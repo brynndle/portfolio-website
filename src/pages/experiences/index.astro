@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+import CollectionGrid from '../../components/CollectionGrid.astro';
+
+const entries = await getCollection('experiences');
+---
+
+<CollectionGrid
+  title="Experiences & Installations"
+  intro="Immersive experiences for small audiences — festivals, installations, and one-on-one moments."
+  basePath="/experiences"
+  entries={entries}
+/>

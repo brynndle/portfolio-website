@@ -1,0 +1,122 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const games = (await getCollection('games')).sort((a, b) => a.data.order - b.data.order);
+const experiences = (await getCollection('experiences')).sort((a, b) => a.data.order - b.data.order);
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+
+const featuredGame = games.find((g) => g.data.featured) ?? games[0];
+const featuredExperience = experiences.find((e) => e.data.featured) ?? experiences[0];
+
+const otherGames = games.filter((g) => g.id !== featuredGame?.id).slice(0, 3);
+const otherExperiences = experiences.filter((e) => e.id !== featuredExperience?.id).slice(0, 3);
+const workHighlights = work.slice(0, 3);
+---
+
+<BaseLayout title="Home">
+  <section class="mx-auto max-w-6xl px-6 pt-16 pb-20">
+    <h1 class="max-w-3xl font-display text-5xl font-bold leading-[1.05] md:text-6xl">
+      I craft intuitive and elegant experiences that put users first.
+    </h1>
+    <p class="mt-6 max-w-2xl font-body text-lg leading-relaxed text-ink/70">
+      I'm a UI/UX &amp; product designer with 20+ years of experience — and lately,
+      I've been putting just as much energy into games and immersive experiences
+      as I have into product work. Here's what I'm making right now.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 pb-24">
+    <div class="grid gap-6 md:grid-cols-3">
+      <ProjectCard
+        title="Vibe Code Rescue"
+        blurb="AI can generate a product fast — but it doesn't know your users, your flow, or why someone would actually click that button. A one-hour UX session fixes the experience so your product works as well as it looks."
+        href="https://brynndle.github.io/ux-rescue/"
+        external
+        variant="dark"
+      />
+      {featuredGame && (
+        <ProjectCard
+          title={featuredGame.data.title}
+          blurb={featuredGame.data.blurb}
+          href={`/games/${featuredGame.id}`}
+          thumbnail={featuredGame.data.thumbnail}
+        />
+      )}
+      {featuredExperience && (
+        <ProjectCard
+          title={featuredExperience.data.title}
+          blurb={featuredExperience.data.blurb}
+          href={`/experiences/${featuredExperience.id}`}
+          thumbnail={featuredExperience.data.thumbnail}
+        />
+      )}
+    </div>
+  </section>
+
+  <section class="border-t border-ink/10 bg-plum-light/40">
+    <div class="mx-auto max-w-6xl px-6 py-20">
+      <div class="flex items-baseline justify-between">
+        <h2 class="font-display text-2xl font-bold">More games</h2>
+        <a href="/games" class="font-display text-sm font-bold uppercase tracking-wide text-plum hover:underline">
+          All games →
+        </a>
+      </div>
+      {otherGames.length > 0 ? (
+        <div class="mt-8 grid gap-6 md:grid-cols-3">
+          {otherGames.map((g) => (
+            <ProjectCard
+              title={g.data.title}
+              blurb={g.data.blurb}
+              href={`/games/${g.id}`}
+              thumbnail={g.data.thumbnail}
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="mt-4 font-body text-ink/60">More games are on the way.</p>
+      )}
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 py-20">
+    <div class="flex items-baseline justify-between">
+      <h2 class="font-display text-2xl font-bold">More experiences</h2>
+      <a href="/experiences" class="font-display text-sm font-bold uppercase tracking-wide text-plum hover:underline">
+        All experiences →
+      </a>
+    </div>
+    <div class="mt-8 grid gap-6 md:grid-cols-3">
+      {otherExperiences.map((e) => (
+        <ProjectCard
+          title={e.data.title}
+          blurb={e.data.blurb}
+          href={`/experiences/${e.id}`}
+          thumbnail={e.data.thumbnail}
+        />
+      ))}
+    </div>
+  </section>
+
+  <section class="border-t border-ink/10 bg-plum-light/40">
+    <div class="mx-auto max-w-6xl px-6 py-20">
+      <div class="flex items-baseline justify-between">
+        <h2 class="font-display text-2xl font-bold">Product design work</h2>
+        <a href="/work" class="font-display text-sm font-bold uppercase tracking-wide text-plum hover:underline">
+          All work →
+        </a>
+      </div>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {workHighlights.map((w) => (
+          <ProjectCard
+            title={w.data.title}
+            blurb={w.data.blurb}
+            href={`/work/${w.id}`}
+            thumbnail={w.data.thumbnail}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

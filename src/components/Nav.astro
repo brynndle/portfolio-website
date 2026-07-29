@@ -1,0 +1,32 @@
+---
+// TODO: replace with the real Google Calendar scheduling link.
+const BOOK_A_CONSULT_URL = '#book-a-consult';
+
+const links = [
+  { href: '/work', label: 'Work' },
+  { href: '/games', label: 'Games' },
+  { href: '/experiences', label: 'Experiences' },
+  { href: '/about', label: 'About' },
+];
+---
+
+<header class="border-b border-ink/10">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+    <a href="/" class="font-display text-lg font-bold tracking-tight">
+      Brynn Caputo
+    </a>
+
+    <nav class="hidden items-center gap-8 font-display text-sm uppercase tracking-wide md:flex">
+      {links.map((link) => (
+        <a href={link.href} class="hover:text-plum">{link.label}</a>
+      ))}
+    </nav>
+
+    <a
+      href={BOOK_A_CONSULT_URL}
+      class="bg-cta px-5 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-base transition-colors hover:bg-cta-dark"
+    >
+      Book a Consult
+    </a>
+  </div>
+</header>

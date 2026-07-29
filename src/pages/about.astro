@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const experience = [
+  {
+    role: 'Senior Product Designer',
+    company: 'Garner Health',
+    years: '2022 – 2024',
+    body: "Led the redesign of an internal insurance claim adjudication system. Conducted user testing to identify workflow inefficiencies in existing internal tools. Developed artifacts to highlight inefficiencies and demonstrate the necessity for a new system. Designed key features for customer-facing desktop and mobile applications, including payment and reimbursement, claim data tracking, and support functionalities. Created high-value features for Garner's business-to-business products.",
+  },
+  {
+    role: 'Senior Product Designer',
+    company: 'Side Inc.',
+    years: '2021 – 2022',
+    body: 'Spearheaded the redesign of a real estate auditing system aimed at tripling auditor efficiency. Conducted competitive research to identify shortcomings of outdated and overpriced products. Collaborated closely with auditors to understand their workflows and identify pain points. Performed time studies to assess inefficiencies and mapped processes to optimize user interfaces. Iteratively designed a solution that surpassed project goals despite resource constraints.',
+  },
+  {
+    role: 'Designer',
+    company: 'Habitat for Humanity Portland',
+    years: '2017 – 2021',
+    body: 'Performed UX audit of the affiliate website and made improvements to navigation, interface, and technology. Followed the Habitat International Brand Guidelines to create a variety of marketing collateral, apparel, and business documents. Created innovative solutions to advertising, signage, and logistics. Helped improve marketing strategies to increase engagement. Managed and updated the affiliate website. Created a custom database to manage a variety of requests and projects from multiple teams such as website updates, newsletters, and event collateral.',
+  },
+  {
+    role: 'Design Lead',
+    company: 'MustWin',
+    years: '2016 – 2017',
+    body: 'Guided teams of 2 to 5 engineers and designers through the completion of mobile and desktop apps and websites for clients such as Microsoft and Zenefits. Organized client requests into actionable tasks and delegated these to the appropriate team member. Mentored junior designers and engineers in use of UX methodologies and front-end coding best practices. Conceptualized, designed, and coded marketing websites and web products.',
+  },
+  {
+    role: 'Product Designer',
+    company: 'Perka',
+    years: '2014 – 2016',
+    body: 'Responsible for the design of business and customer facing mobile apps and web utilities. Worked closely with developers to ensure an optimal app experience for our users across iOS and Android devices. Optimized onboarding and overall app user experience through rapid iterative designs. Worked with my team to conduct user research through analytics, surveys, and in-person interviews. Evaluated design decisions with prototypes created in Framer.JS, Keynote, and Invision.',
+  },
+  {
+    role: 'Senior Product Designer & Front-end Developer',
+    company: 'See.Me',
+    years: '2010 – 2014',
+    body: 'Guided the design of our flagship portfolio and competition product. Rapidly updated and tested site designs and built out new features and experiments weekly. Assisted with design of the iOS app and created user flows and experience maps to aid our developer. Coded full-page responsive layouts in PHP, JavaScript, jQuery, and CSS/SASS using CakePHP and Backbone.js.',
+  },
+  {
+    role: 'Designer',
+    company: 'Suka Design',
+    years: '2007 – 2010',
+    body: 'Learned new processes to bring to my design practice and was responsible for designing print collateral and annual reports for a variety of clients. Created unique and thoughtful identities and branding packages. Oversaw press checks to ensure accuracy and quality of the final product. Learned motion graphics and furthered my web design and coding knowledge to help bring new service offerings to the studio.',
+  },
+  {
+    role: 'Freelance',
+    company: 'Front-end Developer & Designer',
+    years: '2004 – 2011',
+    body: 'The majority of my freelance work was as a front-end developer and designer. Working alone or managing a small team as the projects demanded, I helped small companies build solid products for the web and print. I also worked in-house as a brand strategist, prop stylist, and product designer for various studios and clients.',
+  },
+];
+---
+
+<BaseLayout title="About" description="Brynn Caputo — experience designer based in Portland, OR.">
+  <section class="mx-auto max-w-3xl px-6 pt-16 pb-12">
+    <h1 class="font-display text-4xl font-bold md:text-5xl">Hi! My name is Brynn.</h1>
+    <p class="mt-6 font-body text-lg leading-relaxed text-ink/80">
+      I am a multidisciplinary artist and designer living in the Pacific Northwest.
+      I am happiest when I'm making tools that help people work better, collaborating
+      with enthusiastic artists and engineers, and creating meaningful things.
+    </p>
+    <p class="mt-4 font-body text-lg leading-relaxed text-ink/80">
+      In my free time I pour my energy into designing immersive experiences for
+      festivals and local events. I seek to create moments that facilitate
+      transformation for the audience and participants. Constantly curious, I
+      enjoy exploring fringe communities, strange hobbies, and teaching others
+      along the way. Everything I experience gets funneled back into my work.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 pb-24">
+    <h2 class="font-display text-2xl font-bold">Experience</h2>
+    <ol class="mt-8 space-y-12">
+      {experience.map((job) => (
+        <li class="border-l-2 border-plum pl-6">
+          <p class="font-display text-sm font-bold uppercase tracking-wide text-plum">
+            {job.years}
+          </p>
+          <h3 class="mt-1 font-display text-xl font-bold">{job.role}</h3>
+          <p class="font-body text-sm font-bold uppercase tracking-wide text-ink/60">
+            {job.company}
+          </p>
+          <p class="mt-3 font-body leading-relaxed text-ink/80">{job.body}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+</BaseLayout>
