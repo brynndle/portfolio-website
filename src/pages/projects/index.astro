@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectsGrid from '../../components/ProjectsGrid.astro';
+
+const [work, games, experiences] = await Promise.all([
+  getCollection('work'),
+  getCollection('games'),
+  getCollection('experiences'),
+]);
+const entries = [...work, ...games, ...experiences];
+---
+
+<ProjectsGrid
+  title="All Projects"
+  intro="Everything in one place — product design case studies, games, and experiences. Filter by tag to narrow the view."
+  entries={entries}
+/>
