@@ -91,9 +91,11 @@ const initialSlug = initialTag ? tagToSlug(initialTag) : undefined;
   function render() {
     const active = activeTags();
     const allButton = document.querySelector<HTMLButtonElement>('[data-tag="all"]');
-    allButton?.classList.toggle('is-active', active.length === 0);
-    allButton?.classList.toggle('bg-blue', active.length === 0);
-    allButton?.classList.toggle('text-paper', active.length === 0);
+    const allActive = active.length === 0;
+    allButton?.classList.toggle('is-active', allActive);
+    allButton?.classList.toggle('bg-blue', allActive);
+    allButton?.classList.toggle('text-paper', allActive);
+    allButton?.classList.toggle('text-ink-2', !allActive);
 
     cards.forEach((card) => {
       const cardTags = (card.dataset.tags ?? '').split(' ');
@@ -107,11 +109,13 @@ const initialSlug = initialTag ? tagToSlug(initialTag) : undefined;
       if (button.dataset.tag === 'all') {
         buttons.forEach((b) => {
           b.classList.remove('is-active', 'bg-blue', 'text-paper');
+          b.classList.add('text-ink-2');
         });
       } else {
         button.classList.toggle('is-active');
         button.classList.toggle('bg-blue');
         button.classList.toggle('text-paper');
+        button.classList.toggle('text-ink-2', !button.classList.contains('is-active'));
       }
       render();
     });
