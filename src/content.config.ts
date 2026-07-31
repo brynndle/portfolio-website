@@ -45,7 +45,7 @@ const board = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/board' }),
   schema: z.object({
     title: z.string(),
-    status: z.enum(['in-build', 'open', 'shipped', 'paused']),
+    status: z.enum(['planning', 'in-build', 'open', 'shipped', 'launched', 'looking-for-location', 'paused']),
     lastMove: z.string(),
     movedAt: z.coerce.date(),
     project: z.string().optional(),
