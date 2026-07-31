@@ -1,6 +1,7 @@
 ---
 title: "How We See"
 blurb: "An interactive lighting installation that explores the question of how we see, understand, and play with our environment. The rice paper panels are triggered by the participants motion in front of them. Passive infrared sensors gave the wall an unexpectedly…"
+tags: ["Experiences"]
 thumbnail: "/images/experiences-installations/how-we-see/image-asset.jpeg"
 source: "https://brynncaputo.com/how-we-see"
 featured: false

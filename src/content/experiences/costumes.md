@@ -1,6 +1,7 @@
 ---
 title: "Costumes"
 blurb: "My wasteland look has evolved a lot! Most of the textiles were customized from found objects. I made all of the necklaces, jewelery, and belts. In the second, third, and fourth photos I created the skirts and top from scratch…"
+tags: ["Experiences"]
 thumbnail: "/images/experiences-installations/costumes/IMG_4430.jpeg"
 source: "https://brynncaputo.com/costumes"
 featured: false

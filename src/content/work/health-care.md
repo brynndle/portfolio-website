@@ -1,6 +1,7 @@
 ---
 title: "Healthcare Efficiency"
 blurb: "This company uses a new approach to healthcare with novel financial incentives. Their claims processing tools needed to be efficient enough to handle the growth of their user base."
+tags: ["Product Design"]
 thumbnail: "/images/projects/health-care/garner-process.png"
 source: "https://brynncaputo.com/health-care"
 featured: false

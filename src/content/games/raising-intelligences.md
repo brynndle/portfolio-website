@@ -1,6 +1,7 @@
 ---
 title: "Raising Intelligences"
 blurb: "Raising Intelligences is a two-player game where you and a co-parent guide an intelligence through the choices, arguments, and quiet moments that shape who they become — told through AI-generated events, one story at a time."
+tags: ["Games"]
 link: "https://multiversestudios.xyz/raising-intelligences/"
 featured: true
 order: 0

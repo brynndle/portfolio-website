@@ -1,6 +1,7 @@
 ---
 title: "PlayStation Parents Guide"
 blurb: "The Sony Playstation game store sorts games in several different ways, however, there is no way for parents to specifically search for games that are suitable for their children’s age. The closest rubric they have is the ESRB rating system…"
+tags: ["Product Design"]
 thumbnail: "/images/projects/sony-playstation/AppPhoneMockup.jpg"
 source: "https://brynncaputo.com/sony-playstation"
 featured: false

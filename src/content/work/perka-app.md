@@ -1,6 +1,7 @@
 ---
 title: "Perka iOS App"
 blurb: "The Perka iOS App (now Clover Rewards) allows customers an easy way to participate in multiple merchants loyalty programs without having multiple paper punch cards and key chain cards."
+tags: ["Product Design"]
 thumbnail: "/images/projects/perka-app/image-asset.png"
 source: "https://brynncaputo.com/perka-app"
 featured: false
