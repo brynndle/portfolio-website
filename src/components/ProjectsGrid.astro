@@ -1,0 +1,119 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { TAGS, tagToSlug, type Tag } from '../data/tags';
+
+interface Props {
+  title: string;
+  intro?: string;
+  entries: CollectionEntry<'work' | 'games' | 'experiences'>[];
+  initialTag?: Tag;
+}
+
+const { title, intro, entries, initialTag } = Astro.props;
+const sorted = [...entries].sort((a, b) => a.data.order - b.data.order);
+const initialSlug = initialTag ? tagToSlug(initialTag) : undefined;
+---
+
+<BaseLayout title={title} description={intro}>
+  <section class="border-b border-rule px-10 py-12">
+    <div class="label mb-3 text-blue">Catalog</div>
+    <h1 class="max-w-[24ch] text-[40px] font-semibold leading-[1.05] -tracking-[0.02em] text-balance max-md:text-3xl">{title}</h1>
+    {intro && <p class="mt-4 max-w-[60ch] text-base leading-relaxed text-ink-2 text-pretty">{intro}</p>}
+  </section>
+
+  <section class="flex flex-wrap gap-2.5 border-b border-rule px-10 py-6">
+    <button
+      type="button"
+      data-tag="all"
+      class:list={[
+        'label border px-3.5 py-2 transition-colors duration-100',
+        initialSlug ? 'border-rule-strong text-ink-2' : 'is-active border-rule-strong bg-blue text-paper',
+      ]}
+    >
+      All
+    </button>
+    {TAGS.map((tag) => {
+      const slug = tagToSlug(tag);
+      const active = slug === initialSlug;
+      return (
+        <button
+          type="button"
+          data-tag={slug}
+          class:list={[
+            'label border px-3.5 py-2 transition-colors duration-100',
+            active ? 'is-active border-rule-strong bg-blue text-paper' : 'border-rule-strong text-ink-2',
+          ]}
+        >
+          {tag}
+        </button>
+      );
+    })}
+  </section>
+
+  <section class="px-10 py-12">
+    <div class="grid gap-6 md:grid-cols-3" id="projects-grid">
+      {sorted.map((entry) => {
+        const tagSlugs = entry.data.tags.map(tagToSlug);
+        const hidden = initialSlug ? !tagSlugs.includes(initialSlug) : false;
+        return (
+          <a
+            href={`/${entry.collection}/${entry.id}`}
+            data-tags={tagSlugs.join(' ')}
+            class:list={['block border border-rule-strong bg-paper-3', { hidden }]}
+          >
+            <div class="relative flex h-[170px] items-end overflow-hidden border-b border-rule-strong bg-paper-2 p-3">
+              {entry.data.thumbnail
+                ? <img src={entry.data.thumbnail} alt="" class="absolute inset-0 h-full w-full object-cover" />
+                : <span class="label text-[10px]">image</span>}
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-semibold -tracking-[0.01em]">{entry.data.title}</h3>
+              <p class="mt-2 text-[13.5px] leading-relaxed text-ink-3">{entry.data.blurb}</p>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-tag]');
+  const cards = document.querySelectorAll<HTMLAnchorElement>('#projects-grid > [data-tags]');
+
+  function activeTags(): string[] {
+    return Array.from(buttons)
+      .filter((b) => b.dataset.tag !== 'all' && b.classList.contains('is-active'))
+      .map((b) => b.dataset.tag!);
+  }
+
+  function render() {
+    const active = activeTags();
+    const allButton = document.querySelector<HTMLButtonElement>('[data-tag="all"]');
+    allButton?.classList.toggle('is-active', active.length === 0);
+    allButton?.classList.toggle('bg-blue', active.length === 0);
+    allButton?.classList.toggle('text-paper', active.length === 0);
+
+    cards.forEach((card) => {
+      const cardTags = (card.dataset.tags ?? '').split(' ');
+      const visible = active.length === 0 || active.some((tag) => cardTags.includes(tag));
+      card.classList.toggle('hidden', !visible);
+    });
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      if (button.dataset.tag === 'all') {
+        buttons.forEach((b) => {
+          b.classList.remove('is-active', 'bg-blue', 'text-paper');
+        });
+      } else {
+        button.classList.toggle('is-active');
+        button.classList.toggle('bg-blue');
+        button.classList.toggle('text-paper');
+      }
+      render();
+    });
+  });
+</script>
