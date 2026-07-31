@@ -8,11 +8,20 @@ const projectSchema = z.object({
   title: z.string(),
   blurb: z.string(),
   thumbnail: z.string().optional(),
-  images: z.array(z.string()).default([]),
+  thumbnailBg: z.string().optional(),
   link: z.string().url().optional(),
   featured: z.boolean().default(false),
   order: z.number().default(0),
   source: z.string().url().optional(),
+  role: z.string().optional(),
+  client: z.string().optional(),
+  methods: z.string().optional(),
+  figures: z.array(z.object({
+    src: z.string(),
+    caption: z.string(),
+    meta: z.string().optional(),
+    alt: z.string().optional(),
+  })).default([]),
 });
 
 const work = defineCollection({
@@ -30,4 +39,15 @@ const experiences = defineCollection({
   schema: projectSchema,
 });
 
-export const collections = { work, games, experiences };
+const board = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/board' }),
+  schema: z.object({
+    title: z.string(),
+    status: z.enum(['in-build', 'open', 'shipped', 'paused']),
+    lastMove: z.string(),
+    movedAt: z.coerce.date(),
+    project: z.string().optional(),
+  }),
+});
+
+export const collections = { work, games, experiences, board };

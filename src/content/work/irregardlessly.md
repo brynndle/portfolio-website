@@ -2,16 +2,18 @@
 title: "Irregardless.ly"
 blurb: "Irregardless.ly is like a spell checker but for writing style guides. Users can select style guides to suit their work be it literary or scientific. Users can also build their own style guides and have several active at once."
 thumbnail: "/images/projects/irregardlessly/Sidebar_v1.png"
-images:
-  - "/images/projects/irregardlessly/Sidebar_v1.png"
-  - "/images/projects/irregardlessly/Select_v1.jpg"
 source: "https://brynncaputo.com/irregardlessly"
 featured: false
 order: 3
+role: "UX/UI Design"
+methods: "Stakeholder Interviews, Competitive Analysis, UI Design"
+figures:
+  - src: "/images/projects/irregardlessly/Sidebar_v1.png"
+    caption: "The default state of the Irregardless.ly sidebar for Google Docs. It allows users to change their style guide, manually check the document for tips, clear all tips, access the settings menu, and see all of the current tips."
+  - src: "/images/projects/irregardlessly/Select_v1.jpg"
+    caption: "A multi-select box that allows users to select multiple style guides."
 ---
 # Irregardless.ly
-
-Role: UX/UI Design | Process & Skills: Stakeholder Interviews, Competitive Analysis, UI Design
 
 Irregardless.ly is like a spell checker but for writing style guides. Users can select style guides to suit their work be it literary or scientific. Users can also build their own style guides and have several active at once.
 
@@ -28,11 +30,3 @@ UI elements were made bolder and easier to parse.
 The layout was changed to highlight useful UI in places where it was most needed.
 
 Hiding elements in sub menus helped clean up clutter and surface the important information.
-
-![This is the default state of the Irregardless.ly sidebar for Google Docs. It allows users to change their style guide, manually check the document for tips, clear all tips, access the settings menu, and of course see all of the current tips.](/images/projects/irregardlessly/Sidebar_v1.png)
-
-*This is the default state of the Irregardless.ly sidebar for Google Docs. It allows users to change their style guide, manually check the document for tips, clear all tips, access the settings menu, and of course see all of the current tips.*
-
-![This is a multi-select box that allows users to select multiple style guides.](/images/projects/irregardlessly/Select_v1.jpg)
-
-*This is a multi-select box that allows users to select multiple style guides.*

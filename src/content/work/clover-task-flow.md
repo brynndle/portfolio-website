@@ -2,22 +2,24 @@
 title: "Clover Task Flow"
 blurb: "I was tasked with creating a seamless Perka checkout experience that would run on several versions of the Clover point of sale terminal. The solution needed to guide the clerk through the correct series of steps to validate a transaction…"
 thumbnail: "/images/projects/clover-task-flow/clover-station.png"
-images:
-  - "/images/projects/clover-task-flow/clover-station.png"
-  - "/images/projects/clover-task-flow/image-asset.png"
-  - "/images/projects/clover-task-flow/Mobile-Basic-Punch-1.png"
-  - "/images/projects/clover-task-flow/Mobile-Basic-Punch-2.png"
-  - "/images/projects/clover-task-flow/Mobile-Basic-Punch-5.jpg"
-  - "/images/projects/clover-task-flow/Mobile-Basic-Punch-6.jpg"
 source: "https://brynncaputo.com/clover-task-flow"
 featured: false
 order: 0
+role: "UX/UI Design"
+methods: "Stakeholder Interviews, Engineer Collaboration, Task Flow/Swimlanes, UI Design"
+figures:
+  - src: "/images/projects/clover-task-flow/image-asset.png"
+    caption: "A task flow with an adaptive experience depending on whether or not the validator would have knowledge of the order total, inventory, etc."
+  - src: "/images/projects/clover-task-flow/Mobile-Basic-Punch-1.png"
+    caption: "Mobile UI, step one of the punch redemption flow."
+  - src: "/images/projects/clover-task-flow/Mobile-Basic-Punch-2.png"
+    caption: "Mobile UI, step two."
+  - src: "/images/projects/clover-task-flow/Mobile-Basic-Punch-5.jpg"
+    caption: "Mobile UI, step three."
+  - src: "/images/projects/clover-task-flow/Mobile-Basic-Punch-6.jpg"
+    caption: "Mobile UI, step four."
 ---
-![](/images/projects/clover-task-flow/clover-station.png)
-
 # Designing for the Unknown
-
-Role: UX/UI Design | Process & Skills: Stakeholder Interviews, Engineer Collaboration, Task Flow/Swimlanes, UI Design
 
 I was tasked with creating a seamless Perka checkout experience that would run on several versions of the Clover point of sale terminal. The solution needed to guide the clerk through the correct series of steps to validate a transaction and apply any applicable discounts to the order.
 
@@ -30,17 +32,3 @@ We did not know how much data our system would have to work with. We started wit
 By gradually adding in features, we fleshed out several task flows that would cover most combinations of access we might have depending on the hardware and final features of the point of sale operating system that was still under development.
 
 The case below is when a customer is using a Clover terminal which gave us access to more data and eased responsibility for the clerk. Using swim lanes allowed us to plot the two possible paths for cash and credit against the customers interactions with the app, the verbal interactions between clerk and customer, and the clerks interactions with the point of sale terminal.
-
-![A task flow with an adaptive experience depending on whether or not the validator would have knowledge of the order total, inventory, etc.](/images/projects/clover-task-flow/image-asset.png)
-
-*A task flow with an adaptive experience depending on whether or not the validator would have knowledge of the order total, inventory, etc.*
-
-## UI Examples
-
-![](/images/projects/clover-task-flow/Mobile-Basic-Punch-1.png)
-
-![](/images/projects/clover-task-flow/Mobile-Basic-Punch-2.png)
-
-![](/images/projects/clover-task-flow/Mobile-Basic-Punch-5.jpg)
-
-![](/images/projects/clover-task-flow/Mobile-Basic-Punch-6.jpg)

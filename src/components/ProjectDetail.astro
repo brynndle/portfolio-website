@@ -2,40 +2,105 @@
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ConsultCTA from './ConsultCTA.astro';
 
 interface Props {
   entry: CollectionEntry<'work' | 'games' | 'experiences'>;
   backHref: string;
   backLabel: string;
+  prev?: { title: string; href: string };
+  next?: { title: string; href: string };
 }
 
-const { entry, backHref, backLabel } = Astro.props;
-const { Content } = await render(entry);
----
+const { entry, backHref, backLabel, prev, next } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
 
-<BaseLayout title={entry.data.title} description={entry.data.blurb}>
-  <article class="mx-auto max-w-3xl px-6 py-16">
-    <a href={backHref} class="font-display text-sm font-bold uppercase tracking-wide text-plum hover:underline">
-      ← {backLabel}
-    </a>
-    <h1 class="mt-6 font-display text-4xl font-bold md:text-5xl">{entry.data.title}</h1>
-    {entry.data.link && (
-      <a
-        href={entry.data.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="mt-4 inline-block bg-cta px-5 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-base hover:bg-cta-dark"
-      >
-        Visit →
-      </a>
-    )}
-    <div
-      class="prose prose-lg mt-10 max-w-none font-body leading-relaxed
-             prose-headings:font-display prose-headings:font-bold
-             prose-img:w-full prose-img:border prose-img:border-ink/10
-             prose-a:text-plum"
-    >
-      <Content />
+// Figures live in frontmatter so their captions can render in the rail
+// beside the image rather than under it. See THEME.md → ProjectDetail.
+const figures = d.figures ?? [];
+---
+<BaseLayout title={d.title} description={d.blurb}>
+  <!-- title block -->
+  <div class="grid grid-cols-[220px_1fr] gap-12 border-b border-rule bg-paper-2 px-10 pb-8 pt-10 max-lg:grid-cols-1 max-lg:gap-4">
+    <a href={backHref} class="font-mono text-[11px] uppercase tracking-[0.12em] text-blue">&larr; {backLabel}</a>
+    <div>
+      <h1 class="max-w-[22ch] text-[48px] font-semibold leading-[1.05] -tracking-[0.03em] text-balance max-md:text-[34px]">{d.title}</h1>
+      {d.blurb && <p class="mt-4 max-w-[60ch] text-[19px] leading-relaxed text-ink-2 text-pretty">{d.blurb}</p>}
     </div>
-  </article>
+  </div>
+
+  <!-- header image: full-bleed band, image contained so portrait/landscape assets both work -->
+  {d.thumbnail && (
+    <div
+      class="relative flex h-[520px] items-center justify-center overflow-hidden border-b border-rule bg-paper-2 max-md:h-[300px]"
+      style={d.thumbnailBg ? `background-color: ${d.thumbnailBg}` : undefined}
+    >
+      <img src={d.thumbnail} alt="" class="h-full w-auto max-w-full object-contain" />
+    </div>
+  )}
+
+  <!-- project record -->
+  <div class="grid grid-cols-[220px_1fr] gap-12 border-b border-rule px-10 py-[26px] max-lg:grid-cols-1">
+    <span class="label">Project record</span>
+    <dl class="grid grid-cols-4 gap-7 max-md:grid-cols-2">
+      {[['Role', d.role], ['Client', d.client], ['Methods', d.methods], ['Live', d.source]].filter(([, v]) => v).map(([k, v]) => (
+        <div>
+          <dt class="font-mono text-[11px] uppercase tracking-[0.1em] text-ink-4">{k}</dt>
+          <dd class="mt-1.5 text-sm text-ink">
+            {k === 'Live' ? <a href={v} class="border-b border-blue pb-0.5 text-blue">Visit &nearr;</a> : v}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+
+  <div class="px-10 pb-2">
+    <!-- prose + contents rail -->
+    <div class="grid grid-cols-[220px_1fr] gap-12 max-lg:grid-cols-1">
+      <nav class="sticky top-6 self-start py-9 max-lg:static">
+        <div class="label border-b border-rule pb-3">Contents</div>
+        <ol class="flex flex-col gap-2.5 pt-3 font-mono text-[11.5px] tracking-[0.06em] text-ink-3">
+          {headings.filter((h) => h.depth <= 2).map((h, i) => (
+            <li><a href={`#${h.slug}`} class="hover:text-blue">{String(i + 1).padStart(2, '0')} &nbsp;{h.text}</a></li>
+          ))}
+        </ol>
+      </nav>
+
+      <div class="prose prose-lg max-w-[68ch] border-r border-rule py-9 pr-9 font-sans leading-[1.72] text-ink-2
+                  prose-headings:font-sans prose-headings:font-semibold prose-headings:-tracking-[0.02em] prose-headings:text-ink
+                  prose-h2:mt-9 prose-h2:text-2xl
+                  prose-a:text-blue prose-a:no-underline hover:prose-a:underline
+                  prose-blockquote:border-l-[3px] prose-blockquote:border-blue prose-blockquote:bg-paper-2 prose-blockquote:px-6 prose-blockquote:py-4.5 prose-blockquote:not-italic prose-blockquote:text-ink
+                  prose-img:hidden">
+        <Content />
+      </div>
+    </div>
+
+    <!-- figures: caption in the rail, image in the column, rail sticks past tall images -->
+    {figures.map((fig, i) => (
+      <figure class="m-0 grid grid-cols-[220px_1fr] gap-12 border-t border-rule-soft py-9 max-lg:grid-cols-1">
+        <figcaption class="sticky top-6 self-start max-lg:static">
+          <div class="font-mono text-[11px] uppercase tracking-[0.14em] text-blue">Fig. {String(i + 1).padStart(2, '0')}</div>
+          <p class="mt-2 text-[13.5px] leading-relaxed text-ink-2 text-pretty">{fig.caption}</p>
+          {fig.meta && <div class="mt-2.5 font-mono text-[10.5px] uppercase tracking-[0.08em] text-ink-4">{fig.meta}</div>}
+        </figcaption>
+        <img src={fig.src} alt={fig.alt ?? fig.caption} class="block h-auto max-h-[80vh] max-w-full justify-self-start border border-rule-strong" loading="lazy" />
+      </figure>
+    ))}
+  </div>
+
+  <!-- prev / next -->
+  <div class="grid grid-cols-2 border-y border-rule max-md:grid-cols-1">
+    <a href={prev?.href ?? backHref} class="border-r border-rule px-10 py-7">
+      <div class="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-4">&larr; Previous</div>
+      <div class="mt-2 text-xl font-semibold -tracking-[0.015em]">{prev?.title ?? backLabel}</div>
+    </a>
+    <a href={next?.href ?? backHref} class="px-10 py-7 text-right">
+      <div class="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-4">Next &rarr;</div>
+      <div class="mt-2 text-xl font-semibold -tracking-[0.015em]">{next?.title ?? backLabel}</div>
+    </a>
+  </div>
+
+  <ConsultCTA />
 </BaseLayout>

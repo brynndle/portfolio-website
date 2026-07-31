@@ -54,14 +54,15 @@ const experience = [
 ---
 
 <BaseLayout title="About" description="Brynn Caputo — experience designer based in Portland, OR.">
-  <section class="mx-auto max-w-3xl px-6 pt-16 pb-12">
-    <h1 class="font-display text-4xl font-bold md:text-5xl">Hi! My name is Brynn.</h1>
-    <p class="mt-6 font-body text-lg leading-relaxed text-ink/80">
+  <section class="border-b border-rule px-10 py-12">
+    <div class="label mb-3 text-blue">Who's building this</div>
+    <h1 class="max-w-[20ch] text-[40px] font-semibold leading-[1.05] -tracking-[0.02em] text-balance max-md:text-3xl">Hi! My name is Brynn.</h1>
+    <p class="mt-6 max-w-[64ch] text-lg leading-relaxed text-ink-2 text-pretty">
       I am a multidisciplinary artist and designer living in the Pacific Northwest.
       I am happiest when I'm making tools that help people work better, collaborating
       with enthusiastic artists and engineers, and creating meaningful things.
     </p>
-    <p class="mt-4 font-body text-lg leading-relaxed text-ink/80">
+    <p class="mt-4 max-w-[64ch] text-lg leading-relaxed text-ink-2 text-pretty">
       In my free time I pour my energy into designing immersive experiences for
       festivals and local events. I seek to create moments that facilitate
       transformation for the audience and participants. Constantly curious, I
@@ -70,19 +71,15 @@ const experience = [
     </p>
   </section>
 
-  <section class="mx-auto max-w-3xl px-6 pb-24">
-    <h2 class="font-display text-2xl font-bold">Experience</h2>
-    <ol class="mt-8 space-y-12">
+  <section class="px-10 py-12">
+    <h2 class="text-[22px] font-semibold -tracking-[0.01em]">Experience</h2>
+    <ol class="mt-8 space-y-10 border-t border-rule pt-8">
       {experience.map((job) => (
-        <li class="border-l-2 border-plum pl-6">
-          <p class="font-display text-sm font-bold uppercase tracking-wide text-plum">
-            {job.years}
-          </p>
-          <h3 class="mt-1 font-display text-xl font-bold">{job.role}</h3>
-          <p class="font-body text-sm font-bold uppercase tracking-wide text-ink/60">
-            {job.company}
-          </p>
-          <p class="mt-3 font-body leading-relaxed text-ink/80">{job.body}</p>
+        <li class="border-l border-rule-strong pl-6">
+          <p class="label text-blue">{job.years}</p>
+          <h3 class="mt-1.5 text-xl font-semibold -tracking-[0.01em]">{job.role}</h3>
+          <p class="mt-0.5 font-mono text-xs uppercase tracking-[0.08em] text-ink-3">{job.company}</p>
+          <p class="mt-3 max-w-[70ch] text-[15px] leading-relaxed text-ink-2">{job.body}</p>
         </li>
       ))}
     </ol>

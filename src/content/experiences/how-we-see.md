@@ -2,20 +2,22 @@
 title: "How We See"
 blurb: "An interactive lighting installation that explores the question of how we see, understand, and play with our environment. The rice paper panels are triggered by the participants motion in front of them. Passive infrared sensors gave the wall an unexpectedly…"
 thumbnail: "/images/experiences-installations/how-we-see/image-asset.jpeg"
-images:
-  - "/images/experiences-installations/how-we-see/image-asset.jpeg"
-  - "/images/experiences-installations/how-we-see/1.jpg"
-  - "/images/experiences-installations/how-we-see/2.jpg"
-  - "/images/experiences-installations/how-we-see/3.jpg"
-  - "/images/experiences-installations/how-we-see/4.jpg"
-  - "/images/experiences-installations/how-we-see/430458049_8aaf1e8a14_o.jpeg"
 source: "https://brynncaputo.com/how-we-see"
 featured: false
 order: 4
+figures:
+  - src: "/images/experiences-installations/how-we-see/1.jpg"
+    caption: "The rice-paper wall, lit and responding to motion."
+  - src: "/images/experiences-installations/how-we-see/2.jpg"
+    caption: "The rice-paper wall, lit and responding to motion."
+  - src: "/images/experiences-installations/how-we-see/3.jpg"
+    caption: "The rice-paper wall, lit and responding to motion."
+  - src: "/images/experiences-installations/how-we-see/4.jpg"
+    caption: "The rice-paper wall, lit and responding to motion."
+  - src: "/images/experiences-installations/how-we-see/430458049_8aaf1e8a14_o.jpeg"
+    caption: "Prototyping panel mounts."
 ---
 # How We See & Play
-
-![](/images/experiences-installations/how-we-see/image-asset.jpeg)
 
 An interactive lighting installation that explores the question of how we see, understand, and play with our environment. The rice paper panels are triggered by the participants motion in front of them. Passive infrared sensors gave the wall an unexpectedly organic response time. When the participant waves at the wall there is an almost thoughtful pause before the wall signals back.
 
@@ -30,15 +32,3 @@ An important aspect of this project revolved around the details of it’s presen
 The rice paper makes it even harder to guess. Perhaps if they were glass or plastic, a sneaky sensor could be hidden in them, but the rice paper was stretched over wooden frames and peaking behind them would reveal a low tech lighting solution and a couple of wires.
 
 The motion sensors were actually embedded in the wall and only saw the world through a narrow little pin hole that you’d have to look very closely in just the right place to see. The less there is to a thing the more magical and curious it becomes.
-
-![](/images/experiences-installations/how-we-see/1.jpg)
-
-![](/images/experiences-installations/how-we-see/2.jpg)
-
-![](/images/experiences-installations/how-we-see/3.jpg)
-
-![](/images/experiences-installations/how-we-see/4.jpg)
-
-![Prototyping panel mounts](/images/experiences-installations/how-we-see/430458049_8aaf1e8a14_o.jpeg)
-
-*Prototyping panel mounts*

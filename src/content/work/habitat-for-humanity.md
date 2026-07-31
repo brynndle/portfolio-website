@@ -2,24 +2,28 @@
 title: "Habitat for Humanity"
 blurb: "I arrived at Habitat at the beginning of an ambitious period of growth for the affiliate. When getting up to speed on fundraising I found that there was no record of how the organization interacted with donors over an extended…"
 thumbnail: "/images/projects/habitat-for-humanity/journey-map.png"
-images:
-  - "/images/projects/habitat-for-humanity/journey-map.png"
-  - "/images/projects/habitat-for-humanity/image-asset.png"
-  - "/images/projects/habitat-for-humanity/volunteer-before.jpg"
-  - "/images/projects/habitat-for-humanity/image-asset.jpeg"
-  - "/images/projects/habitat-for-humanity/donatepage.png"
-  - "/images/projects/habitat-for-humanity/poster-3-DEF.jpg"
 source: "https://brynncaputo.com/habitat-for-humanity"
 featured: false
 order: 1
+role: "UX Design"
+client: "Habitat for Humanity Portland"
+figures:
+  - src: "/images/projects/habitat-for-humanity/image-asset.png"
+    caption: "An early sketch of a year of interactions starting from the breakfast with our three different giving levels. These were collected from our email and social media systems, event managers, and portfolio managers."
+  - src: "/images/projects/habitat-for-humanity/volunteer-before.jpg"
+    caption: "The volunteer portal page before the update."
+  - src: "/images/projects/habitat-for-humanity/image-asset.jpeg"
+    caption: "Persona work built from the donor management data and Habitat Brand Guidelines."
+  - src: "/images/projects/habitat-for-humanity/donatepage.png"
+    caption: "Condensing several portal pages into one directory allowing folks to get where they are going in as little as 2 clicks rather than 4 or more."
+  - src: "/images/projects/habitat-for-humanity/poster-3-DEF.jpg"
+    caption: "Updated top-level navigation, flattened from a 54-page mega menu."
 ---
-![](/images/projects/habitat-for-humanity/journey-map.png)
-
 # Analyzing the Journey
 
 I arrived at Habitat at the beginning of an ambitious period of growth for the affiliate. When getting up to speed on fundraising I found that there was no record of how the organization interacted with donors over an extended period of time. I felt a journey map would help quantify this process and show the value of several UX concepts:
 
-Measuring:Incorporating measurement into a teams process involves many facets. Goals need to simplified and specific, technology needs to be in place to actually record the results, and reflection and analysis is required to make the results usable. The journey map acts as a strong visual to guide folks through this process and reinforce its importance.
+Measuring: Incorporating measurement into a teams process involves many facets. Goals need to simplified and specific, technology needs to be in place to actually record the results, and reflection and analysis is required to make the results usable. The journey map acts as a strong visual to guide folks through this process and reinforce its importance.
 
 Consistency: Several departments may be involved with a donors journey each with different messaging and approaches. A map acts to codify the interactions our staff has with donors and creates a visual of how confusing overlapping messaging can be.
 
@@ -31,17 +35,11 @@ Starting a process like this can be overwhelming, especially when you are guidin
 
 To focus the team we settled on one main question we wanted answered: What strategies can we use to retain new donors acquired at this event for 3+ years.
 
-![An early sketch of a year of interactions starting from the breakfast with our three different giving levels. These were collected from our email and social media systems, event managers, and portfolio managers. Engagement was an aggregate of stats …](/images/projects/habitat-for-humanity/image-asset.png)
-
-*An early sketch of a year of interactions starting from the breakfast with our three different giving levels. These were collected from our email and social media systems, event managers, and portfolio managers. Engagement was an aggregate of stats …*
-
-An early sketch of a year of interactions starting from the breakfast with our three different giving levels. These were collected from our email and social media systems, event managers, and portfolio managers. Engagement was an aggregate of stats taken from email opens and clicks, social media analytics, and anecdotes.
+Above is an early sketch used to gather and organize engagement data. This artifact helps illustrate to stakeholders how different our communication is for donors of different levels and how they relate to that donors engagement over a year.
 
 ### The Nitty Gritty Data Dance
 
 Without context, a large complicated event may seem like too much to bite off versus something like a small campaign. Our numbers, however, are small due to being very local. We did not have the luxury of running targeted campaigns to thousands of people. To deeply analyze our donors behaviors we needed to start with a large, rich, historical data set. The breakfast event is consistently well documented going back over 5 years. This allowed us to look at 3 year segments of data to see how our retention strategies were currently working and form a baseline from which we could iterate.
-
-Above is an early sketch used to gather and organize engagement data. This artifact helps illustrate to stakeholders how different our communication is for donors of different levels and how they relate to that donors engagement over a year.
 
 ## Personas
 
@@ -61,19 +59,11 @@ Look closely at messaging across marketing channels. Ensure a mix of content tha
 
 Timed nuturing emails to ensure consistent communication.
 
-![](/images/projects/habitat-for-humanity/volunteer-before.jpg)
-
-![](/images/projects/habitat-for-humanity/image-asset.jpeg)
-
 # Improving the UI
 
 The Habitat website was due for a design overhaul but unfortunately the time and resources to do this were not going to be available. This was partly due to the day to day demands of my position and a lack of budget to hire adequate support for a rebuild from scratch. The solution was to make updates where they had the most impact. The blog, events, and fundraising pages being top priority.
 
-![Condensing several portal pages into one directory allowing folks to get where they are going in as little as 2 clicks rather than 4 or more.](/images/projects/habitat-for-humanity/donatepage.png)
-
-*Condensing several portal pages into one directory allowing folks to get where they are going in as little as 2 clicks rather than 4 or more.*
-
-An urgent issue we wanted to address were “Portal Pages”. Click after click you would be confronted with 2 - 3 layers of similar looking pages with a grid of 4 images, and blurbs. It was hard to tell where you were and the information was difficult to parse. According to our analytics most people did not make it more than 2 levels deep before exiting, anything below that was almost unseen. Aside from burying content, the overall UI of these pages needed help. The updated design above for our donate page addressed the following issues:
+An urgent issue we wanted to address were “Portal Pages”. Click after click you would be confronted with 2 - 3 layers of similar looking pages with a grid of 4 images, and blurbs. It was hard to tell where you were and the information was difficult to parse. According to our analytics most people did not make it more than 2 levels deep before exiting, anything below that was almost unseen. Aside from burying content, the overall UI of these pages needed help. The updated design addressed the following issues:
 
 Too Deep: Our analytics showed a clear problem of folks having to click through too many confusing pages before finding what they needed. After stakeholder interviews with different departments, we found that the pages that mattered most were simply not being found.
 
@@ -101,7 +91,7 @@ To start off our project we looked at our own analytics to determine common user
 
 We also looked at other successful affiliates around the country. There were several common elements we found in their top level navigation that helped give form to our intuition and anecdote based hypothesis.
 
-Some common themes we noticed
+Some common themes we noticed:
 
 There are always two donate buttons, one that goes directly to a donation form and one that gives the user more options to donate and these are both top level items with a stylistic differentiation or with the non-form option being called “Support”. Driving customers to either of these choices is generally a win.
 
@@ -113,14 +103,12 @@ Menu items that were inconsistent from site to site showed us how each affiliate
 
 We decided to remove several old pages that were not needed and consolidate others that were fragmented but related. For our top level items we decided to remove Our Builds as much of the information was outdated and redundant. This allowed us to bring buried menu options up in the hierarchy, eliminate redundant pages and stay within only 6 top level items.
 
-Original:Get Involved - Programs - Our Builds - ReStore - About Us - Donate
+Original: Get Involved - Programs - Our Builds - ReStore - About Us - Donate
 
 Updated: Donate - Volunteer - Get Involved - Programs - ReStore - About Us
 
-![](/images/projects/habitat-for-humanity/poster-3-DEF.jpg)
-
 # Brand Guidelines & Style
 
-Eat Drink Build is a local event thrown by one of Habitat's volunteer groups: Women Build. Restaurants donate a portion of their proceeds on the day of the event to Habitat. The new Habitat for Humanity International brand guidelines have been slowly adopted by affiliates around the country but this event had not yet had a brand refresh at our affiliate. The guidelines for events in the new brand book are somewhat limited. One of the directives is to not have logos or unique artwork for programs like this . This can make it difficult to create eye catching marketing materials. This concept aims at a balance between the strict "No logo" brand guidelines and something loud and fun to catch the eye.
+Eat Drink Build is a local event thrown by one of Habitat's volunteer groups: Women Build. Restaurants donate a portion of their proceeds on the day of the event to Habitat. The new Habitat for Humanity International brand guidelines have been slowly adopted by affiliates around the country but this event had not yet had a brand refresh at our affiliate. The guidelines for events in the new brand book are somewhat limited. One of the directives is to not have logos or unique artwork for programs like this. This can make it difficult to create eye catching marketing materials. This concept aims at a balance between the strict "No logo" brand guidelines and something loud and fun to catch the eye.
 
-Using simple iconography, which is allowed under the guidelines, and the full brand color palette, the solution is bright and eye-catching, but still felt feels like Habitat.
+Using simple iconography, which is allowed under the guidelines, and the full brand color palette, the solution is bright and eye-catching, but still feels like Habitat.

@@ -3,14 +3,22 @@ import { getCollection } from 'astro:content';
 import ProjectDetail from '../../components/ProjectDetail.astro';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('work');
-  return entries.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }));
+  const entries = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+  return entries.map((entry, i) => {
+    const prevEntry = entries[i - 1];
+    const nextEntry = entries[i + 1];
+    return {
+      params: { slug: entry.id },
+      props: {
+        entry,
+        prev: prevEntry && { title: prevEntry.data.title, href: `/work/${prevEntry.id}` },
+        next: nextEntry && { title: nextEntry.data.title, href: `/work/${nextEntry.id}` },
+      },
+    };
+  });
 }
 
-const { entry } = Astro.props;
+const { entry, prev, next } = Astro.props;
 ---
 
-<ProjectDetail entry={entry} backHref="/work" backLabel="Product Design" />
+<ProjectDetail entry={entry} backHref="/work" backLabel="Product Design" prev={prev} next={next} />
