@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { TAGS } from './data/tags';
 
 // Shared shape across Work / Games / Experiences on purpose: this is what
 // makes the future unified, filterable "all work" catalog a template change
@@ -7,6 +8,7 @@ import { glob } from 'astro/loaders';
 const projectSchema = z.object({
   title: z.string(),
   blurb: z.string(),
+  tags: z.array(z.enum(TAGS)).min(1).max(3),
   thumbnail: z.string().optional(),
   thumbnailBg: z.string().optional(),
   link: z.string().url().optional(),

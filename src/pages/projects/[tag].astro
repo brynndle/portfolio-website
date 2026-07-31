@@ -1,0 +1,28 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import { getCollection } from 'astro:content';
+import ProjectsGrid from '../../components/ProjectsGrid.astro';
+import { TAGS, tagToSlug } from '../../data/tags';
+
+export const getStaticPaths = (() => {
+  return TAGS.map((tag) => ({ params: { tag: tagToSlug(tag) }, props: { tag } }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { tag }: Props = Astro.props;
+
+const [work, games, experiences] = await Promise.all([
+  getCollection('work'),
+  getCollection('games'),
+  getCollection('experiences'),
+]);
+const entries = [...work, ...games, ...experiences];
+---
+
+<ProjectsGrid
+  title={tag}
+  intro={`Projects tagged "${tag}".`}
+  entries={entries}
+  initialTag={tag}
+/>

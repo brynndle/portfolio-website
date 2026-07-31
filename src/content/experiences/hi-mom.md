@@ -1,6 +1,7 @@
 ---
 title: "Hi, Mom."
 blurb: "Shown at The New Frame Experience Design Festival in February 2025, this project is my final piece for the year long experience design program run by Odyssey Works. The participants are guided into a dark space and sit at a…"
+tags: ["Experiences"]
 thumbnail: "/images/experiences-installations/hi-mom/Brynn-hero-image.jpg"
 source: "https://brynncaputo.com/hi-mom"
 featured: true

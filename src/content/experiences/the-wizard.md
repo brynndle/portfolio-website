@@ -1,6 +1,7 @@
 ---
 title: "The Wizard"
 blurb: "A whimsical wanderer who endeavors to bring moments of joy to those they encountered and invite them to participate in scenes of absurd silliness."
+tags: ["Experiences"]
 thumbnail: "/images/experiences-installations/the-wizard/4FA0E787-699D-4FE1-B160-F62731A18988_1_105_c.jpeg"
 source: "https://brynncaputo.com/the-wizard"
 featured: false
