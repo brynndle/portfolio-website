@@ -11,7 +11,12 @@ interface Props {
 }
 
 const { title, intro, entries, initialTag } = Astro.props;
-const sorted = [...entries].sort((a, b) => a.data.order - b.data.order);
+const COLLECTION_RANK: Record<'work' | 'games' | 'experiences', number> = { work: 0, games: 1, experiences: 2 };
+const sorted = [...entries].sort((a, b) =>
+  Number(b.data.featured) - Number(a.data.featured) ||
+  COLLECTION_RANK[a.collection] - COLLECTION_RANK[b.collection] ||
+  a.data.order - b.data.order
+);
 const initialSlug = initialTag ? tagToSlug(initialTag) : undefined;
 ---
 
@@ -22,10 +27,11 @@ const initialSlug = initialTag ? tagToSlug(initialTag) : undefined;
     {intro && <p class="mt-4 max-w-[60ch] text-base leading-relaxed text-ink-2 text-pretty">{intro}</p>}
   </section>
 
-  <section class="flex flex-wrap gap-2.5 border-b border-rule px-10 py-6">
+  <section id="tag-filters" aria-label="Filter projects by tag" class="flex flex-wrap gap-2.5 border-b border-rule px-10 py-6">
     <button
       type="button"
       data-tag="all"
+      aria-pressed={!initialSlug}
       class:list={[
         'label border px-3.5 py-2 transition-colors duration-100',
         initialSlug ? 'border-rule-strong text-ink-2' : 'is-active border-rule-strong bg-blue text-paper',
@@ -40,6 +46,7 @@ const initialSlug = initialTag ? tagToSlug(initialTag) : undefined;
         <button
           type="button"
           data-tag={slug}
+          aria-pressed={active}
           class:list={[
             'label border px-3.5 py-2 transition-colors duration-100',
             active ? 'is-active border-rule-strong bg-blue text-paper' : 'border-rule-strong text-ink-2',
@@ -79,8 +86,9 @@ const initialSlug = initialTag ? tagToSlug(initialTag) : undefined;
 </BaseLayout>
 
 <script>
-  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-tag]');
+  const buttons = document.querySelectorAll<HTMLButtonElement>('#tag-filters [data-tag]');
   const cards = document.querySelectorAll<HTMLAnchorElement>('#projects-grid > [data-tags]');
+  const allButton = document.querySelector<HTMLButtonElement>('#tag-filters [data-tag="all"]');
 
   function activeTags(): string[] {
     return Array.from(buttons)
@@ -90,12 +98,12 @@ const initialSlug = initialTag ? tagToSlug(initialTag) : undefined;
 
   function render() {
     const active = activeTags();
-    const allButton = document.querySelector<HTMLButtonElement>('[data-tag="all"]');
     const allActive = active.length === 0;
     allButton?.classList.toggle('is-active', allActive);
     allButton?.classList.toggle('bg-blue', allActive);
     allButton?.classList.toggle('text-paper', allActive);
     allButton?.classList.toggle('text-ink-2', !allActive);
+    allButton?.setAttribute('aria-pressed', String(allActive));
 
     cards.forEach((card) => {
       const cardTags = (card.dataset.tags ?? '').split(' ');
@@ -110,12 +118,14 @@ const initialSlug = initialTag ? tagToSlug(initialTag) : undefined;
         buttons.forEach((b) => {
           b.classList.remove('is-active', 'bg-blue', 'text-paper');
           b.classList.add('text-ink-2');
+          b.setAttribute('aria-pressed', 'false');
         });
       } else {
         button.classList.toggle('is-active');
         button.classList.toggle('bg-blue');
         button.classList.toggle('text-paper');
         button.classList.toggle('text-ink-2', !button.classList.contains('is-active'));
+        button.setAttribute('aria-pressed', String(button.classList.contains('is-active')));
       }
       render();
     });
