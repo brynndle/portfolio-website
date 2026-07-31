@@ -114,18 +114,16 @@ const initialSlug = initialTag ? tagToSlug(initialTag) : undefined;
 
   buttons.forEach((button) => {
     button.addEventListener('click', () => {
-      if (button.dataset.tag === 'all') {
-        buttons.forEach((b) => {
-          b.classList.remove('is-active', 'bg-blue', 'text-paper');
-          b.classList.add('text-ink-2');
-          b.setAttribute('aria-pressed', 'false');
-        });
-      } else {
-        button.classList.toggle('is-active');
-        button.classList.toggle('bg-blue');
-        button.classList.toggle('text-paper');
-        button.classList.toggle('text-ink-2', !button.classList.contains('is-active'));
-        button.setAttribute('aria-pressed', String(button.classList.contains('is-active')));
+      const wasActive = button.classList.contains('is-active');
+      buttons.forEach((b) => {
+        b.classList.remove('is-active', 'bg-blue', 'text-paper');
+        b.classList.add('text-ink-2');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      if (button.dataset.tag !== 'all' && !wasActive) {
+        button.classList.add('is-active', 'bg-blue', 'text-paper');
+        button.classList.remove('text-ink-2');
+        button.setAttribute('aria-pressed', 'true');
       }
       render();
     });
