@@ -5,15 +5,8 @@
 @import "@fontsource/ibm-plex-sans/400.css";
 @import "@fontsource/ibm-plex-sans/500.css";
 @import "@fontsource/ibm-plex-sans/600.css";
-/* IBM Plex Mono — labels, status, metadata */
-@import "@fontsource/ibm-plex-mono/400.css";
-@import "@fontsource/ibm-plex-mono/500.css";
-@import "@fontsource/ibm-plex-mono/600.css";
-@import "@fontsource/ibm-plex-mono/700.css";
-/* WDXL Lubrifont SC — h1 only, trial */
-@import "@fontsource/wdxl-lubrifont-sc/400.css";
-/* Bebas Neue — hero headline */
-@import "@fontsource/bebas-neue/400.css";
+/* Figtree — hero headline + labels, status, metadata */
+@import "@fontsource-variable/figtree/wght.css";
 
 @theme {
   /* ---- surfaces (warm paper) ---- */
@@ -58,9 +51,8 @@
   --color-rule-invert: rgb(244 241 234 / 0.16);
 
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
-  --font-display: "WDXL Lubrifont SC", ui-sans-serif, system-ui, sans-serif;
-  --font-hero: "Bebas Neue", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
 
   /* Sharp corners is a house rule. */
   --radius-none: 0px;
