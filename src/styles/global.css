@@ -1,12 +1,10 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* IBM Plex Sans — everything */
-@import "@fontsource/ibm-plex-sans/400.css";
-@import "@fontsource/ibm-plex-sans/500.css";
-@import "@fontsource/ibm-plex-sans/600.css";
-/* Figtree — hero headline + labels, status, metadata */
+/* Figtree — everything: body copy, labels, status, metadata */
 @import "@fontsource-variable/figtree/wght.css";
+/* Monomaniac One — hero headline, trial */
+@import "@fontsource/monomaniac-one/400.css";
 
 @theme {
   /* ---- surfaces (warm paper) ---- */
@@ -50,7 +48,7 @@
   --color-rule-strong: rgb(20 22 26 / 0.20);
   --color-rule-invert: rgb(244 241 234 / 0.16);
 
-  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
 
