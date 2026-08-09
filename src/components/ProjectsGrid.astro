@@ -69,7 +69,7 @@ const initialSlug = initialTag ? tagToSlug(initialTag) : undefined;
             data-tags={tagSlugs.join(' ')}
             class:list={['block overflow-hidden rounded-[10px] bg-paper-3 shadow-plate', { hidden }]}
           >
-            <div class="relative flex aspect-square items-end overflow-hidden border-b border-rule-strong bg-paper-2 p-3">
+            <div class="relative flex aspect-square items-end overflow-hidden bg-paper-2 p-3">
               {entry.data.thumbnail
                 ? <img src={entry.data.thumbnail} alt="" class="absolute inset-0 h-full w-full object-cover" />
                 : <span class="label text-[14px]">image</span>}

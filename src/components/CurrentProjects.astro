@@ -18,10 +18,10 @@ const featuredExperience = experiences.find((e) => e.data.featured) ?? experienc
 const itAlreadyHappened = games.find((g) => g.id === 'it-already-happened');
 ---
 
-<section class="relative -mt-[72px] border-b border-rule">
-  <div class="band-bg diagonal-cut-band absolute inset-0" aria-hidden="true"></div>
+<section class="relative -mt-[65px] overflow-hidden">
+  <div class="band-bg diagonal-cut-projects absolute inset-0" aria-hidden="true"></div>
 
-  <div class="max-width relative px-10 pb-[102px] pt-[120px] lg:pt-[262px]">
+  <div class="max-width relative px-10 pb-[145px] pt-[120px] lg:pt-[262px]">
     <div class="mb-6 flex items-baseline justify-between">
       <h3 class="font-display text-[32px] font-normal -tracking-[0.01em]">{title}</h3>
       <a href={moreHref} class="label font-bold text-blue">{moreLabel}</a>

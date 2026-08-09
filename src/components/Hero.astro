@@ -2,7 +2,7 @@
 import FeaturedOffering from './FeaturedOffering.astro';
 const { headline, lede } = Astro.props;
 ---
-<section class="relative pt-[var(--nav-height)]">
+<section class="relative pb-[30px] pt-[calc(var(--nav-height)+30px)]">
   <div class="hero-bg diagonal-cut-hero absolute inset-0" aria-hidden="true"></div>
   <div
     class="diagonal-cut-hero pointer-events-none absolute inset-0 opacity-40"
@@ -11,10 +11,10 @@ const { headline, lede } = Astro.props;
   ></div>
 
   <div class="max-width relative flex flex-col justify-start">
-    <div class="flex max-w-[62rem] flex-col justify-center px-11 pb-12 pt-12 lg:pb-[200px]">
-      <p id="hero-eyebrow" class="font-mono text-lg font-semibold uppercase tracking-[0.08em] text-white/90 max-md:text-base">Brynn Caputo — Experience &amp; Product Design</p>
-      <h2 class="mt-5 max-w-[34ch] font-display text-[79px] font-normal leading-[1.02] -tracking-[0.03em] text-balance text-white [text-shadow:-3px_-3px_0_rgb(0_0_0_/_0.10)] max-md:text-[40px]">{headline}</h2>
-      <p class="mt-5 max-w-[62ch] pb-[54px] text-[22px] leading-relaxed text-white text-pretty">{lede}</p>
+    <div class="mx-auto flex w-[86%] flex-col items-center justify-center px-11 pb-12 pt-12 text-center max-md:w-full lg:pb-[200px]">
+      <p id="hero-eyebrow" class="font-mono text-lg font-semibold uppercase tracking-[0.08em] text-white/90 max-md:text-base">UX Design · Product Strategy · Experience Design</p>
+      <h2 class="mt-5 font-display text-[124px] font-normal leading-[1.02] -tracking-[0.03em] text-balance text-white [text-shadow:5px_5px_0_rgba(0,0,0,.24)] max-md:text-[56px]">{headline}</h2>
+      <p class="mt-5 w-[83%] pb-[54px] whitespace-pre-line text-[24px] leading-relaxed text-white text-pretty [text-shadow:2px_2px_7px_rgba(0,0,0,.6)] max-md:w-full">{lede}</p>
     </div>
 
     <div class="absolute inset-x-11 bottom-[36px] z-10 translate-y-1/2 max-lg:static max-lg:bottom-auto max-lg:mx-11 max-lg:mb-8 max-lg:translate-y-0">

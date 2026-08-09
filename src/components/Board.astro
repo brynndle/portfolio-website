@@ -9,6 +9,7 @@ const STATUS = {
   shipped:    { label: 'Shipped', tone: 'text-ink-3' },
   launched:   { label: 'Launched', tone: 'text-green' },
   paused:     { label: 'Paused', tone: 'text-ink-4' },
+  'coming-soon': { label: 'Coming to PDX this September', tone: 'text-blue' },
 };
 
 const items = await Promise.all(entries.map(async ({ data }) => {
@@ -21,15 +22,15 @@ const items = await Promise.all(entries.map(async ({ data }) => {
   return { data, thumbnail };
 }));
 ---
-<div class="min-w-0 border-l border-rule px-10 pb-16 pt-8 max-lg:border-l-0 max-lg:border-t">
+<div class="min-w-0 border-l border-rule-invert px-10 pb-16 pt-[82px] max-lg:border-l-0 max-lg:border-t">
   <div class="mb-1 flex items-baseline justify-between gap-3">
-    <h3 class="font-display text-[32px] font-normal -tracking-[0.01em]">What I'm working on</h3>
-    <span class="label">Updated {new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+    <h3 class="font-display text-[32px] font-normal -tracking-[0.01em] text-white">What I'm working on</h3>
+    <span class="label text-white/60">Updated {new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
   </div>
 
   <div class="mt-5 flex flex-col gap-[22px]">
     {items.map(({ data, thumbnail }) => (
-      <div class="flex min-w-0 items-start overflow-hidden rounded-[8px] border border-rule-strong bg-card shadow-plate-sm">
+      <div class="flex min-w-0 items-start overflow-hidden rounded-[8px] bg-card shadow-plate-sm">
         <div class="relative aspect-square w-[170px] shrink-0 overflow-hidden bg-paper-2">
           {thumbnail
             ? <img src={thumbnail} alt="" class="absolute inset-0 h-full w-full object-cover" />
