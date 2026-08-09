@@ -22,33 +22,39 @@ const figures = d.figures ?? [];
 ---
 <BaseLayout title={d.title} description={d.blurb}>
   <!-- title block -->
-  <div class="grid grid-cols-[220px_1fr] gap-12 border-b border-rule bg-paper-2 px-10 pb-8 pt-10 max-lg:grid-cols-1 max-lg:gap-4">
-    <a href={backHref} class="font-mono text-[11px] uppercase tracking-[0.12em] text-blue">&larr; {backLabel}</a>
+  <div class="grid grid-cols-[220px_min(68ch,100%)] gap-12 border-b border-rule bg-paper-2 px-10 pb-8 pt-10 max-lg:grid-cols-1 max-lg:gap-4">
+    <a href={backHref} class="font-mono text-[14px] uppercase tracking-[0.12em] text-blue">&larr; {backLabel}</a>
     <div>
-      <h1 class="max-w-[22ch] text-[48px] font-semibold leading-[1.05] -tracking-[0.03em] text-balance max-md:text-[34px]">{d.title}</h1>
+      <h1 class="max-w-[22ch] font-display text-[48px] font-normal leading-[1.05] -tracking-[0.03em] text-balance max-md:text-[34px]">{d.title}</h1>
       {d.blurb && <p class="mt-4 max-w-[60ch] text-[19px] leading-relaxed text-ink-2 text-pretty">{d.blurb}</p>}
     </div>
   </div>
 
-  <!-- header image: full-bleed band, image contained so portrait/landscape assets both work -->
-  {d.thumbnail && (
+  <!-- header image: full-bleed blurred backdrop behind the whole section; contained hero aligns to the content column -->
+  {d.hero && (
     <div
-      class="relative flex h-[520px] items-center justify-center overflow-hidden border-b border-rule bg-paper-2 max-md:h-[300px]"
-      style={d.thumbnailBg ? `background-color: ${d.thumbnailBg}` : undefined}
+      class="relative h-[624px] overflow-hidden border-b border-rule max-md:h-[360px]"
+      style={d.heroBg ? `background-color: ${d.heroBg}` : undefined}
     >
-      <img src={d.thumbnail} alt="" class="h-full w-auto max-w-full object-contain" />
+      <img src={d.hero} alt="" class="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl" aria-hidden="true" />
+      <div class="relative grid h-full grid-cols-[220px_min(68ch,100%)] gap-12 px-10 max-lg:grid-cols-1 max-lg:gap-4">
+        <div aria-hidden="true"></div>
+        <div class="flex h-full w-[736px] items-center justify-center overflow-visible">
+          <img src={d.hero} alt="" class="h-full w-full overflow-visible object-cover" />
+        </div>
+      </div>
     </div>
   )}
 
   <!-- project record -->
-  <div class="grid grid-cols-[220px_1fr] gap-12 border-b border-rule px-10 py-[26px] max-lg:grid-cols-1">
-    <span class="label">Project record</span>
+  <div class="grid grid-cols-[220px_min(68ch,100%)] gap-12 border-b border-rule px-10 py-[26px] max-lg:grid-cols-1">
+    <span class="label text-[14px]">Project record</span>
     <dl class="grid grid-cols-4 gap-7 max-md:grid-cols-2">
       {[['Role', d.role], ['Client', d.client], ['Methods', d.methods], ['Live', d.source]].filter(([, v]) => v).map(([k, v]) => (
         <div>
-          <dt class="font-mono text-[11px] uppercase tracking-[0.1em] text-ink-4">{k}</dt>
+          <dt class="font-mono text-[14px] uppercase tracking-[0.1em] text-ink-4">{k}</dt>
           <dd class="mt-1.5 text-sm text-ink">
-            {k === 'Live' ? <a href={v} class="border-b border-blue pb-0.5 text-blue">Visit &nearr;</a> : v}
+            {k === 'Live' ? <a href={v} class="border-b border-blue pb-0.5 font-bold text-blue">Visit &nearr;</a> : v}
           </dd>
         </div>
       ))}
@@ -59,8 +65,8 @@ const figures = d.figures ?? [];
     <!-- prose + contents rail -->
     <div class="grid grid-cols-[220px_1fr] gap-12 max-lg:grid-cols-1">
       <nav class="sticky top-6 self-start py-9 max-lg:static">
-        <div class="label border-b border-rule pb-3">Contents</div>
-        <ol class="flex flex-col gap-2.5 pt-3 font-mono text-[11.5px] tracking-[0.06em] text-ink-3">
+        <div class="label border-b border-rule pb-3 text-[14px]">Contents</div>
+        <ol class="flex flex-col gap-2.5 pt-3 font-mono text-[14px] tracking-[0.06em] text-ink-3">
           {headings.filter((h) => h.depth <= 2).map((h, i) => (
             <li><a href={`#${h.slug}`} class="hover:text-blue">{String(i + 1).padStart(2, '0')} &nbsp;{h.text}</a></li>
           ))}
@@ -93,11 +99,11 @@ const figures = d.figures ?? [];
   <!-- prev / next -->
   <div class="grid grid-cols-2 border-y border-rule max-md:grid-cols-1">
     <a href={prev?.href ?? backHref} class="border-r border-rule px-10 py-7">
-      <div class="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-4">&larr; Previous</div>
+      <div class="font-mono text-[14px] uppercase tracking-[0.12em] text-ink-4">&larr; Previous</div>
       <div class="mt-2 text-xl font-semibold -tracking-[0.015em]">{prev?.title ?? backLabel}</div>
     </a>
     <a href={next?.href ?? backHref} class="px-10 py-7 text-right">
-      <div class="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-4">Next &rarr;</div>
+      <div class="font-mono text-[14px] uppercase tracking-[0.12em] text-ink-4">Next &rarr;</div>
       <div class="mt-2 text-xl font-semibold -tracking-[0.015em]">{next?.title ?? backLabel}</div>
     </a>
   </div>

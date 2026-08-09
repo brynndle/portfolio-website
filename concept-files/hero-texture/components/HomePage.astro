@@ -1,0 +1,19 @@
+---
+// Section order for src/pages/index.astro — matches the approved design (5a / Final Version).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import CollectionGrid from '../components/CollectionGrid.astro';
+import Board from '../components/Board.astro';
+import BioStrip from '../components/BioStrip.astro';
+import ConsultCTA from '../components/ConsultCTA.astro';
+---
+<BaseLayout title="Brynn Caputo — experience & product design">
+  <Hero
+    headline="Twenty years designing software. Now building games you can walk into."
+    lede="Product and UX design for people who need the thing to actually work — plus a growing catalog of games, installations, and immersive experiences."
+  />
+  <CollectionGrid title="Current Projects" moreHref="/work" moreLabel="Full catalog →" />
+  <Board />
+  <BioStrip />
+  <ConsultCTA />
+</BaseLayout>

@@ -15,38 +15,45 @@ const experiences = (await getCollection('experiences')).sort((a, b) => a.data.o
 
 const featuredGame = games.find((g) => g.data.featured) ?? games[0];
 const featuredExperience = experiences.find((e) => e.data.featured) ?? experiences[0];
+const itAlreadyHappened = games.find((g) => g.id === 'it-already-happened');
 ---
 
-<section class="border-b border-rule px-10 py-12">
-  <div class="mb-6 flex items-baseline justify-between">
-    <h3 class="text-[22px] font-semibold -tracking-[0.01em]">{title}</h3>
-    <a href={moreHref} class="label text-blue">{moreLabel}</a>
-  </div>
-  <div class="grid gap-6 md:grid-cols-3">
-    <ProjectCard
-      title="Vibe Code Rescue"
-      blurb="AI ships fast. It doesn't know your users, your flow, or why anyone would click that button. A one-hour session fixes the experience so the product works as well as it looks."
-      href="https://brynndle.github.io/ux-rescue/"
-      kicker="Consult"
-      variant="service"
-    />
-    {featuredGame && (
-      <ProjectCard
-        title={featuredGame.data.title}
-        blurb={featuredGame.data.blurb}
-        href={`/games/${featuredGame.id}`}
-        thumbnail={featuredGame.data.thumbnail}
-        kicker="Game"
-      />
-    )}
-    {featuredExperience && (
-      <ProjectCard
-        title={featuredExperience.data.title}
-        blurb={featuredExperience.data.blurb}
-        href={`/experiences/${featuredExperience.id}`}
-        thumbnail={featuredExperience.data.thumbnail}
-        kicker="Experience"
-      />
-    )}
+<section class="relative -mt-[72px] border-b border-rule">
+  <div class="band-bg diagonal-cut-band absolute inset-0" aria-hidden="true"></div>
+
+  <div class="max-width relative px-10 pb-[102px] pt-[120px] lg:pt-[262px]">
+    <div class="mb-6 flex items-baseline justify-between">
+      <h3 class="font-display text-[32px] font-normal -tracking-[0.01em]">{title}</h3>
+      <a href={moreHref} class="label font-bold text-blue">{moreLabel}</a>
+    </div>
+    <div class="grid gap-[40px] md:grid-cols-3">
+      {itAlreadyHappened && (
+        <ProjectCard
+          title={itAlreadyHappened.data.title}
+          blurb={itAlreadyHappened.data.blurb}
+          href={`/games/${itAlreadyHappened.id}`}
+          thumbnail={itAlreadyHappened.data.thumbnail}
+          kicker="Game"
+        />
+      )}
+      {featuredGame && (
+        <ProjectCard
+          title={featuredGame.data.title}
+          blurb={featuredGame.data.blurb}
+          href={`/games/${featuredGame.id}`}
+          thumbnail={featuredGame.data.thumbnail}
+          kicker="Game"
+        />
+      )}
+      {featuredExperience && (
+        <ProjectCard
+          title={featuredExperience.data.title}
+          blurb={featuredExperience.data.blurb}
+          href={`/experiences/${featuredExperience.id}`}
+          thumbnail={featuredExperience.data.thumbnail}
+          kicker="Experience"
+        />
+      )}
+    </div>
   </div>
 </section>

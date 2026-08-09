@@ -10,7 +10,8 @@ const projectSchema = z.object({
   blurb: z.string(),
   tags: z.array(z.enum(TAGS)).min(1).max(3),
   thumbnail: z.string().optional(),
-  thumbnailBg: z.string().optional(),
+  hero: z.string().optional(),
+  heroBg: z.string().optional(),
   link: z.string().url().optional(),
   featured: z.boolean().default(false),
   order: z.number().default(0),
@@ -49,6 +50,7 @@ const board = defineCollection({
     lastMove: z.string(),
     movedAt: z.coerce.date(),
     project: z.string().optional(),
+    thumbnail: z.string().optional(),
   }),
 });
 

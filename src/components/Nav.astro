@@ -1,21 +1,72 @@
 ---
 import { BOOK_A_CONSULT_URL } from '../data/site';
+
+interface Props {
+  overlay?: boolean;
+}
+
+const { overlay = false } = Astro.props;
+
 const links = [
   { href: '/#board', label: 'Now' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/work', label: 'Work' },
+];
+const projectLinks = [
+  { href: '/work', label: 'Product Design' },
   { href: '/games', label: 'Games' },
   { href: '/experiences', label: 'Experiences' },
-  { href: '/about', label: 'About' },
 ];
 ---
-<header class="flex items-center justify-between border-b border-rule px-10 py-[18px]">
-  <a href="/" class="flex items-baseline gap-2.5">
-    <span class="text-base font-semibold -tracking-[0.01em]">Brynn Caputo</span>
-    <span class="font-mono text-[11px] text-ink-3">/ experience &amp; product design</span>
-  </a>
-  <nav class="flex items-center gap-7 font-mono text-xs uppercase tracking-[0.08em] text-ink-2">
-    {links.map((l) => <a href={l.href} class="transition-colors duration-100 hover:text-blue">{l.label}</a>)}
-    <a href={BOOK_A_CONSULT_URL} class="bg-blue px-4 py-2.5 font-medium text-paper">Book a consult</a>
-  </nav>
+<header
+  id="site-nav"
+  data-overlay={overlay ? 'true' : 'false'}
+  data-scrolled="false"
+  class:list={[
+    'z-50 min-h-[var(--nav-height)] border-b border-rule bg-paper transition-colors duration-300',
+    overlay ? 'fixed inset-x-0 top-0' : 'sticky top-0',
+  ]}
+>
+  <div class="max-width flex min-h-[var(--nav-height)] items-center justify-between px-10 py-[18px]">
+    <a href="/" class="nav-brand flex items-baseline gap-2.5 transition-opacity duration-300">
+      <span class="nav-name text-base font-semibold -tracking-[0.01em] text-ink">Brynn Caputo</span>
+      <span class="nav-byline font-mono text-[11px] text-ink-3">/ experience &amp; product design</span>
+    </a>
+    <nav class="flex items-center gap-7 font-mono text-xs font-bold uppercase tracking-[0.08em] text-ink-2">
+      <div class="flex items-center gap-4">
+        <a href="https://www.instagram.com/brynndlebop" aria-label="Instagram @brynndlebop" class="nav-link transition-colors duration-300 hover:text-blue">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@brynndlebop" aria-label="TikTok @brynndlebop" class="nav-link transition-colors duration-300 hover:text-blue">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 2h-3v13.5a3 3 0 1 1-2.5-2.96V9.4a6 6 0 1 0 5.5 5.98V9.03a7.4 7.4 0 0 0 4.5 1.53v-3a4.4 4.4 0 0 1-4.5-4.4V2z"/></svg>
+        </a>
+      </div>
+      {links.map((l) => <a href={l.href} class="nav-link transition-colors duration-300 hover:text-blue">{l.label}</a>)}
+      <div class="group relative">
+        <a href="/projects" class="nav-link block py-2 transition-colors duration-300 hover:text-blue">Projects</a>
+        <div class="invisible absolute left-0 top-full z-10 min-w-[180px] border border-rule-strong bg-paper opacity-0 transition-opacity duration-100 group-hover:visible group-hover:opacity-100">
+          {projectLinks.map((l) => (
+            <a href={l.href} class="block px-4 py-3 normal-case tracking-normal text-ink-2 transition-colors duration-100 hover:bg-paper-2 hover:text-blue">{l.label}</a>
+          ))}
+        </div>
+      </div>
+      <a href="/about" class="nav-link transition-colors duration-300 hover:text-blue">About</a>
+      <a href={BOOK_A_CONSULT_URL} class="bg-[#00ff1c] px-4 py-2.5 text-[14px] font-bold text-ink shadow-[5px_5px_0px_rgba(0,0,0,0.5)]">Coffee?</a>
+    </nav>
+  </div>
 </header>
+
+{overlay && (
+  <script>
+    const header = document.getElementById('site-nav');
+    const eyebrow = document.getElementById('hero-eyebrow');
+    if (header) {
+      const updateScrolled = () => {
+        const navHeight = header.offsetHeight;
+        const pastEyebrow = eyebrow ? eyebrow.getBoundingClientRect().bottom <= navHeight : true;
+        header.dataset.scrolled = pastEyebrow ? 'true' : 'false';
+      };
+      updateScrolled();
+      window.addEventListener('scroll', updateScrolled, { passive: true });
+      window.addEventListener('resize', updateScrolled);
+    }
+  </script>
+)}

@@ -7,13 +7,15 @@ import BioStrip from '../components/BioStrip.astro';
 import ConsultCTA from '../components/ConsultCTA.astro';
 ---
 
-<BaseLayout title="Home" description="Brynn Caputo — experience & product design.">
+<BaseLayout title="Home" description="Brynn Caputo — experience & product design." navOverlay>
   <Hero
-    headline="Twenty years designing software. Now building games you can walk into."
-    lede="Product and UX design for people who need the thing to actually work — plus a growing catalog of games, installations, and immersive experiences."
+    headline="I design games, immersive theater, and physical worlds with twenty years of software behind all of it."
+    lede="I've solved problems for major corporations and small start-ups and now I want to offer my services to independant creators who are vibe coding amazing products but need help with the UX."
   />
-  <CurrentProjects title="Current Projects" moreHref="/work" moreLabel="Full catalog →" />
-  <Board />
-  <BioStrip />
+  <CurrentProjects title="Recently Launched" moreHref="/work" moreLabel="Full catalog →" />
+  <section id="board" class="max-width grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] border-b border-rule max-lg:grid-cols-1">
+    <BioStrip />
+    <Board />
+  </section>
   <ConsultCTA />
 </BaseLayout>

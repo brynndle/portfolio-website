@@ -3,25 +3,26 @@ interface Props { title: string; blurb: string; href: string; kicker?: string; t
 const { title, blurb, href, kicker, thumbnail, variant = 'default' } = Astro.props;
 ---
 {variant === 'service' ? (
-  <a href={href} class="flex h-full flex-col justify-between border border-rule-strong bg-blue p-5 text-paper">
+  <a href={href} class="flex h-full flex-col justify-between rounded-[10px] bg-blue p-5 text-paper shadow-plate">
     <div>
-      {kicker && <div class="mb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-paper/70">{kicker}</div>}
+      {kicker && <div class="mb-2 font-mono text-[14px] uppercase tracking-[0.14em] text-paper/70">{kicker}</div>}
       <h3 class="text-[22px] font-semibold leading-[1.15] -tracking-[0.015em]">{title}</h3>
       <p class="mt-3 text-sm leading-relaxed text-paper/85">{blurb}</p>
     </div>
-    <span class="mt-7 self-start border-b border-paper/60 pb-[3px] font-mono text-xs uppercase tracking-[0.1em]">Book an hour →</span>
+    <span class="mt-7 self-start border-b border-paper/60 pb-[3px] font-mono text-xs font-bold uppercase tracking-[0.1em]">Book an hour →</span>
   </a>
 ) : (
-  <a href={href} class="block border border-rule-strong bg-paper-3">
-    <div class="relative flex h-[170px] items-end overflow-hidden border-b border-rule-strong bg-paper-2 p-3">
+  <a href={href} class="block overflow-hidden rounded-[10px] bg-paper-3 shadow-plate">
+    <div class="relative flex aspect-square items-end overflow-hidden border-b border-rule-strong bg-paper-2 p-3">
       {thumbnail
         ? <img src={thumbnail} alt="" class="absolute inset-0 h-full w-full object-cover" />
-        : <span class="label text-[10px]">image</span>}
+        : <span class="label text-[14px]">image</span>}
     </div>
     <div class="p-5">
-      {kicker && <div class="mb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-blue">{kicker}</div>}
-      <h3 class="text-lg font-semibold -tracking-[0.01em]">{title}</h3>
-      <p class="mt-2 text-[13.5px] leading-relaxed text-ink-3">{blurb}</p>
+      {kicker && <div class="mb-2 font-mono text-[14px] uppercase tracking-[0.14em] text-blue">{kicker}</div>}
+      <h3 class="text-[24px] font-semibold -tracking-[0.01em]">{title}</h3>
+      <p class="mt-2 text-[16px] leading-relaxed text-[rgb(78,78,78)]">{blurb}</p>
+      <span class="mt-4 inline-block border-b border-ink-3/60 pb-[3px] font-mono text-xs font-bold uppercase tracking-[0.1em] text-ink-3">See more →</span>
     </div>
   </a>
 )}

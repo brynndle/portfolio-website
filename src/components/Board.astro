@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 const entries = (await getCollection('board')).sort((a, b) => b.data.movedAt - a.data.movedAt);
 const STATUS = {
   planning:   { label: 'Planning', tone: 'text-ink-3' },
@@ -10,29 +10,42 @@ const STATUS = {
   launched:   { label: 'Launched', tone: 'text-green' },
   paused:     { label: 'Paused', tone: 'text-ink-4' },
 };
+
+const items = await Promise.all(entries.map(async ({ data }) => {
+  let thumbnail = data.thumbnail;
+  if (!thumbnail && data.project) {
+    const [collection, slug] = data.project.split('/') as ['work' | 'games' | 'experiences', string];
+    const projectEntry = await getEntry(collection, slug);
+    thumbnail = projectEntry?.data.thumbnail;
+  }
+  return { data, thumbnail };
+}));
 ---
-<section id="board" class="border-b border-rule px-10 py-12">
-  <div class="mb-6 flex items-baseline justify-between">
-    <div class="flex items-baseline gap-3.5">
-      <h3 class="text-[22px] font-semibold -tracking-[0.01em]">The board</h3>
-      <span class="font-mono text-xs text-ink-3">what's actually on the bench right now</span>
-    </div>
+<div class="min-w-0 border-l border-rule px-10 pb-16 pt-8 max-lg:border-l-0 max-lg:border-t">
+  <div class="mb-1 flex items-baseline justify-between gap-3">
+    <h3 class="font-display text-[32px] font-normal -tracking-[0.01em]">What I'm working on</h3>
     <span class="label">Updated {new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
   </div>
 
-  <div class="border-t border-rule">
-    <div class="label grid grid-cols-[1.6fr_0.8fr_2.2fr_0.7fr] gap-6 border-b border-rule-soft py-3.5">
-      <span>Project</span><span>Status</span><span>Description</span><span>Link</span>
-    </div>
-    {entries.map(({ data }) => (
-      <div class="grid grid-cols-[1.6fr_0.8fr_2.2fr_0.7fr] items-baseline gap-6 border-b border-rule-soft py-[18px]">
-        <span class="text-base font-medium">{data.title}</span>
-        <span class={`font-mono text-[11px] uppercase tracking-[0.08em] ${STATUS[data.status].tone}`}>● {STATUS[data.status].label}</span>
-        <span class="text-sm text-ink-2">{data.lastMove}</span>
-        {data.project
-          ? <a href={`/${data.project}`} class="font-mono text-[13px] text-blue transition-colors duration-100 hover:text-ink">View →</a>
-          : <span class="font-mono text-[13px] text-ink-4">—</span>}
+  <div class="mt-5 flex flex-col gap-[22px]">
+    {items.map(({ data, thumbnail }) => (
+      <div class="flex min-w-0 items-start overflow-hidden rounded-[8px] border border-rule-strong bg-card shadow-plate-sm">
+        <div class="relative aspect-square w-[170px] shrink-0 overflow-hidden bg-paper-2">
+          {thumbnail
+            ? <img src={thumbnail} alt="" class="absolute inset-0 h-full w-full object-cover" />
+            : <span class="label absolute inset-0 flex items-center justify-center text-[14px]">image</span>}
+        </div>
+        <div class="min-w-0 flex-1 py-4 pr-4 pl-[20px]">
+          <div class="flex items-baseline justify-between gap-3">
+            <span class="text-[24px] font-medium">{data.title}</span>
+            <span class={`font-mono text-[11px] uppercase tracking-[0.08em] ${STATUS[data.status].tone}`}>● {STATUS[data.status].label}</span>
+          </div>
+          <p class="mt-1.5 truncate text-[16px] text-ink-2">{data.lastMove}</p>
+          {data.project && (
+            <a href={`/${data.project}`} class="mt-1.5 inline-block font-mono text-[13px] font-bold text-blue transition-colors duration-100 hover:text-ink">View →</a>
+          )}
+        </div>
       </div>
     ))}
   </div>
-</section>
+</div>

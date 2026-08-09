@@ -2,7 +2,8 @@
 title: "Irregardless.ly"
 blurb: "Irregardless.ly is like a spell checker but for writing style guides. Users can select style guides to suit their work be it literary or scientific. Users can also build their own style guides and have several active at once."
 tags: ["Product Design"]
-thumbnail: "/images/projects/irregardlessly/Sidebar_v1.png"
+thumbnail: "/images/thumbnails/work/irregardlessly.jpg"
+hero: "/images/projects/irregardlessly/Sidebar_v1.png"
 source: "https://brynncaputo.com/irregardlessly"
 featured: false
 order: 3

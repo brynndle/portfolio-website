@@ -1,22 +1,24 @@
 ---
-const { portrait } = Astro.props;
 ---
-<section class="grid grid-cols-[300px_1fr] border-b border-rule max-md:grid-cols-1">
-  <div class="flex flex-col border-r border-rule py-8 pl-10 pr-8">
-    <div class="flex min-h-[200px] flex-1 items-end border border-rule-strong bg-paper-2 p-3">
-      {portrait ? <img src={portrait} alt="Brynn Caputo" class="h-full w-full object-cover" /> : <span class="label text-[10px]">portrait</span>}
-    </div>
+<div class="px-10 py-8" style="padding-bottom: 70px">
+  <div class="label mb-3.5 text-blue" style="font-weight: bold">Who's Brynn?</div>
+  <h3 class="max-w-[32ch] font-display text-[32px] font-normal leading-[1.25] -tracking-[0.015em] text-balance">A designer and engineer building products, games, and experiences in Portland, OR.</h3>
+  <p class="mt-3.5 max-w-[52ch] text-[17px] leading-relaxed text-ink-2 text-pretty">
+    I'm Brynn. For 20 years I've been designing products that put users first: <b>loyalty apps for small businesses</b> at Perka and Clover, <b>optimizing claims tooling</b> in healthcare, a <b>real estate auditing system</b> at Side that tripled auditor throughput. Between those <b>I build installations, characters, and hackable terminals for desert festivals.</b>
+  </p>
+
+  <div class="mt-[22px] flex flex-col gap-3 border-t border-rule pt-4 font-mono text-[13px] tracking-[0.06em] text-ink-3">
+    <p class="mt-3.5 max-w-[52ch] text-[15px] leading-relaxed text-ink-2 text-pretty">Have a project you need help launching? Lets have (virtual) coffee. <a class="mt-1.5 inline-block font-mono text-[13px] text-blue transition-colors duration-100 hover:text-ink" href="https://calendly.com/brynndlebop/let-s-have-coffee">Book a 30 min slot to chat.</a></p>
   </div>
-  <div class="px-10 pb-8 pt-[34px]">
-    <div class="label mb-3.5 text-blue">Who's building this</div>
-    <h3 class="max-w-[44ch] text-[22px] font-semibold leading-[1.25] -tracking-[0.015em] text-balance">Twenty years making software make sense — and lately, things you can stand inside.</h3>
-    <p class="mt-3.5 max-w-[68ch] text-[15px] leading-relaxed text-ink-2 text-pretty">
-      I'm Brynn. I design products for teams who need the thing to actually work — loyalty apps at Perka and Clover, claims tooling in healthcare, an audit system at Side that tripled auditor throughput. Between those I build installations, characters, and hackable terminals for desert festivals. Same instinct, different materials.
-    </p>
-    <div class="mt-[22px] flex flex-wrap items-baseline gap-7 border-t border-rule pt-4 font-mono text-[11px] tracking-[0.06em] text-ink-3">
-      <span><span class="uppercase tracking-[0.12em] text-ink-4">Clients</span> &nbsp;Clover · Perka · Side · Sony · Habitat</span>
-      <span><span class="uppercase tracking-[0.12em] text-ink-4">Shown at</span> &nbsp;The New Frame · Neotropolis · Wasteland</span>
-      <a href="/about" class="border-b border-blue pb-0.5 uppercase tracking-[0.1em] text-blue">More about me →</a>
+  <div class="mt-[22px] flex flex-col gap-3 border-t border-rule pt-4 font-mono text-[13px] tracking-[0.06em] text-ink-3">
+    <div>
+      <div class="font-semibold uppercase tracking-[0.12em] text-ink-4">Clients</div>
+      <div class="mt-0.5">Sony · Cisco · Clover · Perka · Side · Habitat for Humanity</div>
     </div>
+    <div>
+      <div class="font-semibold uppercase tracking-[0.12em] text-ink-4">Shown at</div>
+      <div class="mt-0.5">The New Frame · Neotropolis · Wasteland · Portland Winter Lights Festival</div>
+    </div>
+    <a href="/about" class="w-fit border-b border-blue pb-0.5 font-bold uppercase tracking-[0.1em] text-blue">More about me →</a>
   </div>
-</section>
+</div>

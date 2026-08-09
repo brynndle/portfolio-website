@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+const entries = (await getCollection('board')).sort((a, b) => b.data.movedAt - a.data.movedAt);
+const STATUS = {
+  'in-build': { label: 'In build', tone: 'text-blue' },
+  open:       { label: 'Taking bookings', tone: 'text-green' },
+  shipped:    { label: 'Shipped', tone: 'text-ink-3' },
+  paused:     { label: 'Paused', tone: 'text-ink-4' },
+};
+const age = (d) => {
+  const days = Math.floor((Date.now() - +d) / 864e5);
+  if (days < 1) return 'today';
+  if (days < 7) return `${days}d`;
+  if (days < 60) return `${Math.floor(days / 7)}w`;
+  return '—';
+};
+---
+<section id="board" class="border-b border-rule px-10 py-12">
+  <div class="mb-6 flex items-baseline justify-between">
+    <div class="flex items-baseline gap-3.5">
+      <h3 class="text-[22px] font-semibold -tracking-[0.01em]">The board</h3>
+      <span class="font-mono text-xs text-ink-3">what's actually on the bench right now</span>
+    </div>
+    <span class="label">Updated {new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+  </div>
+
+  <div class="border-t border-rule">
+    <div class="label grid grid-cols-[1.6fr_0.8fr_2.2fr_0.7fr] gap-6 border-b border-rule-soft py-3.5">
+      <span>Project</span><span>Status</span><span>Last move</span><span>Since</span>
+    </div>
+    {entries.map(({ data }) => (
+      <div class="grid grid-cols-[1.6fr_0.8fr_2.2fr_0.7fr] items-baseline gap-6 border-b border-rule-soft py-[18px]">
+        <span class="text-base font-medium">{data.title}</span>
+        <span class={`font-mono text-[11px] uppercase tracking-[0.08em] ${STATUS[data.status].tone}`}>● {STATUS[data.status].label}</span>
+        <span class="text-sm text-ink-2">{data.lastMove}</span>
+        <span class="font-mono text-[13px] text-ink-3">{age(data.movedAt)}</span>
+      </div>
+    ))}
+  </div>
+</section>

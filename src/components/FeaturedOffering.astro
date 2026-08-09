@@ -1,19 +1,46 @@
 ---
 import { BOOK_A_CONSULT_URL, AVAILABILITY } from '../data/site';
+
+interface Props {
+  pitch?: string;
+}
+
+const {
+  pitch = "You built something real with AI and it works — mostly. But people stall in the middle of the flow, miss the thing you want them to click, or email you instead of finishing. I go through your product the way your users actually do, find where it breaks down, and hand you a short ranked list of fixes you can ship the same week.",
+} = Astro.props;
+
+/* Process is supporting detail here — the explanation above is the point. */
+const steps = [
+  "Let's have a 30 minute chat to see if your project is a good fit.",
+  'We have a 1 hour session where I audit your site.',
+  'You get the recording and a plan to fix the issues.',
+];
 ---
-<article class="border border-rule-strong bg-card shadow-plate">
-  <div class="border-b border-rule px-[30px] pb-[22px] pt-[26px]">
-    <div class="mb-3.5 flex items-center gap-2.5">
-      <span class="block h-2.5 w-2.5 bg-green"></span>
-      <span class="font-mono text-[13px] font-semibold uppercase tracking-[0.18em] text-green">Featured Offering</span>
+<article class="grid grid-cols-[1.9fr_1.1fr_auto] items-stretch overflow-hidden rounded-[10px] border border-rule-strong bg-card shadow-plate max-lg:grid-cols-1">
+  <!-- what the service is -->
+  <div class="border-r border-rule px-8 py-7 max-lg:border-b max-lg:border-r-0">
+    <div class="mb-4 flex items-center gap-2.5">
+      <span class="bg-ink px-2 py-[5px] font-mono text-xs font-semibold uppercase tracking-[0.18em] text-paper">Featured Offering</span>
     </div>
-    <h3 class="max-w-[17ch] text-[28px] font-semibold leading-[1.12] -tracking-[0.025em] text-balance">One hour. Your product, made usable.</h3>
-    <p class="mt-2.5 max-w-[42ch] text-sm leading-relaxed text-ink-3">AI ships fast. It doesn't know your users, your flow, or why anyone would click that button.</p>
+    <h3 class="text-[28px] font-semibold leading-[1.12] -tracking-[0.025em] text-balance">Vibe Code UX Rescue</h3>
+    <p class="mt-3 text-base leading-[1.62] text-ink-2 text-pretty">{pitch}</p>
   </div>
 
-  <div class="flex flex-col gap-2.5 px-[30px] pb-6 pt-5">
-    <span class="font-mono text-[11.5px] font-medium uppercase tracking-[0.12em] text-green">{AVAILABILITY}</span>
-    <a href={BOOK_A_CONSULT_URL} class="bg-blue px-[26px] py-4 text-center font-mono text-[12.5px] font-medium uppercase tracking-[0.1em] text-paper">Book a consult →</a>
-    <span class="font-mono text-[11px] text-ink-4">60 min · remote · recorded</span>
+  <!-- how it works, demoted -->
+  <div class="flex flex-col justify-center border-r border-rule px-8 py-7 max-lg:border-b max-lg:border-r-0">
+    <span class="mb-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-4">How it works</span>
+    {steps.map((step, i) => (
+      <div class="flex items-baseline gap-3.5 border-b border-rule py-[11px]">
+        <span class="shrink-0 font-mono text-xs text-accent">{String(i + 1).padStart(2, '0')}</span>
+        <span class="text-[14.5px] font-medium leading-[1.45]">{step}</span>
+      </div>
+    ))}
+  </div>
+
+  <!-- the action -->
+  <div class="flex flex-col items-center justify-center gap-2.5 bg-slate px-8 py-7 text-center">
+    <span class="font-mono text-[11.5px] font-medium uppercase tracking-[0.12em] text-[#ff00ef]">{AVAILABILITY}</span>
+    <a href={BOOK_A_CONSULT_URL} class="whitespace-nowrap bg-[#00ff1c] px-7 py-4 text-center font-mono text-[14.5px] font-bold uppercase tracking-[0.1em] text-ink shadow-[5px_5px_0px_rgba(0,0,0,0.5)]">Let's talk →</a>
+    <span class="font-mono text-[11px] text-ink">Free 30 minute consult</span>
   </div>
 </article>

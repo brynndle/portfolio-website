@@ -1,0 +1,20 @@
+---
+import { BOOK_A_CONSULT_URL } from '../data/site';
+const links = [
+  { href: '/#board', label: 'Now' },
+  { href: '/work', label: 'Work' },
+  { href: '/games', label: 'Games' },
+  { href: '/experiences', label: 'Experiences' },
+  { href: '/about', label: 'About' },
+];
+---
+<header class="flex items-center justify-between border-b border-rule px-10 py-[18px]">
+  <a href="/" class="flex items-baseline gap-2.5">
+    <span class="text-base font-semibold -tracking-[0.01em]">Brynn Caputo</span>
+    <span class="font-mono text-[11px] text-ink-3">/ experience &amp; product design</span>
+  </a>
+  <nav class="flex items-center gap-7 font-mono text-xs uppercase tracking-[0.08em] text-ink-2">
+    {links.map((l) => <a href={l.href} class="transition-colors duration-100 hover:text-blue">{l.label}</a>)}
+    <a href={BOOK_A_CONSULT_URL} class="bg-accent px-4 py-2.5 font-medium text-paper">Book a consult</a>
+  </nav>
+</header>

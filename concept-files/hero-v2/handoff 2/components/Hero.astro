@@ -1,0 +1,16 @@
+---
+import FeaturedOffering from './FeaturedOffering.astro';
+const { headline, lede } = Astro.props;
+---
+<!-- 4c — full-width hero, offering card floats up over the rule below it -->
+<section class="bg-paper">
+  <div class="border-b border-rule bg-paper-2 px-10 pb-[132px] pt-[76px]">
+    <h2 class="max-w-[18ch] text-[60px] font-semibold leading-[1.03] -tracking-[0.03em] text-balance max-lg:text-[46px] max-md:text-[36px]">{headline}</h2>
+    <p class="mt-6 max-w-[56ch] text-[17px] leading-relaxed text-ink-2 text-pretty">{lede}</p>
+  </div>
+
+  <!-- negative margin pulls the card up so it overhangs the hero's bottom rule -->
+  <div class="relative -mt-[92px] px-10 max-lg:-mt-[72px]">
+    <FeaturedOffering />
+  </div>
+</section>

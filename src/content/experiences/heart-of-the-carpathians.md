@@ -1,8 +1,9 @@
 ---
 title: "Heart of the Carpathians"
 blurb: "In this experience for one, the participant will be taken on a journey into the mountains to experience the majesty and culture of the carpathian forests. In the end we hope they will leave with a personal connection to the…"
-tags: ["Experiences", "Marketing"]
-thumbnail: "/images/experiences-installations/heart-of-the-carpathians/banner-image.jpg"
+tags: ["Experiences"]
+thumbnail: "/images/thumbnails/experiences/heart-of-the-carpathians.png"
+hero: "/images/experiences-installations/heart-of-the-carpathians/banner-image.jpg"
 source: "https://brynncaputo.com/heart-of-the-carpathians"
 featured: false
 order: 2

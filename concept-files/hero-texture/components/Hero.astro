@@ -1,0 +1,31 @@
+---
+import FeaturedOffering from './FeaturedOffering.astro';
+const { headline, lede } = Astro.props;
+---
+<section class="grid grid-cols-[1fr_560px] border-b border-rule bg-paper max-lg:grid-cols-1">
+  <!-- Left: headline over a dot field that fades from the top-right corner -->
+  <div class="relative overflow-hidden bg-paper-2">
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <div
+        class="absolute inset-0"
+        style="background-image:radial-gradient(rgb(20 22 26 / 0.26) 1.5px, transparent 1.6px); background-size:20px 20px; -webkit-mask-image:radial-gradient(120% 130% at 100% 0%, #000 0 30%, transparent 78%); mask-image:radial-gradient(120% 130% at 100% 0%, #000 0 30%, transparent 78%);"
+      ></div>
+      <div class="absolute -right-[110px] -top-24 size-[300px] rounded-full border-[1.5px] border-panel/30"></div>
+      <div class="absolute -bottom-[52px] right-[120px] size-[150px] rotate-[16deg] border border-[rgb(20_22_26/0.18)]"></div>
+    </div>
+    <div class="relative flex min-h-full flex-col justify-center px-11 pb-[68px] pt-16">
+      <h2 class="max-w-[18ch] text-[56px] font-semibold leading-[1.02] -tracking-[0.03em] text-balance max-md:text-[40px]">{headline}</h2>
+      <p class="mt-6 max-w-[52ch] text-lg leading-relaxed text-ink-2 text-pretty">{lede}</p>
+    </div>
+  </div>
+
+  <!-- Right: orchid panel, fine mist grain, floating offering card -->
+  <div class="relative flex items-center overflow-hidden border-l border-rule bg-panel px-11 py-12">
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background-image:url('/mist.png'); background-size:300px 300px;"
+      aria-hidden="true"
+    ></div>
+    <div class="relative w-full"><FeaturedOffering /></div>
+  </div>
+</section>

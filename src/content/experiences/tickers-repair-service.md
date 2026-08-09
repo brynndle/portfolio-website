@@ -2,7 +2,8 @@
 title: "Ticker's Fix-it"
 blurb: "Ticker is a character I created for Neotropolis, an immersive, week long sci-fi festival that takes place annually in the mojave desert. I have always relied on props to be the center of an experience but with Ticker I decided…"
 tags: ["Experiences"]
-thumbnail: "/images/experiences-installations/tickers-repair-service/IMG_0175.jpeg"
+thumbnail: "/images/thumbnails/experiences/tickers-repair-service.png"
+hero: "/images/experiences-installations/tickers-repair-service/IMG_0175.jpeg"
 source: "https://brynncaputo.com/tickers-repair-service"
 featured: false
 order: 8

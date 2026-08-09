@@ -9,24 +9,45 @@
 @import "@fontsource/ibm-plex-mono/400.css";
 @import "@fontsource/ibm-plex-mono/500.css";
 @import "@fontsource/ibm-plex-mono/600.css";
+@import "@fontsource/ibm-plex-mono/700.css";
+/* WDXL Lubrifont SC — h1 only, trial */
+@import "@fontsource/wdxl-lubrifont-sc/400.css";
 
 @theme {
   /* ---- surfaces (warm paper) ---- */
+  --content-width: 1400px;
+  --nav-height: 74px;             /* Nav.astro's rendered height — keep in sync via its min-h-[var(--nav-height)] */
+  
+  /* ---- surfaces (warm paper) ---- */
   --color-paper: #f4f1ea;        /* page + card base */
-  --color-paper-2: #eae5d8;      /* banded sections, hero */
+  --color-paper-2: #eae5d8;      /* banded sections: cards, nav hover, consult CTA */
   --color-paper-3: #faf8f2;      /* project card interior */
   --color-card: #ffffff;         /* floating offering card */
+  --color-slate: #f6f6f6;        /* featured offering action panel — cool neutral, not paper-2 */
+
+  /* ---- hero only (not shared with banded sections) ----
+     Alternate palettes — swap in one block below to preview, keep only one active.
+     Sunset:   --color-hero-1: #ff5f4a;  --color-hero-2: #3a1d5c;
+     Electric: --color-hero-1: #c8f24a;  --color-hero-2: #5b2a86;
+  */
+  --color-hero-1: #a12eb9;       /* hero gradient start — magenta */
+  --color-hero-2: #2e4bec;       /* hero gradient end — matches action blue */
+  --color-band: #e7ecfa;         /* light tint of hero blue — section right after the hero */
 
   /* ---- ink ---- */
+  --color-white: #fff;
   --color-ink: #14161a;          /* headlines, footer bg */
   --color-ink-2: #43443f;        /* body copy */
   --color-ink-3: #6b6b63;        /* mono labels, metadata */
   --color-ink-4: #8a8578;        /* faintest metadata */
 
-  /* ---- accents (2 only) ---- */
+  /* ---- accents (3 only) ---- */
   --color-blue: #2e4bec;         /* primary action + section eyebrows */
   --color-green: #1f7a4d;        /* availability / open status */
   --color-green-dark: #5fd39a;   /* same signal on ink backgrounds */
+
+  /* ---- nav CTA (not one of the 3 core accents — needs to read on the hero gradient, where blue disappears) ---- */
+  --color-accent: #ff00ef;       /* matches "2 slots left" availability text */
 
   /* ---- rules ---- */
   --color-rule: rgb(20 22 26 / 0.14);
@@ -36,6 +57,7 @@
 
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: "WDXL Lubrifont SC", ui-sans-serif, system-ui, sans-serif;
 
   /* Sharp corners is a house rule. */
   --radius-none: 0px;
@@ -50,11 +72,12 @@
 
   /* The one shadow in the system: hard offset, no blur. */
   --shadow-plate: 14px 14px 0 rgb(20 22 26 / 0.12);
+  --shadow-plate-sm: 6px 6px 0 var(--tw-shadow-color, rgb(20 22 26 / 0.08));
 }
 
 @layer base {
   html {
-    background-color: var(--color-paper);
+    background-color: #fff;
     color: var(--color-ink);
     font-family: var(--font-sans);
   }
@@ -72,6 +95,61 @@
     text-transform: uppercase;
     color: var(--color-ink-3);
   }
+}
+
+.max-width {
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+.hero-bg {
+  background: linear-gradient(135deg, var(--color-hero-1), var(--color-hero-2));
+}
+
+.band-bg {
+  background: linear-gradient(288deg, rgba(241, 235, 247, 1) 0%, rgba(235, 252, 249, 0.61) 41%, rgba(253, 230, 255, 0.92) 100%);
+}
+
+/* Diagonal seam between the hero and the section right after it.
+   Right edge stays full height (so the floating card isn't clipped there);
+   left edge is cut short by --seam so the band color shows through beneath it. */
+.diagonal-cut-hero {
+  --seam: 72px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - var(--seam)));
+}
+
+.diagonal-cut-band {
+  --seam: 72px;
+  clip-path: polygon(0 0, 100% var(--seam), 100% 100%, 0 100%);
+}
+
+/* Nav overlay mode (homepage only, data-overlay="true"): the nav is fixed on
+   top of the hero with a transparent background — the hero's own gradient +
+   mist show through it. The brand (name/byline) stays hidden while the
+   hero's own eyebrow line is still visible below; once you scroll past it
+   (data-scrolled="true", set in Nav.astro's script), the nav swaps to a
+   solid white bar and the brand reappears. */
+#site-nav[data-overlay="true"] {
+  background: transparent;
+  border-bottom-color: transparent;
+}
+#site-nav[data-overlay="true"] .nav-brand {
+  opacity: 0;
+  visibility: hidden;
+}
+#site-nav[data-overlay="true"] .nav-link {
+  color: rgb(255 255 255 / 0.92);
+}
+#site-nav[data-overlay="true"][data-scrolled="true"] {
+  background: var(--color-paper);
+  border-bottom-color: var(--color-rule);
+}
+#site-nav[data-overlay="true"][data-scrolled="true"] .nav-brand {
+  opacity: 1;
+  visibility: visible;
+}
+#site-nav[data-overlay="true"][data-scrolled="true"] .nav-link {
+  color: var(--color-ink-2);
 }
 
 /* Dark mode disabled for now — re-enable by uncommenting.
