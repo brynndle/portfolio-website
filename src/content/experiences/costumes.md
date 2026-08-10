@@ -2,7 +2,7 @@
 title: "Immersive Worldbuilding"
 blurb: "Detailed, realistic, costumes are key parts of my immersive work. Nothing brings a participant into an experience like being fully dressed for the occasion."
 tags: ["Experiences"]
-thumbnail: "/images/thumbnails/experiences/costumes.jpg"
+thumbnail: "/images/thumbnails/experiences/costumes.png"
 hero: "/images/experiences-installations/costumes/IMG_4430.jpeg"
 featured: false
 order: 0
