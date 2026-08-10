@@ -4,7 +4,6 @@ blurb: "I arrived at Habitat at the beginning of an ambitious period of growth f
 tags: ["Product Design"]
 thumbnail: "/images/thumbnails/work/habitat-for-humanity.jpg"
 hero: "/images/projects/habitat-for-humanity/journey-map.png"
-source: "https://brynncaputo.com/habitat-for-humanity"
 featured: false
 order: 1
 role: "UX Design"

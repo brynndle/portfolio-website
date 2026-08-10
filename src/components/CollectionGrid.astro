@@ -24,7 +24,7 @@ const sorted = [...entries].sort((a, b) => a.data.order - b.data.order);
     <div class="grid gap-6 md:grid-cols-3">
       {sorted.map((entry) => (
         <ProjectCard
-          title={entry.data.title}
+          title={entry.data.listTitle ?? entry.data.title}
           blurb={entry.data.blurb}
           href={`${basePath}/${entry.id}`}
           thumbnail={entry.data.thumbnail}

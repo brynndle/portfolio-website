@@ -4,7 +4,6 @@ blurb: "An interactive lighting installation that explores the question of how w
 tags: ["Experiences"]
 thumbnail: "/images/thumbnails/experiences/how-we-see.jpg"
 hero: "/images/experiences-installations/how-we-see/image-asset.jpeg"
-source: "https://brynncaputo.com/how-we-see"
 featured: false
 order: 4
 figures:

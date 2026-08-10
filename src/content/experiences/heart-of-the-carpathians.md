@@ -4,7 +4,6 @@ blurb: "In this experience for one, the participant will be taken on a journey i
 tags: ["Experiences"]
 thumbnail: "/images/thumbnails/experiences/heart-of-the-carpathians.png"
 hero: "/images/experiences-installations/heart-of-the-carpathians/banner-image.jpg"
-source: "https://brynncaputo.com/heart-of-the-carpathians"
 featured: false
 order: 2
 figures:

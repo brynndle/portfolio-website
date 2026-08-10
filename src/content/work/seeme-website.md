@@ -4,7 +4,6 @@ blurb: "Our small team wanted to build a site that would offer beautiful portfol
 tags: ["Product Design"]
 thumbnail: "/images/thumbnails/work/seeme-website.png"
 hero: "/images/projects/seeme-website/image-asset.jpeg"
-source: "https://brynncaputo.com/seeme"
 featured: false
 order: 9
 role: "UX/UI Design, Front-End Developer"

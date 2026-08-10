@@ -4,7 +4,6 @@ blurb: "I was tasked with creating a seamless Perka checkout experience that wou
 tags: ["Product Design"]
 thumbnail: "/images/thumbnails/work/clover-task-flow.jpg"
 hero: "/images/projects/clover-task-flow/clover-station.png"
-source: "https://brynncaputo.com/clover-task-flow"
 featured: false
 order: 0
 role: "UX/UI Design"

@@ -27,12 +27,14 @@ const figures = await Promise.all((d.figures ?? []).map(async (fig) => {
 }));
 ---
 <BaseLayout title={d.title} description={d.blurb}>
-  <!-- title block -->
-  <div class="grid grid-cols-[220px_min(68ch,100%)] gap-12 border-b border-rule bg-paper-3 px-5 pb-8 pt-10 max-lg:grid-cols-1 max-lg:gap-4 md:px-10">
-    <a href={backHref} class="font-mono text-[0.875rem] uppercase tracking-[0.12em] text-blue">&larr; {backLabel}</a>
-    <div>
-      <h1 class="max-w-[22ch] font-display text-[3rem] font-normal leading-[1.05] -tracking-[0.03em] text-balance max-md:text-[2.125rem]">{d.title}</h1>
-      {d.blurb && <p class="mt-4 max-w-[60ch] text-[1.1875rem] leading-relaxed text-ink-2 text-pretty">{d.blurb}</p>}
+  <!-- title block: background band is full-bleed, content is capped like the rest of the page -->
+  <div class="border-b border-rule bg-paper-3">
+    <div class="max-width grid grid-cols-[220px_min(68ch,100%)] gap-12 px-5 pb-8 pt-10 max-lg:grid-cols-1 max-lg:gap-4 md:px-10">
+      <a href={backHref} class="font-mono text-[0.875rem] uppercase tracking-[0.12em] text-blue">&larr; {backLabel}</a>
+      <div>
+        <h1 class="max-w-[22ch] font-display text-[3rem] font-normal leading-[1.05] -tracking-[0.03em] text-balance max-md:text-[2.125rem]">{d.title}</h1>
+        {d.blurb && <p class="mt-4 max-w-[60ch] text-[1.1875rem] leading-relaxed text-ink-2 text-pretty">{d.blurb}</p>}
+      </div>
     </div>
   </div>
 
@@ -42,8 +44,8 @@ const figures = await Promise.all((d.figures ?? []).map(async (fig) => {
       class="relative h-[624px] overflow-hidden border-b border-rule max-md:h-[360px]"
       style={d.heroBg ? `background-color: ${d.heroBg}` : undefined}
     >
-      <img src={d.hero} alt="" class="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl" aria-hidden="true" />
-      <div class="relative grid h-full grid-cols-[220px_min(68ch,100%)] gap-12 px-5 max-lg:grid-cols-1 max-lg:gap-4 md:px-10">
+      {!d.heroBg && <img src={d.hero} alt="" class="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl" aria-hidden="true" />}
+      <div class="max-width relative grid h-full grid-cols-[220px_min(68ch,100%)] gap-12 px-5 max-lg:grid-cols-1 max-lg:gap-4 md:px-10">
         <div aria-hidden="true"></div>
         <div class="flex h-full w-full items-center justify-center overflow-visible lg:w-[736px]">
           <img src={d.hero} alt="" class="h-full w-full overflow-visible object-cover" />
@@ -53,11 +55,11 @@ const figures = await Promise.all((d.figures ?? []).map(async (fig) => {
   )}
 
   <!-- project record -->
-  <div class="grid grid-cols-[220px_min(68ch,100%)] gap-x-12 gap-y-5 border-b border-rule px-5 py-[26px] max-lg:grid-cols-1 md:px-10">
+  <div class="max-width grid grid-cols-[220px_min(68ch,100%)] gap-x-12 gap-y-5 border-b border-rule px-5 py-[26px] max-lg:grid-cols-1 md:px-10">
     <span class="label font-bold text-[0.875rem]">Project Details</span>
     <dl class="grid grid-cols-4 gap-7 max-md:grid-cols-1">
       {[['Role', d.role], ['Client', d.client], ['Methods', d.methods], ['Live', d.source]].filter(([, v]) => v).map(([k, v]) => (
-        <div class:list={{ 'md:col-span-2': k === 'Methods' }}>
+        <div class:list={{ 'md:col-span-2': k === 'Methods' || k === 'Client' }}>
           <dt class="font-mono text-[0.875rem] uppercase tracking-[0.1em] text-ink-4">{k}</dt>
           <dd class="mt-1.5 text-sm text-ink">
             {k === 'Live' ? <a href={v} class="border-b border-blue pb-0.5 font-bold text-blue">Visit &nearr;</a> : v}
@@ -67,15 +69,18 @@ const figures = await Promise.all((d.figures ?? []).map(async (fig) => {
     </dl>
   </div>
 
-  <div class="px-5 pb-2 md:px-10">
+  <div class="max-width px-5 pb-2 md:px-10">
     <!-- prose + contents rail -->
     <div class="grid grid-cols-[220px_1fr] gap-x-12 gap-y-5 max-lg:grid-cols-1">
-      <nav class="sticky top-6 self-start py-9 max-lg:static max-lg:border-b max-lg:border-rule max-lg:pb-0">
+      <nav class="sticky top-6 self-start py-9 max-lg:static max-lg:border-b max-lg:border-rule">
         <div class="label border-b border-rule pb-3 font-bold text-[0.875rem] max-lg:border-b-0">Contents</div>
         <ol class="flex flex-col gap-2.5 pt-3 font-mono text-[0.875rem] tracking-[0.06em] text-ink-3">
           {headings.filter((h) => h.depth <= 2).map((h, i) => (
             <li><a href={`#${h.slug}`} class="hover:text-blue">{String(i + 1).padStart(2, '0')} &nbsp;{h.text}</a></li>
           ))}
+          {figures.length > 0 && (
+            <li><a href="#images" class="hover:text-blue">{String(headings.filter((h) => h.depth <= 2).length + 1).padStart(2, '0')} &nbsp;Images</a></li>
+          )}
         </ol>
       </nav>
 
@@ -91,10 +96,9 @@ const figures = await Promise.all((d.figures ?? []).map(async (fig) => {
 
     <!-- figures: caption in the rail, image in the column, rail sticks past tall images -->
     {figures.map((fig, i) => (
-      <figure class="m-0 grid grid-cols-[220px_1fr] gap-12 border-t border-rule-soft py-9 max-lg:grid-cols-1">
+      <figure id={i === 0 ? 'images' : undefined} class="m-0 grid grid-cols-[220px_1fr] gap-12 border-t border-rule-soft py-9 max-lg:grid-cols-1">
         <figcaption class="sticky top-6 self-start max-lg:static">
-          <div class="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-blue">Fig. {String(i + 1).padStart(2, '0')}</div>
-          <p class="mt-2 text-[0.8438rem] leading-relaxed text-ink-2 text-pretty">{fig.caption}</p>
+          <p class="text-[0.8438rem] leading-relaxed text-ink-2 text-pretty">{fig.caption}</p>
           {fig.meta && <div class="mt-2.5 font-mono text-[0.6562rem] uppercase tracking-[0.08em] text-ink-4">{fig.meta}</div>}
         </figcaption>
         <img src={fig.src} width={fig.width} height={fig.height} alt={fig.alt ?? fig.caption} class="block h-auto max-h-[80vh] max-w-full justify-self-start border border-rule-strong object-contain" style={`aspect-ratio: ${fig.width} / ${fig.height}`} loading="lazy" />
@@ -103,7 +107,7 @@ const figures = await Promise.all((d.figures ?? []).map(async (fig) => {
   </div>
 
   <!-- prev / next -->
-  <div class="grid grid-cols-2 border-y border-rule max-md:grid-cols-1">
+  <div class="max-width grid grid-cols-2 border-y border-rule max-md:grid-cols-1">
     <a href={prev?.href ?? backHref} class="border-r border-rule px-5 py-7 md:px-10">
       <div class="font-mono text-[0.875rem] uppercase tracking-[0.12em] text-ink-4">&larr; Previous</div>
       <div class="mt-2 text-xl font-semibold -tracking-[0.015em]">{prev?.title ?? backLabel}</div>

@@ -4,7 +4,6 @@ blurb: "Crimlins Foible is a live action game that will take place at [Neotropol
 tags: ["Games"]
 thumbnail: "/images/thumbnails/experiences/termtech.png"
 hero: "/images/experiences-installations/termtech/Screen-Shot-2023-02-06-at-4.55.06-PM.png"
-source: "https://brynncaputo.com/termtech"
 featured: false
 order: 5
 figures:

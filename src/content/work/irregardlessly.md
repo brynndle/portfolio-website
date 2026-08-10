@@ -4,7 +4,6 @@ blurb: "Irregardless.ly is like a spell checker but for writing style guides. Us
 tags: ["Product Design"]
 thumbnail: "/images/thumbnails/work/irregardlessly.jpg"
 hero: "/images/projects/irregardlessly/Sidebar_v1.png"
-source: "https://brynncaputo.com/irregardlessly"
 featured: false
 order: 3
 role: "UX/UI Design"

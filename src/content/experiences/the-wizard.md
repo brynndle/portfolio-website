@@ -4,7 +4,6 @@ blurb: "A whimsical wanderer who endeavors to bring moments of joy to those they
 tags: ["Experiences"]
 thumbnail: "/images/thumbnails/experiences/the-wizard.jpg"
 hero: "/images/experiences-installations/the-wizard/4FA0E787-699D-4FE1-B160-F62731A18988_1_105_c.jpeg"
-source: "https://brynncaputo.com/the-wizard"
 featured: false
 order: 6
 figures:

@@ -5,7 +5,6 @@ tags: ["Product Design"]
 thumbnail: "/images/thumbnails/work/perka-enrollment.jpg"
 hero: "/images/projects/perka-enrollment/image-asset.jpeg"
 heroBg: "#454348"
-source: "https://brynncaputo.com/perka-enrollment"
 featured: false
 order: 5
 role: "UX/UI Design"

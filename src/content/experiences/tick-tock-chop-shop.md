@@ -4,7 +4,6 @@ blurb: "Built for Wasteland Weekend 2023, the chop shop is the mercantile front 
 tags: ["Experiences"]
 thumbnail: "/images/thumbnails/experiences/tick-tock-chop-shop.jpg"
 hero: "/images/experiences-installations/tick-tock-chop-shop/header-image.jpg"
-source: "https://brynncaputo.com/tick-tock-chop-shop"
 featured: false
 order: 7
 figures:

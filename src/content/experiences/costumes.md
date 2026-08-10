@@ -4,7 +4,6 @@ blurb: "Detailed, realistic, costumes are key parts of my immersive work. Nothin
 tags: ["Experiences"]
 thumbnail: "/images/thumbnails/experiences/costumes.jpg"
 hero: "/images/experiences-installations/costumes/IMG_4430.jpeg"
-source: "https://brynncaputo.com/costumes"
 featured: false
 order: 0
 figures:

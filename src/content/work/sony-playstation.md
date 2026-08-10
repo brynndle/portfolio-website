@@ -4,7 +4,6 @@ blurb: "The Sony Playstation game store sorts games in several different ways, h
 tags: ["Product Design"]
 thumbnail: "/images/thumbnails/work/sony-playstation.jpg"
 hero: "/images/projects/sony-playstation/AppPhoneMockup.jpg"
-source: "https://brynncaputo.com/sony-playstation"
 featured: false
 order: 10
 role: "UX/UI Design"

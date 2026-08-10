@@ -4,7 +4,6 @@ blurb: "At Side I spearheaded the redesign of a real estate auditing system aime
 tags: ["Product Design"]
 thumbnail: "/images/thumbnails/work/real-estate-tool.png"
 hero: "/images/thumbnails/work/real-estate-tool.png"
-source: "https://brynncaputo.com/real-estate-tool"
 featured: false
 order: 7
 role: "Senior Product Designer"

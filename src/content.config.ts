@@ -7,6 +7,7 @@ import { TAGS } from './data/tags';
 // later instead of a content re-architecture (see plan doc, Phase 2 note).
 const projectSchema = z.object({
   title: z.string(),
+  listTitle: z.string().optional(),
   blurb: z.string(),
   tags: z.array(z.enum(TAGS)).min(1).max(3),
   thumbnail: z.string().optional(),

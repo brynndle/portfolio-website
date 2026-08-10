@@ -4,7 +4,6 @@ blurb: "This is a fun little flash game that was inspired by my first attempts a
 tags: ["Games"]
 thumbnail: "/images/thumbnails/experiences/employment-game.jpg"
 hero: "/images/thumbnails/experiences/employment-game.jpg"
-source: "https://brynncaputo.com/employment-game"
 featured: false
 order: 1
 ---

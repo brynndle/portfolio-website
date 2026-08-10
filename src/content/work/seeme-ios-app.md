@@ -4,7 +4,6 @@ blurb: "As a See Me user I would like to be able to browse my feed easily and qu
 tags: ["Product Design"]
 thumbnail: "/images/thumbnails/work/seeme-ios-app.jpg"
 hero: "/images/projects/seeme-ios-app/image-asset.jpeg"
-source: "https://brynncaputo.com/iphone-uiux"
 featured: false
 order: 8
 figures:

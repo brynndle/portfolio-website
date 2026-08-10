@@ -4,7 +4,6 @@ blurb: "Ticker is a character I created for Neotropolis, an immersive, week long
 tags: ["Experiences"]
 thumbnail: "/images/thumbnails/experiences/tickers-repair-service.png"
 hero: "/images/experiences-installations/tickers-repair-service/IMG_0175.jpeg"
-source: "https://brynncaputo.com/tickers-repair-service"
 featured: false
 order: 8
 figures:

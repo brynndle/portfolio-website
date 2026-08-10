@@ -4,7 +4,6 @@ blurb: "The Perka iOS App (now Clover Rewards) allows customers an easy way to p
 tags: ["Product Design"]
 thumbnail: "/images/thumbnails/work/perka-app.png"
 hero: "/images/projects/perka-app/image-asset.png"
-source: "https://brynncaputo.com/perka-app"
 featured: false
 order: 4
 role: "UX/UI Design"

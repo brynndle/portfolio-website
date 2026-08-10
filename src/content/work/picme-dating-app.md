@@ -4,7 +4,6 @@ blurb: "Picme came to me with a new spin on the swipe to match dating app. They 
 tags: ["Product Design"]
 thumbnail: "/images/thumbnails/work/picme-dating-app.jpg"
 hero: "/images/projects/picme-dating-app/Onboarding-1.png"
-source: "https://brynncaputo.com/picme-dating-app"
 featured: false
 order: 6
 role: "UX/UI & Product Design"
