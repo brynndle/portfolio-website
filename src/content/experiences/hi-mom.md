@@ -5,7 +5,7 @@ tags: ["Experiences"]
 thumbnail: "/images/experiences-installations/hi-mom/Brynn-hero-image.jpg"
 source: "https://brynncaputo.com/hi-mom"
 featured: true
-order: 3
+order: 0
 figures:
   - src: "/images/experiences-installations/hi-mom/Hand-with-phone.jpg"
     caption: "A participant holds the recreated cell phone, listening to the voicemails."

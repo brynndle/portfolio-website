@@ -5,7 +5,7 @@ tags: ["Experiences"]
 thumbnail: "/images/experiences-installations/costumes/IMG_4430.jpeg"
 source: "https://brynncaputo.com/costumes"
 featured: false
-order: 0
+order: 1
 figures:
   - src: "/images/experiences-installations/costumes/IMG_0980.jpeg"
     caption: "Wasteland Weekend look — skirt and top made from a vintage military drag chute."

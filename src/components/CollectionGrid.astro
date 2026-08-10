@@ -21,7 +21,7 @@ const sorted = [...entries].sort((a, b) => a.data.order - b.data.order);
     {intro && <p class="mt-4 max-w-[60ch] text-base leading-relaxed text-ink-2 text-pretty">{intro}</p>}
   </section>
   <section class="px-10 py-12">
-    <div class="grid gap-6 md:grid-cols-3">
+    <div class="grid gap-6 md:grid-cols-4">
       {sorted.map((entry) => (
         <ProjectCard
           title={entry.data.title}

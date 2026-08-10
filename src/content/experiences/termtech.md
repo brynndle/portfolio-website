@@ -5,7 +5,7 @@ tags: ["Experiences", "Games"]
 thumbnail: "/images/experiences-installations/termtech/Screen-Shot-2023-02-06-at-4.55.06-PM.png"
 source: "https://brynncaputo.com/termtech"
 featured: false
-order: 5
+order: 3
 figures:
   - src: "/images/experiences-installations/termtech/FB5A83EF-A40E-411F-82A7-14DDC810F957.jpeg"
     caption: "One of the three custom-built municipal terminals."
