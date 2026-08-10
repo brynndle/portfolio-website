@@ -1,0 +1,516 @@
+---
+// Dev-only style inspector. Never rendered in production builds — gated by
+// import.meta.env.DEV in BaseLayout. Click any element on the page to select
+// it, then live-tweak padding / background / border / radius / text color
+// with instant visual feedback, and copy the resulting CSS back out to hand
+// to Claude (or paste straight into the component).
+---
+<div id="dev-palette-root">
+  <button id="dp-toggle" type="button" title="Toggle dev style palette">🛠 Dev</button>
+
+  <aside id="dp-panel" hidden>
+    <header>
+      <span id="dp-selector">No element selected</span>
+      <button id="dp-close" type="button" aria-label="Close">×</button>
+    </header>
+
+    <div id="dp-parent-row" hidden>
+      <button id="dp-parent" type="button">↑ Select parent</button>
+    </div>
+
+    <p id="dp-hint">Click any element on the page to select it.</p>
+
+    <div id="dp-fields" hidden>
+      <fieldset>
+        <legend>Padding (px)</legend>
+        <div class="dp-grid4">
+          <label>Top<input type="number" id="dp-pt" min="0" /></label>
+          <label>Right<input type="number" id="dp-pr" min="0" /></label>
+          <label>Bottom<input type="number" id="dp-pb" min="0" /></label>
+          <label>Left<input type="number" id="dp-pl" min="0" /></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Background</legend>
+        <label class="dp-row">Color <input type="color" id="dp-bg" /></label>
+        <label class="dp-row">Alpha <span class="dp-alpha-wrap"><input type="range" id="dp-bg-a" min="0" max="100" /><span id="dp-bg-a-val" class="dp-alpha-val">100%</span></span></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Border</legend>
+        <label class="dp-row">Width (px) <input type="number" id="dp-bw" min="0" /></label>
+        <label class="dp-row">Color <input type="color" id="dp-bc" /></label>
+        <label class="dp-row">Alpha <span class="dp-alpha-wrap"><input type="range" id="dp-bc-a" min="0" max="100" /><span id="dp-bc-a-val" class="dp-alpha-val">100%</span></span></label>
+        <label class="dp-row">Radius (px) <input type="number" id="dp-br" min="0" /></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Text</legend>
+        <label class="dp-row">Color <input type="color" id="dp-tc" /></label>
+        <label class="dp-row">Alpha <span class="dp-alpha-wrap"><input type="range" id="dp-tc-a" min="0" max="100" /><span id="dp-tc-a-val" class="dp-alpha-val">100%</span></span></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Typography</legend>
+        <label class="dp-row">Family
+          <select id="dp-ff">
+            <option value="">— computed —</option>
+            <option value="'Figtree Variable', sans-serif">Figtree</option>
+            <option value="system-ui, sans-serif">System UI</option>
+            <option value="Georgia, serif">Serif</option>
+            <option value="monospace">Monospace</option>
+          </select>
+        </label>
+        <label class="dp-row">Size (px) <input type="number" id="dp-fs" min="1" /></label>
+        <label class="dp-row">Weight
+          <select id="dp-fw">
+            <option value="300">300 — Light</option>
+            <option value="400">400 — Regular</option>
+            <option value="500">500 — Medium</option>
+            <option value="600">600 — Semibold</option>
+            <option value="700">700 — Bold</option>
+            <option value="800">800 — Extrabold</option>
+          </select>
+        </label>
+        <label class="dp-row">Style
+          <select id="dp-fst">
+            <option value="normal">Normal</option>
+            <option value="italic">Italic</option>
+            <option value="oblique">Oblique</option>
+          </select>
+        </label>
+      </fieldset>
+
+      <div class="dp-actions">
+        <button id="dp-reset" type="button">Reset element</button>
+        <button id="dp-copy" type="button">Copy CSS</button>
+      </div>
+
+      <textarea id="dp-output" readonly rows="6"></textarea>
+    </div>
+  </aside>
+</div>
+
+<style>
+  #dev-palette-root {
+    all: initial;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    color-scheme: light;
+  }
+  #dev-palette-root * { box-sizing: border-box; }
+
+  #dp-toggle {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 2147483000;
+    background: #14161a;
+    color: #f4f1ea;
+    border: 1px solid rgb(255 255 255 / 0.2);
+    padding: 9px 14px;
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  #dp-toggle[data-active="true"] {
+    background: #f2a33d;
+    color: #14161a;
+  }
+
+  #dp-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    z-index: 2147483000;
+    background: #ffffff;
+    color: #14161a;
+    border-left: 1px solid rgb(20 22 26 / 0.2);
+    box-shadow: -8px 0 24px rgb(0 0 0 / 0.15);
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+  }
+  #dp-panel header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    border-bottom: 1px solid rgb(20 22 26 / 0.14);
+    font-weight: 600;
+  }
+  #dp-selector { overflow-wrap: anywhere; }
+  #dp-close {
+    background: none;
+    border: none;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    color: inherit;
+    padding: 2px 6px;
+  }
+  #dp-hint {
+    padding: 14px;
+    margin: 0;
+    color: #6b6b63;
+  }
+  #dp-parent-row {
+    padding: 10px 14px 0;
+  }
+  #dp-parent-row button {
+    width: 100%;
+    border: 1px solid rgb(20 22 26 / 0.2);
+    background: #f4f1ea;
+    padding: 6px 8px;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  #dp-fields {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow-y: auto;
+  }
+  fieldset {
+    border: 1px solid rgb(20 22 26 / 0.14);
+    padding: 10px;
+  }
+  legend {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6b6b63;
+    padding: 0 4px;
+  }
+  .dp-grid4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .dp-grid4 label, .dp-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 11px;
+    color: #43443f;
+  }
+  .dp-row { flex-direction: row; align-items: center; justify-content: space-between; }
+  input[type="number"] {
+    width: 100%;
+    border: 1px solid rgb(20 22 26 / 0.2);
+    padding: 4px 6px;
+    font-family: inherit;
+    font-size: 12px;
+  }
+  input[type="color"] {
+    width: 40px;
+    height: 24px;
+    border: 1px solid rgb(20 22 26 / 0.2);
+    padding: 0;
+    cursor: pointer;
+  }
+  select {
+    border: 1px solid rgb(20 22 26 / 0.2);
+    background: #fff;
+    padding: 4px 6px;
+    font-family: inherit;
+    font-size: 11px;
+    max-width: 150px;
+    cursor: pointer;
+  }
+  .dp-alpha-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  input[type="range"] {
+    width: 90px;
+  }
+  .dp-alpha-val {
+    font-size: 10.5px;
+    color: #6b6b63;
+    min-width: 32px;
+    text-align: right;
+  }
+  .dp-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .dp-actions button {
+    flex: 1;
+    border: 1px solid rgb(20 22 26 / 0.2);
+    background: #f4f1ea;
+    padding: 8px;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  #dp-copy { background: #2e4bec; color: #f4f1ea; border-color: #2e4bec; }
+  #dp-output {
+    width: 100%;
+    border: 1px solid rgb(20 22 26 / 0.2);
+    padding: 8px;
+    font-family: inherit;
+    font-size: 11px;
+    resize: vertical;
+  }
+
+  .dp-hover-outline {
+    outline: 2px solid #f2a33d !important;
+    outline-offset: -1px;
+  }
+  @keyframes dp-flash {
+    0% { outline: 3px solid #2e4bec; outline-offset: -1px; }
+    75% { outline: 3px solid #2e4bec; outline-offset: -1px; }
+    100% { outline: 3px solid transparent; outline-offset: -1px; }
+  }
+  .dp-flash-outline {
+    animation: dp-flash 700ms ease-out;
+  }
+</style>
+
+<script>
+  const root = document.getElementById('dev-palette-root')!;
+  const toggleBtn = document.getElementById('dp-toggle')!;
+  const panel = document.getElementById('dp-panel')!;
+  const closeBtn = document.getElementById('dp-close')!;
+  const selectorLabel = document.getElementById('dp-selector')!;
+  const parentRow = document.getElementById('dp-parent-row')!;
+  const hint = document.getElementById('dp-hint')!;
+  const fields = document.getElementById('dp-fields')!;
+  const output = document.getElementById('dp-output') as HTMLTextAreaElement;
+
+  const ptEl = document.getElementById('dp-pt') as HTMLInputElement;
+  const prEl = document.getElementById('dp-pr') as HTMLInputElement;
+  const pbEl = document.getElementById('dp-pb') as HTMLInputElement;
+  const plEl = document.getElementById('dp-pl') as HTMLInputElement;
+  const bgEl = document.getElementById('dp-bg') as HTMLInputElement;
+  const bgAEl = document.getElementById('dp-bg-a') as HTMLInputElement;
+  const bgAValEl = document.getElementById('dp-bg-a-val')!;
+  const bwEl = document.getElementById('dp-bw') as HTMLInputElement;
+  const bcEl = document.getElementById('dp-bc') as HTMLInputElement;
+  const bcAEl = document.getElementById('dp-bc-a') as HTMLInputElement;
+  const bcAValEl = document.getElementById('dp-bc-a-val')!;
+  const brEl = document.getElementById('dp-br') as HTMLInputElement;
+  const tcEl = document.getElementById('dp-tc') as HTMLInputElement;
+  const tcAEl = document.getElementById('dp-tc-a') as HTMLInputElement;
+  const tcAValEl = document.getElementById('dp-tc-a-val')!;
+  const ffEl = document.getElementById('dp-ff') as HTMLSelectElement;
+  const fsEl = document.getElementById('dp-fs') as HTMLInputElement;
+  const fwEl = document.getElementById('dp-fw') as HTMLSelectElement;
+  const fstEl = document.getElementById('dp-fst') as HTMLSelectElement;
+
+  let active = false;
+  let selected: HTMLElement | null = null;
+  let hovered: HTMLElement | null = null;
+
+  function rgbToHex(rgb: string): string {
+    const m = rgb.match(/[\d.]+/g);
+    if (!m) return '#000000';
+    const [r, g, b] = m.map(Number);
+    return '#' + [r, g, b].map((v) => v.toString(16).padStart(2, '0')).join('');
+  }
+
+  function alphaOf(rgb: string): number {
+    const m = rgb.match(/[\d.]+/g);
+    if (!m || m.length < 4) return 100;
+    return Math.round(parseFloat(m[3]) * 100);
+  }
+
+  function hexToRgba(hex: string, alphaPct: string | number): string {
+    const n = parseInt(hex.slice(1), 16);
+    const r = (n >> 16) & 255;
+    const g = (n >> 8) & 255;
+    const b = n & 255;
+    return `rgba(${r}, ${g}, ${b}, ${Number(alphaPct) / 100})`;
+  }
+
+  function describe(el: HTMLElement): string {
+    const id = el.id ? `#${el.id}` : '';
+    const cls = el.classList.length ? `.${Array.from(el.classList).slice(0, 2).join('.')}` : '';
+    return `${el.tagName.toLowerCase()}${id}${cls}`;
+  }
+
+  function loadFields(el: HTMLElement) {
+    const cs = getComputedStyle(el);
+    ptEl.value = String(parseFloat(cs.paddingTop) || 0);
+    prEl.value = String(parseFloat(cs.paddingRight) || 0);
+    pbEl.value = String(parseFloat(cs.paddingBottom) || 0);
+    plEl.value = String(parseFloat(cs.paddingLeft) || 0);
+    const isTransparentBg = cs.backgroundColor === 'rgba(0, 0, 0, 0)' || cs.backgroundColor === 'transparent';
+    bgEl.value = rgbToHex(isTransparentBg ? 'rgb(255,255,255)' : cs.backgroundColor);
+    bgAEl.value = String(isTransparentBg ? 0 : alphaOf(cs.backgroundColor));
+    bgAValEl.textContent = `${bgAEl.value}%`;
+
+    bwEl.value = String(parseFloat(cs.borderTopWidth) || 0);
+    bcEl.value = rgbToHex(cs.borderTopColor);
+    bcAEl.value = String(alphaOf(cs.borderTopColor));
+    bcAValEl.textContent = `${bcAEl.value}%`;
+
+    brEl.value = String(parseFloat(cs.borderTopLeftRadius) || 0);
+
+    tcEl.value = rgbToHex(cs.color);
+    tcAEl.value = String(alphaOf(cs.color));
+    tcAValEl.textContent = `${tcAEl.value}%`;
+
+    ffEl.value = '';
+    fsEl.value = String(Math.round(parseFloat(cs.fontSize)) || 16);
+    const weights = [300, 400, 500, 600, 700, 800];
+    const computedWeight = parseInt(cs.fontWeight, 10) || 400;
+    fwEl.value = String(weights.reduce((a, b) => (Math.abs(b - computedWeight) < Math.abs(a - computedWeight) ? b : a)));
+    fstEl.value = cs.fontStyle === 'italic' || cs.fontStyle === 'oblique' ? cs.fontStyle : 'normal';
+  }
+
+  function applyFields() {
+    if (!selected) return;
+    bgAValEl.textContent = `${bgAEl.value}%`;
+    bcAValEl.textContent = `${bcAEl.value}%`;
+    tcAValEl.textContent = `${tcAEl.value}%`;
+
+    selected.style.paddingTop = `${ptEl.value}px`;
+    selected.style.paddingRight = `${prEl.value}px`;
+    selected.style.paddingBottom = `${pbEl.value}px`;
+    selected.style.paddingLeft = `${plEl.value}px`;
+    selected.style.backgroundColor = hexToRgba(bgEl.value, bgAEl.value);
+    selected.style.borderStyle = 'solid';
+    selected.style.borderWidth = `${bwEl.value}px`;
+    selected.style.borderColor = hexToRgba(bcEl.value, bcAEl.value);
+    selected.style.borderRadius = `${brEl.value}px`;
+
+    // Color and typography also apply to descendants: a "box" you select is
+    // often a wrapper around a child with its own explicit color/font class
+    // (e.g. a Tailwind text-white/80 or text-lg on a <p>), and an inherited
+    // value on the parent can never beat a child's own explicit declaration
+    // — only an inline style set directly on that child can.
+    const textColor = hexToRgba(tcEl.value, tcAEl.value);
+    const typoTargets: HTMLElement[] = [selected, ...Array.from(selected.querySelectorAll<HTMLElement>('*'))];
+    typoTargets.forEach((t) => {
+      t.style.color = textColor;
+      if (ffEl.value) t.style.fontFamily = ffEl.value;
+      t.style.fontSize = `${fsEl.value}px`;
+      t.style.fontWeight = fwEl.value;
+      t.style.fontStyle = fstEl.value;
+    });
+
+    updateOutput();
+  }
+
+  function updateOutput() {
+    if (!selected) return;
+    const s = selected.style;
+    const lines = [
+      `padding: ${s.paddingTop} ${s.paddingRight} ${s.paddingBottom} ${s.paddingLeft};`,
+      `background-color: ${s.backgroundColor};`,
+      `border: ${s.borderWidth} solid ${s.borderColor};`,
+      `border-radius: ${s.borderRadius};`,
+      `color: ${s.color};`,
+      ...(s.fontFamily ? [`font-family: ${s.fontFamily};`] : []),
+      `font-size: ${s.fontSize};`,
+      `font-weight: ${s.fontWeight};`,
+      `font-style: ${s.fontStyle};`,
+    ];
+    output.value = lines.join('\n');
+  }
+
+  function flash(el: HTMLElement) {
+    el.classList.remove('dp-flash-outline');
+    // force reflow so re-adding the class restarts the animation
+    void el.offsetWidth;
+    el.classList.add('dp-flash-outline');
+  }
+
+  function selectElement(el: HTMLElement) {
+    selected = el;
+    flash(el);
+    selectorLabel.textContent = describe(el);
+    hint.hidden = true;
+    fields.hidden = false;
+    const parent = el.parentElement;
+    parentRow.hidden = !parent || parent === document.body || root.contains(parent);
+    loadFields(el);
+    updateOutput();
+  }
+
+  function onMouseOver(e: MouseEvent) {
+    if (!active) return;
+    const target = e.target as HTMLElement;
+    if (root.contains(target)) return;
+    if (hovered && hovered !== target) hovered.classList.remove('dp-hover-outline');
+    hovered = target;
+    hovered.classList.add('dp-hover-outline');
+  }
+
+  function onMouseOut(e: MouseEvent) {
+    const target = e.target as HTMLElement;
+    if (target === hovered) {
+      target.classList.remove('dp-hover-outline');
+      hovered = null;
+    }
+  }
+
+  function onClick(e: MouseEvent) {
+    if (!active) return;
+    const target = e.target as HTMLElement;
+    if (root.contains(target)) return;
+    e.preventDefault();
+    e.stopPropagation();
+    selectElement(target);
+  }
+
+  function setActive(next: boolean) {
+    active = next;
+    toggleBtn.dataset.active = String(active);
+    document.body.style.cursor = active ? 'crosshair' : '';
+    if (!active) {
+      if (hovered) hovered.classList.remove('dp-hover-outline');
+      hovered = null;
+    }
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    setActive(!active);
+    panel.hidden = !active;
+  });
+  closeBtn.addEventListener('click', () => {
+    setActive(false);
+    panel.hidden = true;
+  });
+
+  document.addEventListener('mouseover', onMouseOver, true);
+  document.addEventListener('mouseout', onMouseOut, true);
+  document.addEventListener('click', onClick, true);
+
+  [ptEl, prEl, pbEl, plEl, bgEl, bgAEl, bwEl, bcEl, bcAEl, brEl, tcEl, tcAEl, ffEl, fsEl, fwEl, fstEl].forEach((el) => {
+    el.addEventListener('input', applyFields);
+  });
+
+  document.getElementById('dp-parent')!.addEventListener('click', () => {
+    if (selected?.parentElement && !root.contains(selected.parentElement)) {
+      selectElement(selected.parentElement);
+    }
+  });
+
+  document.getElementById('dp-reset')!.addEventListener('click', () => {
+    if (!selected) return;
+    selected.removeAttribute('style');
+    selected.querySelectorAll<HTMLElement>('*').forEach((t) => t.removeAttribute('style'));
+    loadFields(selected);
+    updateOutput();
+  });
+
+  document.getElementById('dp-copy')!.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(output.value);
+      const btn = document.getElementById('dp-copy')!;
+      const original = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => (btn.textContent = original), 1200);
+    } catch {
+      output.select();
+    }
+  });
+</script>

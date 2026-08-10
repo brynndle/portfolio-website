@@ -2,8 +2,8 @@
 title: "Picme Dating App"
 blurb: "Picme came to me with a new spin on the swipe to match dating app. They wanted to help users get high quality matches through comparing their picture libraries. The app scans each users pictures and assigns tags to each…"
 tags: ["Product Design"]
-thumbnail: "/images/projects/picme-dating-app/Onboarding-1.png"
-source: "https://brynncaputo.com/picme-dating-app"
+thumbnail: "/images/thumbnails/work/picme-dating-app.jpg"
+hero: "/images/projects/picme-dating-app/Onboarding-1.png"
 featured: false
 order: 6
 role: "UX/UI & Product Design"

@@ -2,7 +2,8 @@
 title: "Real Estate Compliance Auditing Tool"
 blurb: "At Side I spearheaded the redesign of a real estate auditing system aimed at tripling their auditors efficiency. To do this I conducted competitive research to identify the shortcomings of their current outdated and overpriced auditing tool. I also collaborated…"
 tags: ["Product Design"]
-source: "https://brynncaputo.com/real-estate-tool"
+thumbnail: "/images/thumbnails/work/real-estate-tool.png"
+hero: "/images/thumbnails/work/real-estate-tool.png"
 featured: false
 order: 7
 role: "Senior Product Designer"

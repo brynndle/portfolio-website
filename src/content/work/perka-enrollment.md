@@ -2,9 +2,9 @@
 title: "Perka Enrollment Helper"
 blurb: "My team discovered through merchant feedback and user interviews that customers were interested in being able to earn loyalty points even if they forgot their phone. We came up with an idea to print a scannable code on a receipt…"
 tags: ["Product Design"]
-thumbnail: "/images/projects/perka-enrollment/image-asset.jpeg"
-thumbnailBg: "#454348"
-source: "https://brynncaputo.com/perka-enrollment"
+thumbnail: "/images/thumbnails/work/perka-enrollment.jpg"
+hero: "/images/projects/perka-enrollment/image-asset.jpeg"
+heroBg: "#454348"
 featured: false
 order: 5
 role: "UX/UI Design"

@@ -1,0 +1,19 @@
+---
+import { BOOK_A_CONSULT_URL, AVAILABILITY } from '../data/site';
+---
+<article class="border border-rule-strong bg-card shadow-plate">
+  <div class="border-b border-rule px-[30px] pb-[22px] pt-[26px]">
+    <div class="mb-3.5 flex items-center gap-2.5">
+      <span class="block h-2.5 w-2.5 bg-green"></span>
+      <span class="font-mono text-[13px] font-semibold uppercase tracking-[0.18em] text-green">Featured Offering</span>
+    </div>
+    <h3 class="max-w-[17ch] text-[28px] font-semibold leading-[1.12] -tracking-[0.025em] text-balance">One hour. Your product, made usable.</h3>
+    <p class="mt-2.5 max-w-[42ch] text-sm leading-relaxed text-ink-3">AI ships fast. It doesn't know your users, your flow, or why anyone would click that button.</p>
+  </div>
+
+  <div class="flex flex-col gap-2.5 px-[30px] pb-6 pt-5">
+    <span class="font-mono text-[11.5px] font-medium uppercase tracking-[0.12em] text-green">{AVAILABILITY}</span>
+    <a href={BOOK_A_CONSULT_URL} class="bg-blue px-[26px] py-4 text-center font-mono text-[12.5px] font-medium uppercase tracking-[0.1em] text-paper">Book a consult →</a>
+    <span class="font-mono text-[11px] text-ink-4">60 min · remote · recorded</span>
+  </div>
+</article>

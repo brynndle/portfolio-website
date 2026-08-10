@@ -2,8 +2,8 @@
 title: "Tick Tock Chop Shop"
 blurb: "Built for Wasteland Weekend 2023, the chop shop is the mercantile front for my character, Ticker, who uses it as a base to barter time pieces and spread the lore of the Guild of Tickers."
 tags: ["Experiences"]
-thumbnail: "/images/experiences-installations/tick-tock-chop-shop/header-image.jpg"
-source: "https://brynncaputo.com/tick-tock-chop-shop"
+thumbnail: "/images/thumbnails/experiences/tick-tock-chop-shop.jpg"
+hero: "/images/experiences-installations/tick-tock-chop-shop/header-image.jpg"
 featured: false
 order: 7
 figures:

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="420" viewBox="0 0 420 420">
+  <g fill="none" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+    
+    <path d="M18 46c10-14 20 14 30 0s20 14 30 0" stroke="#2e4bec"></path>
+    <path d="M250 30c12-16 24 16 36 0" stroke="#14161a"></path>
+    <path d="M60 250c8-18 22 18 30 0s20 16 28 0" stroke="#2e4bec"></path>
+    <path d="M300 330c10-14 22 14 32 0" stroke="#2e4bec"></path>
+    
+    <path d="M120 60l14-20 14 20 14-20" stroke="#2e4bec"></path>
+    <path d="M330 140l12 20 14-20 12 20" stroke="#14161a"></path>
+    <path d="M30 340l14-20 14 20 14-20" stroke="#2e4bec"></path>
+    <path d="M200 380l12-18 14 18 12-18" stroke="#2e4bec"></path>
+    
+    <circle cx="196" cy="86" r="13" stroke="#2e4bec"></circle>
+    <circle cx="86" cy="150" r="9" stroke="#14161a"></circle>
+    <circle cx="366" cy="252" r="14" stroke="#2e4bec"></circle>
+    <circle cx="140" cy="300" r="8" stroke="#2e4bec"></circle>
+    <circle cx="270" cy="196" r="5" fill="#14161a" stroke="none"></circle>
+    <circle cx="46" cy="200" r="4.5" fill="#2e4bec" stroke="none"></circle>
+    <circle cx="316" cy="60" r="4.5" fill="#2e4bec" stroke="none"></circle>
+    
+    <path d="M236 250l22 22M258 250l-22 22" stroke="#14161a"></path>
+    <path d="M104 96l18 18M122 96l-18 18" stroke="#2e4bec"></path>
+    <path d="M386 348l18 18M404 348l-18 18" stroke="#2e4bec"></path>
+    
+    <path d="M156 168l20 34h-40z" stroke="#2e4bec"></path>
+    <path d="M300 268l16 22-16 22-16-22z" stroke="#2e4bec"></path>
+    <path d="M56 396l18 24H38z" stroke="#14161a"></path>
+    
+    <rect x="352" y="18" width="30" height="30" rx="2" stroke="#2e4bec"></rect>
+    <rect x="14" y="110" width="24" height="24" rx="2" stroke="#14161a"></rect>
+    <rect x="212" y="322" width="28" height="28" rx="2" stroke="#2e4bec"></rect>
+    
+    <path d="M170 120c24-16 48 4 44 26" stroke="#14161a"></path>
+    <path d="M18 268c22 20 52 8 60-12" stroke="#2e4bec"></path>
+    <path d="M246 148c-18 18-6 44 16 46" stroke="#2e4bec"></path>
+    <path d="M330 200c20 10 22 34 4 44" stroke="#14161a"></path>
+    
+    <path d="M96 214c-10-8-22 2-16 12s22 6 24-6-12-22-24-14" stroke="#2e4bec"></path>
+    <path d="M282 90c-9-7-20 2-14 11s20 5 22-6" stroke="#2e4bec"></path>
+    
+    <path d="M370 118c-14-14-30-10-38 2M370 118l-14 2M370 118l-2-14" stroke="#2e4bec"></path>
+    <path d="M120 396c16-12 18-30 8-42M128 354l-12 4M128 354l4 12" stroke="#2e4bec"></path>
+    
+    <path d="M186 232c18-16 36-4 24 12s-32 10-24-12z" stroke="#2e4bec"></path>
+    <path d="M60 60c14-12 28-2 18 10s-26 6-18-10z" stroke="#14161a"></path>
+    
+    <path d="M400 180v-16M400 210v-16M386 192h-14M428 192h-14" stroke="#14161a"></path>
+    <path d="M172 20v-14M172 44v-12" stroke="#2e4bec"></path>
+  </g>
+</svg>

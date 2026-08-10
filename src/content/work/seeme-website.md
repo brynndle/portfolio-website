@@ -2,8 +2,8 @@
 title: "See.Me Website"
 blurb: "Our small team wanted to build a site that would offer beautiful portfolios, marketing support, and exposure to artists all over the world."
 tags: ["Product Design"]
-thumbnail: "/images/projects/seeme-website/image-asset.jpeg"
-source: "https://brynncaputo.com/seeme"
+thumbnail: "/images/thumbnails/work/seeme-website.png"
+hero: "/images/projects/seeme-website/image-asset.jpeg"
 featured: false
 order: 9
 role: "UX/UI Design, Front-End Developer"

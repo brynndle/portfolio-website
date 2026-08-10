@@ -1,9 +1,9 @@
 ---
 title: "Costumes"
-blurb: "My wasteland look has evolved a lot! Most of the textiles were customized from found objects. I made all of the necklaces, jewelery, and belts. In the second, third, and fourth photos I created the skirts and top from scratch…"
+blurb: "Detailed, realistic, costumes are key parts of my immersive work. Nothing brings a participant into an experience like being fully dressed for the occasion."
 tags: ["Experiences"]
-thumbnail: "/images/experiences-installations/costumes/IMG_4430.jpeg"
-source: "https://brynncaputo.com/costumes"
+thumbnail: "/images/thumbnails/experiences/costumes.jpg"
+hero: "/images/experiences-installations/costumes/IMG_4430.jpeg"
 featured: false
 order: 1
 figures:
@@ -34,11 +34,15 @@ figures:
 
 ## Wasteland Weekend
 
-My wasteland look has evolved a lot! Most of the textiles were customized from found objects. I made all of the necklaces, jewelery, and belts. In the second, third, and fourth photos I created the skirts and top from scratch from a vintage military drag chute.
+My Wasteland costumes are all inspired by my character and their experience. A clock-maker, Ticker repairs time pieces that convoy drivers use when going on long haul drives across featureless wastelands where navigation is done by precise clocks the way they used to do on ships. 
+
+Materials: Vintage miltary drag shoot, miltary surplus clothing, watches by the pound, watch repair tools, bottle caps, can tabs, old strainers, and other random junk. Weathering through various rust powerders and chemical processes.
 
 ## Neotropolis
 
-I have an array of outfits for Neotropolis. In the first photo I made the fascinator I am wearing out of lighting gels, hot glue, and a toothpick. The second photo was made from scratch including the harness. The third photo was a combination of thrifted items to create an elegant corporate space look. The hat in the 4th photo I designed, 3D printed, and soldered up. The mechanic garb in the 4th photo was assembled from found pieces but the harness was my custom design with 3D printed and fabric elements.
+My character at Neotropolis is part of a ship repair experience and also volunteers at one of the event run coroporations so my costumes needed to be fit for a mechanic but also include pieces for corporate work.
+
+In the first photo I made the fascinator I am wearing out of lighting gels, hot glue, and a toothpick. The second photo was made from scratch including the harness. The third photo was a combination of thrifted items to create an elegant corporate space look. The hat in the 4th photo I designed, 3D printed, and soldered up. The mechanic garb in the 4th photo was assembled from found pieces but the harness was my custom design with 3D printed and fabric elements.
 
 ## The Wizard
 

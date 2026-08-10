@@ -2,7 +2,8 @@
 title: "Employment Game"
 blurb: "This is a fun little flash game that was inspired by my first attempts at finding a design job after graduation. I gave myself weekly design and coding challenges to keep learning and stay inspired. Many of them were fun…"
 tags: ["Games"]
-source: "https://brynncaputo.com/employment-game"
+thumbnail: "/images/thumbnails/experiences/employment-game.jpg"
+hero: "/images/thumbnails/experiences/employment-game.jpg"
 featured: false
 order: 5
 ---

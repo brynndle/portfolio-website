@@ -7,13 +7,20 @@ import BioStrip from '../components/BioStrip.astro';
 import ConsultCTA from '../components/ConsultCTA.astro';
 ---
 
-<BaseLayout title="Home" description="Brynn Caputo — experience & product design.">
+<BaseLayout title="Home" description="Brynn Caputo — experience & product design." navOverlay>
   <Hero
-    headline="Twenty years designing software. Now building games you can walk into."
-    lede="Product and UX design for people who need the thing to actually work — plus a growing catalog of games, installations, and immersive experiences."
+    headline="I make weird ideas feel real."
+    lede={`I'm a product and experience designer who makes games, immersive experiences, digital products, and physical worlds. I've spent 20 years learning how software works—and how people actually experience it.\n\nNow I help independent creators turn ambitious, vibe-coded prototypes into products that feel intentional, intuitive, and unmistakably theirs.`}
   />
-  <CurrentProjects title="Current Projects" moreHref="/work" moreLabel="Full catalog →" />
-  <Board />
-  <BioStrip />
+  <CurrentProjects title="Recently Launched" moreHref="/work" moreLabel="Full catalog →" />
+  <section class="relative -mt-[65px] overflow-hidden">
+    <div class="hero-bg diagonal-cut-board absolute inset-x-0 -bottom-1 top-0" aria-hidden="true"></div>
+    <div class="diagonal-cut-board pointer-events-none absolute inset-x-0 -bottom-1 top-0 opacity-40" style="background-image:url('/mist.png'); background-size:300px 300px;" aria-hidden="true"></div>
+    <div class="diagonal-cut-board pointer-events-none absolute inset-x-0 -bottom-1 top-0 bg-black/30" aria-hidden="true"></div>
+    <div id="board" class="max-width relative grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] max-lg:grid-cols-1">
+      <BioStrip />
+      <Board />
+    </div>
+  </section>
   <ConsultCTA />
 </BaseLayout>

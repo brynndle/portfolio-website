@@ -1,0 +1,37 @@
+---
+import { BOOK_A_CONSULT_URL, AVAILABILITY } from '../data/site';
+
+const deliverables = [
+  'A walkthrough of where real users stall',
+  'The three changes that matter most, ranked',
+  'Written notes and the recording, same day',
+];
+---
+<article class="grid grid-cols-[1.2fr_1.6fr_auto] items-stretch border border-rule-strong bg-paper shadow-plate max-lg:grid-cols-1">
+  <!-- the pitch -->
+  <div class="border-r border-rule px-8 py-7 max-lg:border-b max-lg:border-r-0">
+    <div class="mb-3.5 flex items-center gap-2.5">
+      <span class="block size-2.5 bg-green"></span>
+      <span class="font-mono text-[13px] font-semibold uppercase tracking-[0.18em] text-green">Featured Offering</span>
+    </div>
+    <h3 class="max-w-[15ch] text-[27px] font-semibold leading-[1.12] -tracking-[0.025em] text-balance">One hour. Your product, made usable.</h3>
+    <p class="mt-2.5 max-w-[36ch] text-[13.5px] leading-relaxed text-ink-3">AI ships fast. It doesn't know your users or why anyone would click that button.</p>
+  </div>
+
+  <!-- what you get, numbered -->
+  <div class="grid grid-cols-3 gap-[26px] border-r border-rule px-8 py-7 max-lg:border-b max-lg:border-r-0 max-md:grid-cols-1 max-md:gap-4">
+    {deliverables.map((item, i) => (
+      <div>
+        <div class="mb-[7px] font-mono text-[11px] text-accent">{String(i + 1).padStart(2, '0')}</div>
+        <div class="text-sm leading-normal">{item}</div>
+      </div>
+    ))}
+  </div>
+
+  <!-- the action -->
+  <div class="flex flex-col justify-center gap-2.5 bg-paper-2 px-8 py-7">
+    <span class="font-mono text-[11.5px] font-medium uppercase tracking-[0.12em] text-green">{AVAILABILITY}</span>
+    <a href={BOOK_A_CONSULT_URL} class="whitespace-nowrap bg-accent px-7 py-4 text-center font-mono text-[12.5px] font-medium uppercase tracking-[0.1em] text-paper">Book a consult →</a>
+    <span class="font-mono text-[11px] text-ink-4">60 min · remote · recorded</span>
+  </div>
+</article>

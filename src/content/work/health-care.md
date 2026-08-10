@@ -1,19 +1,24 @@
 ---
-title: "Healthcare Efficiency"
+title: "Garner Health"
+listTitle: "Healthcare Efficiency"
 blurb: "This company uses a new approach to healthcare with novel financial incentives. Their claims processing tools needed to be efficient enough to handle the growth of their user base."
 tags: ["Product Design"]
-thumbnail: "/images/projects/health-care/garner-process.png"
-source: "https://brynncaputo.com/health-care"
+thumbnail: "/images/thumbnails/work/health-care.png"
+hero: "/images/projects/health-care/app-screens-hero.png"
+heroBg: "#006D58"
 featured: false
 order: 2
 role: "Senior Product Designer"
+client: "Garner Health"
 figures:
   - src: "/images/projects/health-care/garner-process.png"
     caption: "The claims record as it appears in the member app, showing status updates as a claim moves through processing."
+  - src: "/images/projects/health-care/claim-details-annotated.png"
+    caption: "The multi-card reimbursement system, showing how direct deposit and check payments are broken out when a single claim is split across methods."
 ---
 # Healthcare Efficiency
 
-Under a Non-Disclosure Agreement. Some of the details in this case study may be vague to protect the companies intellectual property.
+**Under a Non-Disclosure Agreement. Some of the details in this case study may be vague to protect the companies intellectual property.**
 
 This company uses a new approach to healthcare with novel financial incentives. Their claims processing tools needed to be efficient enough to handle the growth of their user base.
 

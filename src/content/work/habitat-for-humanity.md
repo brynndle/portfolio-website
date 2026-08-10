@@ -1,9 +1,9 @@
 ---
 title: "Habitat for Humanity"
 blurb: "I arrived at Habitat at the beginning of an ambitious period of growth for the affiliate. When getting up to speed on fundraising I found that there was no record of how the organization interacted with donors over an extended…"
-tags: ["Product Design", "Marketing"]
-thumbnail: "/images/projects/habitat-for-humanity/journey-map.png"
-source: "https://brynncaputo.com/habitat-for-humanity"
+tags: ["Product Design"]
+thumbnail: "/images/thumbnails/work/habitat-for-humanity.jpg"
+hero: "/images/projects/habitat-for-humanity/journey-map.png"
 featured: false
 order: 1
 role: "UX Design"

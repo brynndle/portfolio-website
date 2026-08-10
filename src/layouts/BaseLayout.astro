@@ -1,14 +1,16 @@
 ---
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import DevPalette from '../components/DevPalette.astro';
 import '../styles/global.css';
 
 interface Props {
   title: string;
   description?: string;
+  navOverlay?: boolean;
 }
 
-const { title, description = "Brynn Caputo — experience designer." } = Astro.props;
+const { title, description = "Brynn Caputo — experience designer.", navOverlay = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -22,10 +24,11 @@ const { title, description = "Brynn Caputo — experience designer." } = Astro.p
     <meta name="description" content={description} />
   </head>
   <body class="bg-paper font-sans text-ink antialiased">
-    <Nav />
+    <Nav overlay={navOverlay} />
     <main>
       <slot />
     </main>
     <Footer />
+    {import.meta.env.DEV && <DevPalette />}
   </body>
 </html>

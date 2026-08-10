@@ -1,9 +1,9 @@
 ---
 title: "Crimlin's Foible"
 blurb: "Crimlins Foible is a live action game that will take place at [Neotropolis](https://www.neotropolis.com/about), a week long fully immersive sci-fi/cyberpunk festival in the Mojave desert. Players who accept the quest will be tasked with hacking into three custom built computer terminals…"
-tags: ["Experiences", "Games"]
-thumbnail: "/images/experiences-installations/termtech/Screen-Shot-2023-02-06-at-4.55.06-PM.png"
-source: "https://brynncaputo.com/termtech"
+tags: ["Games"]
+thumbnail: "/images/thumbnails/experiences/termtech.png"
+hero: "/images/experiences-installations/termtech/Screen-Shot-2023-02-06-at-4.55.06-PM.png"
 featured: false
 order: 3
 figures:

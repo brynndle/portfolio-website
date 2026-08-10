@@ -2,8 +2,8 @@
 title: "Clover Task Flow"
 blurb: "I was tasked with creating a seamless Perka checkout experience that would run on several versions of the Clover point of sale terminal. The solution needed to guide the clerk through the correct series of steps to validate a transaction…"
 tags: ["Product Design"]
-thumbnail: "/images/projects/clover-task-flow/clover-station.png"
-source: "https://brynncaputo.com/clover-task-flow"
+thumbnail: "/images/thumbnails/work/clover-task-flow.jpg"
+hero: "/images/projects/clover-task-flow/clover-station.png"
 featured: false
 order: 0
 role: "UX/UI Design"

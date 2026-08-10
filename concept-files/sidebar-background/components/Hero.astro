@@ -1,0 +1,30 @@
+---
+import FeaturedOffering from './FeaturedOffering.astro';
+const { headline, lede } = Astro.props;
+---
+<section class="grid grid-cols-[1fr_560px] border-b border-rule bg-paper max-lg:grid-cols-1">
+  <!-- Left: headline over an outlined-geometry field -->
+  <div class="relative overflow-hidden bg-paper">
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <div class="absolute -left-24 -top-[84px] size-[340px] rounded-full border border-[rgb(20_22_26/0.16)]"></div>
+      <div class="absolute left-11 top-9 size-[210px] rounded-full border border-panel/30"></div>
+      <div class="absolute -bottom-[88px] right-[74px] size-[230px] rotate-[21deg] border border-[rgb(20_22_26/0.14)]"></div>
+      <div class="absolute -right-8 top-[52px] size-[150px] rounded-tl-[150px] border border-[rgb(20_22_26/0.14)]"></div>
+      <div class="absolute -bottom-10 left-[300px] h-[250px] w-px bg-[rgb(20_22_26/0.12)]"></div>
+    </div>
+    <div class="relative flex min-h-full flex-col justify-center px-11 pb-[68px] pt-16">
+      <h2 class="max-w-[18ch] text-[56px] font-semibold leading-[1.02] -tracking-[0.03em] text-balance max-md:text-[40px]">{headline}</h2>
+      <p class="mt-6 max-w-[52ch] text-lg leading-relaxed text-ink-2 text-pretty">{lede}</p>
+    </div>
+  </div>
+
+  <!-- Right: orchid panel, fine mist grain, floating offering card -->
+  <div class="relative flex items-center overflow-hidden border-l border-rule bg-panel px-11 py-12">
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background-image:url('/mist.png'); background-size:300px 300px;"
+      aria-hidden="true"
+    ></div>
+    <div class="relative w-full"><FeaturedOffering /></div>
+  </div>
+</section>

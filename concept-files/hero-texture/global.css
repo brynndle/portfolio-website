@@ -1,0 +1,94 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* IBM Plex Sans — everything */
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+/* IBM Plex Mono — labels, status, metadata */
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
+
+@theme {
+  /* ---- surfaces (warm paper) ---- */
+  --color-paper: #f4f1ea;        /* page + card base */
+  --color-paper-2: #efeadd;      /* banded sections, hero left column */
+  --color-paper-3: #faf8f2;      /* project card interior */
+  --color-card: #ffffff;         /* floating offering card */
+
+  /* ---- ink ---- */
+  --color-ink: #14161a;          /* headlines, footer bg */
+  --color-ink-2: #43443f;        /* body copy */
+  --color-ink-3: #6b6b63;        /* mono labels, metadata */
+  --color-ink-4: #8a8578;        /* faintest metadata */
+
+  /* ---- accents (2 only) ---- */
+  --color-blue: #2e4bec;         /* primary action + section eyebrows */
+  --color-panel: #8a4fd1;        /* hero right-hand panel (orchid) */
+  --color-green: #00875a;        /* availability / open status */
+  --color-green-dark: #5fd39a;   /* same signal on ink backgrounds */
+
+  /* ---- rules ---- */
+  --color-rule: rgb(20 22 26 / 0.14);
+  --color-rule-soft: rgb(20 22 26 / 0.10);
+  --color-rule-strong: rgb(20 22 26 / 0.20);
+  --color-rule-invert: rgb(244 241 234 / 0.16);
+
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Sharp corners is a house rule. */
+  --radius-none: 0px;
+  --radius-sm: 0px;
+  --radius: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-full: 0px;
+
+  /* The one shadow in the system: hard offset, no blur. */
+  --shadow-plate: 14px 14px 0 rgb(20 22 26 / 0.12);
+}
+
+html {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-sans); font-weight: 600; letter-spacing: -0.025em; }
+
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--color-blue); }
+
+/* Mono label — the theme's signature. Use via class="label". */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;      /* 11px */
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-paper: #16181c;
+    --color-paper-2: #1b1e23;
+    --color-paper-3: #1f2228;
+    --color-card: #1f2228;
+    --color-ink: #edeae1;
+    --color-ink-2: #b9b6ad;
+    --color-ink-3: #8b8f97;
+    --color-ink-4: #6f7379;
+    --color-blue: #7c97ff;
+    --color-panel: #6b3aa8;
+    --color-green: #5fd39a;
+    --color-rule: rgb(237 234 225 / 0.16);
+    --color-rule-soft: rgb(237 234 225 / 0.10);
+    --color-rule-strong: rgb(237 234 225 / 0.24);
+    --shadow-plate: 14px 14px 0 rgb(0 0 0 / 0.4);
+  }
+}

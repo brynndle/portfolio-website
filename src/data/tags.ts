@@ -1,4 +1,4 @@
-export const TAGS = ['Product Design', 'Games', 'Experiences', 'Marketing'] as const;
+export const TAGS = ['Product Design', 'Games', 'Experiences'] as const;
 
 export type Tag = (typeof TAGS)[number];
 

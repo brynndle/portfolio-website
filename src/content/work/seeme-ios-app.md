@@ -2,8 +2,8 @@
 title: "See.Me iOS App"
 blurb: "As a See Me user I would like to be able to browse my feed easily and quickly so that I can give support to the artists I follow."
 tags: ["Product Design"]
-thumbnail: "/images/projects/seeme-ios-app/image-asset.jpeg"
-source: "https://brynncaputo.com/iphone-uiux"
+thumbnail: "/images/thumbnails/work/seeme-ios-app.jpg"
+hero: "/images/projects/seeme-ios-app/image-asset.jpeg"
 featured: false
 order: 8
 figures:
