@@ -12,11 +12,11 @@
   --nav-height: 74px;             /* Nav.astro's rendered height — keep in sync via its min-h-[var(--nav-height)] */
   
   /* ---- surfaces (warm paper) ---- */
-  --color-paper: #f4f1ea;        /* page + card base */
-  --color-paper-2: #eae5d8;      /* banded sections: cards, nav hover, consult CTA */
-  --color-paper-3: #faf8f2;      /* project card interior */
+  --color-paper: #efefef;        /* page + card base — desaturated, same lightness as prior warm tone */
+  --color-paper-2: #e1e1e1;      /* banded sections: cards, nav hover, consult CTA — desaturated */
+  --color-paper-3: #f6f6f6;      /* project card interior — desaturated */
   --color-card: #ffffff;         /* floating offering card */
-  --color-slate: #f6f6f6;        /* featured offering action panel — cool neutral, not paper-2 */
+  --color-slate: #f4f4f4;        /* featured offering action panel — cool neutral, not paper-2 */
 
   /* ---- hero only (not shared with banded sections) ----
      Alternate palettes — swap in one block below to preview, keep only one active.
@@ -65,7 +65,8 @@
 
   /* The one shadow in the system: hard offset, no blur. */
   --shadow-plate: 14px 14px 0 rgb(20 22 26 / 0.12);
-  --shadow-plate-sm: 10px 10px 0 var(--tw-shadow-color, var(--tw-shadow-color, rgb(20 22 26 / .2)));
+  --shadow-plate-sm: 10px 10px 0 var(--tw-shadow-color, rgb(20 22 26 / .2));
+  --shadow-plate-soft: 14px 14px 0px var(--tw-shadow-color, rgb(20 22 26 / 0.07));
 }
 
 @layer base {

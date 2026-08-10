@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
+import sharp from 'sharp';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ConsultCTA from './ConsultCTA.astro';
 
@@ -18,15 +19,20 @@ const d = entry.data;
 
 // Figures live in frontmatter so their captions can render in the rail
 // beside the image rather than under it. See THEME.md → ProjectDetail.
-const figures = d.figures ?? [];
+// Intrinsic width/height are read here (rather than left off the <img>) so the
+// browser can reserve the right amount of space before the image loads.
+const figures = await Promise.all((d.figures ?? []).map(async (fig) => {
+  const { width, height } = await sharp(`public${fig.src}`).metadata();
+  return { ...fig, width, height };
+}));
 ---
 <BaseLayout title={d.title} description={d.blurb}>
   <!-- title block -->
-  <div class="grid grid-cols-[220px_min(68ch,100%)] gap-12 border-b border-rule bg-paper-2 px-10 pb-8 pt-10 max-lg:grid-cols-1 max-lg:gap-4">
-    <a href={backHref} class="font-mono text-[14px] uppercase tracking-[0.12em] text-blue">&larr; {backLabel}</a>
+  <div class="grid grid-cols-[220px_min(68ch,100%)] gap-12 border-b border-rule bg-paper-3 px-5 pb-8 pt-10 max-lg:grid-cols-1 max-lg:gap-4 md:px-10">
+    <a href={backHref} class="font-mono text-[0.875rem] uppercase tracking-[0.12em] text-blue">&larr; {backLabel}</a>
     <div>
-      <h1 class="max-w-[22ch] font-display text-[48px] font-normal leading-[1.05] -tracking-[0.03em] text-balance max-md:text-[34px]">{d.title}</h1>
-      {d.blurb && <p class="mt-4 max-w-[60ch] text-[19px] leading-relaxed text-ink-2 text-pretty">{d.blurb}</p>}
+      <h1 class="max-w-[22ch] font-display text-[3rem] font-normal leading-[1.05] -tracking-[0.03em] text-balance max-md:text-[2.125rem]">{d.title}</h1>
+      {d.blurb && <p class="mt-4 max-w-[60ch] text-[1.1875rem] leading-relaxed text-ink-2 text-pretty">{d.blurb}</p>}
     </div>
   </div>
 
@@ -37,9 +43,9 @@ const figures = d.figures ?? [];
       style={d.heroBg ? `background-color: ${d.heroBg}` : undefined}
     >
       <img src={d.hero} alt="" class="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl" aria-hidden="true" />
-      <div class="relative grid h-full grid-cols-[220px_min(68ch,100%)] gap-12 px-10 max-lg:grid-cols-1 max-lg:gap-4">
+      <div class="relative grid h-full grid-cols-[220px_min(68ch,100%)] gap-12 px-5 max-lg:grid-cols-1 max-lg:gap-4 md:px-10">
         <div aria-hidden="true"></div>
-        <div class="flex h-full w-[736px] items-center justify-center overflow-visible">
+        <div class="flex h-full w-full items-center justify-center overflow-visible lg:w-[736px]">
           <img src={d.hero} alt="" class="h-full w-full overflow-visible object-cover" />
         </div>
       </div>
@@ -47,12 +53,12 @@ const figures = d.figures ?? [];
   )}
 
   <!-- project record -->
-  <div class="grid grid-cols-[220px_min(68ch,100%)] gap-12 border-b border-rule px-10 py-[26px] max-lg:grid-cols-1">
-    <span class="label text-[14px]">Project record</span>
-    <dl class="grid grid-cols-4 gap-7 max-md:grid-cols-2">
+  <div class="grid grid-cols-[220px_min(68ch,100%)] gap-x-12 gap-y-5 border-b border-rule px-5 py-[26px] max-lg:grid-cols-1 md:px-10">
+    <span class="label font-bold text-[0.875rem]">Project Details</span>
+    <dl class="grid grid-cols-4 gap-7 max-md:grid-cols-1">
       {[['Role', d.role], ['Client', d.client], ['Methods', d.methods], ['Live', d.source]].filter(([, v]) => v).map(([k, v]) => (
-        <div>
-          <dt class="font-mono text-[14px] uppercase tracking-[0.1em] text-ink-4">{k}</dt>
+        <div class:list={{ 'md:col-span-2': k === 'Methods' }}>
+          <dt class="font-mono text-[0.875rem] uppercase tracking-[0.1em] text-ink-4">{k}</dt>
           <dd class="mt-1.5 text-sm text-ink">
             {k === 'Live' ? <a href={v} class="border-b border-blue pb-0.5 font-bold text-blue">Visit &nearr;</a> : v}
           </dd>
@@ -61,12 +67,12 @@ const figures = d.figures ?? [];
     </dl>
   </div>
 
-  <div class="px-10 pb-2">
+  <div class="px-5 pb-2 md:px-10">
     <!-- prose + contents rail -->
-    <div class="grid grid-cols-[220px_1fr] gap-12 max-lg:grid-cols-1">
-      <nav class="sticky top-6 self-start py-9 max-lg:static">
-        <div class="label border-b border-rule pb-3 text-[14px]">Contents</div>
-        <ol class="flex flex-col gap-2.5 pt-3 font-mono text-[14px] tracking-[0.06em] text-ink-3">
+    <div class="grid grid-cols-[220px_1fr] gap-x-12 gap-y-5 max-lg:grid-cols-1">
+      <nav class="sticky top-6 self-start py-9 max-lg:static max-lg:border-b max-lg:border-rule max-lg:pb-0">
+        <div class="label border-b border-rule pb-3 font-bold text-[0.875rem] max-lg:border-b-0">Contents</div>
+        <ol class="flex flex-col gap-2.5 pt-3 font-mono text-[0.875rem] tracking-[0.06em] text-ink-3">
           {headings.filter((h) => h.depth <= 2).map((h, i) => (
             <li><a href={`#${h.slug}`} class="hover:text-blue">{String(i + 1).padStart(2, '0')} &nbsp;{h.text}</a></li>
           ))}
@@ -87,23 +93,23 @@ const figures = d.figures ?? [];
     {figures.map((fig, i) => (
       <figure class="m-0 grid grid-cols-[220px_1fr] gap-12 border-t border-rule-soft py-9 max-lg:grid-cols-1">
         <figcaption class="sticky top-6 self-start max-lg:static">
-          <div class="font-mono text-[11px] uppercase tracking-[0.14em] text-blue">Fig. {String(i + 1).padStart(2, '0')}</div>
-          <p class="mt-2 text-[13.5px] leading-relaxed text-ink-2 text-pretty">{fig.caption}</p>
-          {fig.meta && <div class="mt-2.5 font-mono text-[10.5px] uppercase tracking-[0.08em] text-ink-4">{fig.meta}</div>}
+          <div class="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-blue">Fig. {String(i + 1).padStart(2, '0')}</div>
+          <p class="mt-2 text-[0.8438rem] leading-relaxed text-ink-2 text-pretty">{fig.caption}</p>
+          {fig.meta && <div class="mt-2.5 font-mono text-[0.6562rem] uppercase tracking-[0.08em] text-ink-4">{fig.meta}</div>}
         </figcaption>
-        <img src={fig.src} alt={fig.alt ?? fig.caption} class="block h-auto max-h-[80vh] max-w-full justify-self-start border border-rule-strong" loading="lazy" />
+        <img src={fig.src} width={fig.width} height={fig.height} alt={fig.alt ?? fig.caption} class="block h-auto max-h-[80vh] max-w-full justify-self-start border border-rule-strong object-contain" style={`aspect-ratio: ${fig.width} / ${fig.height}`} loading="lazy" />
       </figure>
     ))}
   </div>
 
   <!-- prev / next -->
   <div class="grid grid-cols-2 border-y border-rule max-md:grid-cols-1">
-    <a href={prev?.href ?? backHref} class="border-r border-rule px-10 py-7">
-      <div class="font-mono text-[14px] uppercase tracking-[0.12em] text-ink-4">&larr; Previous</div>
+    <a href={prev?.href ?? backHref} class="border-r border-rule px-5 py-7 md:px-10">
+      <div class="font-mono text-[0.875rem] uppercase tracking-[0.12em] text-ink-4">&larr; Previous</div>
       <div class="mt-2 text-xl font-semibold -tracking-[0.015em]">{prev?.title ?? backLabel}</div>
     </a>
-    <a href={next?.href ?? backHref} class="px-10 py-7 text-right">
-      <div class="font-mono text-[14px] uppercase tracking-[0.12em] text-ink-4">Next &rarr;</div>
+    <a href={next?.href ?? backHref} class="px-5 py-7 text-right md:px-10">
+      <div class="font-mono text-[0.875rem] uppercase tracking-[0.12em] text-ink-4">Next &rarr;</div>
       <div class="mt-2 text-xl font-semibold -tracking-[0.015em]">{next?.title ?? backLabel}</div>
     </a>
   </div>
