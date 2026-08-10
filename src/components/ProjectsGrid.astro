@@ -17,6 +17,16 @@ const sorted = [...entries].sort((a, b) =>
   COLLECTION_RANK[a.collection] - COLLECTION_RANK[b.collection] ||
   a.data.order - b.data.order
 );
+
+const sections = TAGS.map((tag) => {
+  const slug = tagToSlug(tag);
+  return {
+    tag,
+    slug,
+    entries: sorted.filter((entry) => entry.data.tags.map(tagToSlug).includes(slug)),
+  };
+}).filter((section) => section.entries.length > 0);
+
 const initialSlug = initialTag ? tagToSlug(initialTag) : undefined;
 ---
 
@@ -27,47 +37,23 @@ const initialSlug = initialTag ? tagToSlug(initialTag) : undefined;
     {intro && <p class="mt-4 max-w-[75ch] text-lg leading-relaxed text-ink-2 text-pretty">{intro}</p>}
   </section>
 
-  <section id="tag-filters" aria-label="Filter projects by tag" class="max-width flex flex-wrap gap-2.5 border-b border-rule px-5 py-6 md:px-10">
-    <button
-      type="button"
-      data-tag="all"
-      aria-pressed={!initialSlug}
-      class:list={[
-        'label border px-3.5 py-2 transition-colors duration-100',
-        initialSlug ? 'border-rule-strong text-ink-2' : 'is-active border-rule-strong bg-blue text-paper',
-      ]}
-    >
-      All
-    </button>
-    {TAGS.map((tag) => {
-      const slug = tagToSlug(tag);
-      const active = slug === initialSlug;
-      return (
-        <button
-          type="button"
-          data-tag={slug}
-          aria-pressed={active}
-          class:list={[
-            'label border px-3.5 py-2 transition-colors duration-100',
-            active ? 'is-active border-rule-strong bg-blue text-paper' : 'border-rule-strong text-ink-2',
-          ]}
-        >
-          {tag}
-        </button>
-      );
-    })}
+  <section aria-label="Jump to section" class="max-width border-b border-rule px-5 py-6 md:px-10">
+    <div class="label mb-3 text-ink-3">Jump to section</div>
+    <div class="flex flex-wrap gap-2.5">
+      {sections.map(({ tag, slug }) => (
+        <a href={`#${slug}`} data-jump-link class="label border border-rule-strong px-3.5 py-2 text-ink-2 transition-colors duration-100 hover:border-blue hover:text-blue">{tag}</a>
+      ))}
+    </div>
   </section>
 
-  <section class="max-width px-5 py-12 md:px-10">
-    <div class="grid gap-[40px] md:grid-cols-4" id="projects-grid">
-      {sorted.map((entry) => {
-        const tagSlugs = entry.data.tags.map(tagToSlug);
-        const hidden = initialSlug ? !tagSlugs.includes(initialSlug) : false;
-        return (
+  {sections.map(({ tag, slug, entries: sectionEntries }) => (
+    <section id={slug} class="max-width scroll-mt-[calc(var(--nav-height)+16px)] border-b border-rule px-5 py-12 last:border-b-0 md:px-10">
+      <h2 class="mb-6 text-[1.5rem] font-semibold -tracking-[0.01em]">{tag}</h2>
+      <div class="grid gap-[40px] md:grid-cols-4">
+        {sectionEntries.map((entry) => (
           <a
             href={`/${entry.collection}/${entry.id}`}
-            data-tags={tagSlugs.join(' ')}
-            class:list={['block overflow-hidden rounded-[10px] bg-paper-3 shadow-[var(--shadow-plate-soft)]', { hidden }]}
+            class="block overflow-hidden rounded-[10px] bg-paper-3 shadow-[var(--shadow-plate-soft)]"
           >
             <div class="relative flex aspect-square items-end overflow-hidden bg-paper-2 p-3">
               {entry.data.thumbnail
@@ -80,53 +66,23 @@ const initialSlug = initialTag ? tagToSlug(initialTag) : undefined;
               <span class="mt-4 inline-block border-b border-ink-3/60 pb-[3px] font-mono text-xs font-bold uppercase tracking-[0.1em] text-ink-3">See more →</span>
             </div>
           </a>
-        );
-      })}
-    </div>
-  </section>
+        ))}
+      </div>
+    </section>
+  ))}
 </BaseLayout>
 
-<script>
-  const buttons = document.querySelectorAll<HTMLButtonElement>('#tag-filters [data-tag]');
-  const cards = document.querySelectorAll<HTMLAnchorElement>('#projects-grid > [data-tags]');
-  const allButton = document.querySelector<HTMLButtonElement>('#tag-filters [data-tag="all"]');
-
-  function activeTags(): string[] {
-    return Array.from(buttons)
-      .filter((b) => b.dataset.tag !== 'all' && b.classList.contains('is-active'))
-      .map((b) => b.dataset.tag!);
-  }
-
-  function render() {
-    const active = activeTags();
-    const allActive = active.length === 0;
-    allButton?.classList.toggle('is-active', allActive);
-    allButton?.classList.toggle('bg-blue', allActive);
-    allButton?.classList.toggle('text-paper', allActive);
-    allButton?.classList.toggle('text-ink-2', !allActive);
-    allButton?.setAttribute('aria-pressed', String(allActive));
-
-    cards.forEach((card) => {
-      const cardTags = (card.dataset.tags ?? '').split(' ');
-      const visible = active.length === 0 || active.some((tag) => cardTags.includes(tag));
-      card.classList.toggle('hidden', !visible);
-    });
-  }
-
-  buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const wasActive = button.classList.contains('is-active');
-      buttons.forEach((b) => {
-        b.classList.remove('is-active', 'bg-blue', 'text-paper');
-        b.classList.add('text-ink-2');
-        b.setAttribute('aria-pressed', 'false');
-      });
-      if (button.dataset.tag !== 'all' && !wasActive) {
-        button.classList.add('is-active', 'bg-blue', 'text-paper');
-        button.classList.remove('text-ink-2');
-        button.setAttribute('aria-pressed', 'true');
-      }
-      render();
+<script define:vars={{ initialSlug }}>
+  document.querySelectorAll('[data-jump-link]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const slug = link.getAttribute('href').slice(1);
+      document.getElementById(slug)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.pushState(null, '', `#${slug}`);
     });
   });
+
+  if (initialSlug) {
+    document.getElementById(initialSlug)?.scrollIntoView({ behavior: 'instant', block: 'start' });
+  }
 </script>
