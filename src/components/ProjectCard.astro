@@ -12,17 +12,19 @@ const { title, blurb, href, kicker, thumbnail, variant = 'default' } = Astro.pro
     <span class="mt-7 self-start border-b border-paper/60 pb-[3px] font-mono text-xs font-bold uppercase tracking-[0.1em]">Book an hour →</span>
   </a>
 ) : (
-  <a href={href} class="block overflow-hidden rounded-[10px] bg-paper-3 shadow-plate">
+  <a href={href} class="flex h-full flex-col overflow-hidden rounded-[10px] bg-paper-3 shadow-plate">
     <div class="relative flex aspect-square items-end overflow-hidden bg-paper-2 p-3">
       {thumbnail
         ? <img src={thumbnail} alt="" class="absolute inset-0 h-full w-full object-cover" />
         : <span class="label text-[0.875rem]">image</span>}
     </div>
-    <div class="p-5">
-      {kicker && <div class="mb-2 font-mono text-[0.875rem] uppercase tracking-[0.14em] text-blue">{kicker}</div>}
-      <h3 class="text-[1.5rem] font-semibold -tracking-[0.01em]">{title}</h3>
-      <p class="mt-2 text-[1rem] leading-relaxed text-[rgb(78,78,78)]">{blurb}</p>
-      <span class="mt-4 inline-block border-b border-ink-3/60 pb-[3px] font-mono text-xs font-bold uppercase tracking-[0.1em] text-ink-3">See more →</span>
+    <div class="flex flex-1 flex-col justify-between p-5">
+      <div>
+        {kicker && <div class="mb-2 font-mono text-[0.875rem] uppercase tracking-[0.14em] text-blue">{kicker}</div>}
+        <h3 class="text-[1.5rem] font-semibold -tracking-[0.01em]">{title}</h3>
+        <p class="mt-2 text-[1rem] leading-relaxed text-[rgb(78,78,78)]">{blurb}</p>
+      </div>
+      <span class="mt-4 self-start border-b border-ink-3/60 pb-[3px] font-mono text-xs font-bold uppercase tracking-[0.1em] text-ink-3">See more →</span>
     </div>
   </a>
 )}
