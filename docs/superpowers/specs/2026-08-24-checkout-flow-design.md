@@ -31,6 +31,23 @@ record.
 - The existing `/checkout` page (bare Payment Link, no data capture) is
   replaced by this flow and removed.
 
+## Implementation note (added during deploy setup, 2026-08-24)
+
+Google Sheets writes were switched from a service-account JSON key to a
+**Google Apps Script Web App** bound to the Sheet. The user's Google Cloud
+project blocks service-account key creation via an org policy that
+requires Cloud Console IAM/policy work to lift — not something to push a
+non-technical user through for a portfolio-site feature. Apps Script
+needs no Cloud project, no IAM, no key: a script pasted into the Sheet's
+own editor (Extensions → Apps Script), deployed as a Web App, called over
+plain HTTP with a shared secret. Same guarantee (only this flow's server
+code can write to the Sheet, verified per-request), same append-only
+Sheet-as-datastore design — different transport. `lib/sheets.ts`'s
+`appendIntakeRow` now POSTs `{ secret, values }` to the Web App URL
+instead of calling the Sheets API directly; `GOOGLE_SHEETS_WEBAPP_URL`
+and `GOOGLE_SHEETS_WEBAPP_SECRET` replace the three `GOOGLE_SERVICE_*`
+env vars everywhere in this spec and the implementation plan.
+
 ## Implementation note (added during planning)
 
 The plan implements this without an Astro server adapter. The site stays

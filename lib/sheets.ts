@@ -26,23 +26,23 @@ export function formatIntakeRowValues(row: IntakeRow): string[] {
   ];
 }
 
-export interface SheetsValuesClient {
-  spreadsheets: {
-    values: {
-      append: (params: Record<string, unknown>) => Promise<unknown>;
-    };
-  };
+export interface SheetsWebAppClient {
+  fetch: (url: string, init: RequestInit) => Promise<Response>;
 }
 
 export async function appendIntakeRow(
-  sheetsClient: SheetsValuesClient,
-  sheetId: string,
+  client: SheetsWebAppClient,
+  webAppUrl: string,
+  secret: string,
   row: IntakeRow
 ): Promise<void> {
-  await sheetsClient.spreadsheets.values.append({
-    spreadsheetId: sheetId,
-    range: 'Sheet1!A:J',
-    valueInputOption: 'RAW',
-    requestBody: { values: [formatIntakeRowValues(row)] },
+  const response = await client.fetch(webAppUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ secret, values: formatIntakeRowValues(row) }),
   });
+
+  if (!response.ok) {
+    throw new Error(`Sheets web app responded with ${response.status}`);
+  }
 }

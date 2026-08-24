@@ -1,19 +1,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import Stripe from 'stripe';
-import { google } from 'googleapis';
 import { verifyPaidSession } from '../lib/verifySession';
 import { loadTierConfigsFromEnv } from '../lib/tiers';
 import { buildIntakeRow, type IntakeFormFields } from '../lib/intakeForm';
 import { appendIntakeRow } from '../lib/sheets';
-
-function getSheetsClient() {
-  const auth = new google.auth.JWT({
-    email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    key: (process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY ?? '').replace(/\\n/g, '\n'),
-    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-  });
-  return google.sheets({ version: 'v4', auth });
-}
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -54,7 +44,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const row = buildIntakeRow(verifyResult.session, fields);
 
   try {
-    await appendIntakeRow(getSheetsClient(), process.env.GOOGLE_SHEET_ID as string, row);
+    await appendIntakeRow(
+      { fetch },
+      process.env.GOOGLE_SHEETS_WEBAPP_URL as string,
+      process.env.GOOGLE_SHEETS_WEBAPP_SECRET as string,
+      row
+    );
   } catch {
     res.status(502).json({ ok: false, reason: 'sheet_write_failed' });
     return;

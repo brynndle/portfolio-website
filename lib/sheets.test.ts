@@ -32,17 +32,25 @@ describe('formatIntakeRowValues', () => {
 });
 
 describe('appendIntakeRow', () => {
-  it('calls values.append with the formatted row', async () => {
-    const append = vi.fn().mockResolvedValue({});
-    const sheetsClient = { spreadsheets: { values: { append } } };
+  it('POSTs the formatted row and secret to the web app URL', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, status: 200 });
+    const client = { fetch: fetchMock };
 
-    await appendIntakeRow(sheetsClient, 'sheet_123', row);
+    await appendIntakeRow(client, 'https://script.google.com/macros/s/abc/exec', 'shh', row);
 
-    expect(append).toHaveBeenCalledWith(
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://script.google.com/macros/s/abc/exec',
       expect.objectContaining({
-        spreadsheetId: 'sheet_123',
-        requestBody: { values: [formatIntakeRowValues(row)] },
+        method: 'POST',
+        body: JSON.stringify({ secret: 'shh', values: formatIntakeRowValues(row) }),
       })
     );
+  });
+
+  it('throws when the web app responds with a non-ok status', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({ ok: false, status: 500 });
+    const client = { fetch: fetchMock };
+
+    await expect(appendIntakeRow(client, 'https://script.google.com/macros/s/abc/exec', 'shh', row)).rejects.toThrow();
   });
 });
