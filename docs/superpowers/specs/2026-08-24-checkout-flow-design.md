@@ -31,6 +31,17 @@ record.
 - The existing `/checkout` page (bare Payment Link, no data capture) is
   replaced by this flow and removed.
 
+## Implementation note (added during planning)
+
+The plan implements this without an Astro server adapter. The site stays
+static (`output: 'static'`); `/confirm` is a static page whose inline
+client script calls `GET /api/verify-session` (a plain Vercel Serverless
+Function) before showing the form. All dynamic logic — verification, the
+webhook, the intake write, the Blob upload token — lives in a root-level
+`/api` directory, which Vercel supports for any static frontend. This
+preserves every guarantee in this spec (server-side verification, no
+client-trusted data) while touching none of the ~15 existing static pages.
+
 ## Flow
 
 1. Visitor lands on one of three pricing pages, clicks through to that
