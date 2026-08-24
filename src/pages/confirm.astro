@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Confirm" description="Confirm your consult booking and tell us about your project.">
+  <section class="max-width border-b border-rule px-5 py-12 md:px-10" id="confirm-root">
+    <div class="label mb-3 text-blue">Almost there</div>
+    <h1 id="confirm-heading" class="max-w-[20ch] text-[2.5rem] font-semibold leading-[1.05] -tracking-[0.02em] text-balance max-md:text-3xl">Checking your payment…</h1>
+
+    <div id="confirm-error" class="mt-6 hidden max-w-[64ch] text-lg leading-relaxed text-ink-2">
+      <p>
+        We couldn't verify this payment. If you just paid, check the link in your confirmation
+        email, or email <a class="text-blue underline" href="mailto:hi@brynncaputo.com">hi@brynncaputo.com</a>
+        and we'll sort it out.
+      </p>
+    </div>
+
+    <form id="confirm-form" class="mt-8 hidden max-w-[64ch] space-y-6">
+      <div>
+        <label class="label mb-2 block" for="companyName">Company name</label>
+        <input id="companyName" name="companyName" type="text" required class="w-full border border-rule bg-paper px-4 py-3 text-ink" />
+      </div>
+      <div>
+        <label class="label mb-2 block" for="clientName">Your name</label>
+        <input id="clientName" name="clientName" type="text" required class="w-full border border-rule bg-paper px-4 py-3 text-ink" />
+      </div>
+      <div>
+        <label class="label mb-2 block" for="email">Email</label>
+        <input id="email" name="email" type="email" required class="w-full border border-rule bg-paper px-4 py-3 text-ink" />
+      </div>
+      <div>
+        <label class="label mb-2 block" for="description">Tell us about your product or the issue</label>
+        <textarea id="description" name="description" rows="5" required class="w-full border border-rule bg-paper px-4 py-3 text-ink"></textarea>
+      </div>
+      <div>
+        <label class="label mb-2 block">Links to your product or website</label>
+        <div id="link-fields" class="space-y-2">
+          <input type="url" name="links" placeholder="https://" class="w-full border border-rule bg-paper px-4 py-3 text-ink" />
+        </div>
+        <button type="button" id="add-link" class="mt-2 font-mono text-xs font-bold uppercase tracking-[0.08em] text-blue">+ Add another link</button>
+      </div>
+      <div>
+        <label class="label mb-2 block" for="files">Upload files (PDF, prototype, etc.)</label>
+        <input id="files" name="files" type="file" multiple class="w-full" />
+        <p id="upload-status" class="mt-1 text-sm text-ink-3"></p>
+      </div>
+      <button
+        type="submit"
+        class="whitespace-nowrap bg-[#00ff1c] px-[26px] py-4 text-center font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[5px_5px_0px_rgba(0,0,0,0.5)]"
+      >
+        Submit →
+      </button>
+    </form>
+
+    <div id="confirm-success" class="mt-6 hidden max-w-[64ch] text-lg leading-relaxed text-ink-2">
+      <p>Got it — thanks. We'll be in touch within one business day.</p>
+    </div>
+  </section>
+
+  <script>
+    import { upload } from '@vercel/blob/client';
+
+    const heading = document.getElementById('confirm-heading')!;
+    const errorBox = document.getElementById('confirm-error')!;
+    const form = document.getElementById('confirm-form') as HTMLFormElement;
+    const successBox = document.getElementById('confirm-success')!;
+    const linkFields = document.getElementById('link-fields')!;
+    const addLinkBtn = document.getElementById('add-link')!;
+    const filesInput = document.getElementById('files') as HTMLInputElement;
+    const uploadStatus = document.getElementById('upload-status')!;
+    const emailInput = document.getElementById('email') as HTMLInputElement;
+
+    const sessionId = new URLSearchParams(window.location.search).get('session_id');
+
+    function showError() {
+      heading.textContent = "We couldn't verify this payment";
+      errorBox.classList.remove('hidden');
+    }
+
+    addLinkBtn.addEventListener('click', () => {
+      const input = document.createElement('input');
+      input.type = 'url';
+      input.name = 'links';
+      input.placeholder = 'https://';
+      input.className = 'w-full border border-rule bg-paper px-4 py-3 text-ink';
+      linkFields.appendChild(input);
+    });
+
+    async function init() {
+      if (!sessionId) {
+        showError();
+        return;
+      }
+
+      const res = await fetch(`/api/verify-session?session_id=${encodeURIComponent(sessionId)}`);
+      const result = await res.json();
+
+      if (!result.ok) {
+        showError();
+        return;
+      }
+
+      heading.textContent = 'Tell us about your project';
+      if (result.session.customerEmail) emailInput.value = result.session.customerEmail;
+      form.classList.remove('hidden');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      submitBtn.disabled = true;
+
+      try {
+        const fileUrls: string[] = [];
+        if (filesInput.files && filesInput.files.length > 0) {
+          uploadStatus.textContent = 'Uploading files…';
+          for (const file of Array.from(filesInput.files)) {
+            const blob = await upload(file.name, file, {
+              access: 'public',
+              handleUploadUrl: '/api/blob-upload',
+            });
+            fileUrls.push(blob.url);
+          }
+          uploadStatus.textContent = 'Files uploaded.';
+        }
+
+        const links = Array.from(linkFields.querySelectorAll<HTMLInputElement>('input[name="links"]'))
+          .map((input) => input.value.trim())
+          .filter(Boolean);
+
+        const payload = {
+          sessionId,
+          companyName: (document.getElementById('companyName') as HTMLInputElement).value,
+          clientName: (document.getElementById('clientName') as HTMLInputElement).value,
+          email: emailInput.value,
+          description: (document.getElementById('description') as HTMLTextAreaElement).value,
+          links,
+          fileUrls,
+        };
+
+        const res = await fetch('/api/submit-intake', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) throw new Error('submit failed');
+
+        form.classList.add('hidden');
+        successBox.classList.remove('hidden');
+      } catch {
+        submitBtn.disabled = false;
+        uploadStatus.textContent = 'Something went wrong submitting — please email hi@brynncaputo.com directly.';
+      }
+    });
+
+    init();
+  </script>
+</BaseLayout>
