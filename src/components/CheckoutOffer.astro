@@ -1,0 +1,21 @@
+---
+// src/components/CheckoutOffer.astro
+import type { CheckoutTier } from '../data/checkoutTiers';
+
+interface Props {
+  tier: CheckoutTier;
+}
+const { tier } = Astro.props;
+---
+<section class="max-width border-b border-rule px-5 py-12 md:px-10">
+  <div class="label mb-3 text-blue">{tier.persona}</div>
+  <h1 class="max-w-[20ch] text-[2.5rem] font-semibold leading-[1.05] -tracking-[0.02em] text-balance max-md:text-3xl">1-Hour UX Consult</h1>
+  <p class="mt-6 max-w-[64ch] text-lg leading-relaxed text-ink-2 text-pretty">{tier.blurb}</p>
+  <p class="mt-6 font-mono text-2xl font-bold text-ink">${tier.price}</p>
+  <a
+    href={tier.paymentLinkUrl}
+    class="mt-8 inline-block whitespace-nowrap bg-[#00ff1c] px-[26px] py-4 text-center font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[5px_5px_0px_rgba(0,0,0,0.5)]"
+  >
+    Proceed to payment →
+  </a>
+</section>

@@ -1,0 +1,11 @@
+---
+// src/pages/checkout/startup.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CheckoutOffer from '../../components/CheckoutOffer.astro';
+import { CHECKOUT_TIERS } from '../../data/checkoutTiers';
+
+const tier = CHECKOUT_TIERS.find((t) => t.slug === 'startup')!;
+---
+<BaseLayout title={`Checkout — ${tier.name}`} description={tier.blurb}>
+  <CheckoutOffer tier={tier} />
+</BaseLayout>
