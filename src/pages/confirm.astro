@@ -72,10 +72,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     const sessionId = new URLSearchParams(window.location.search).get('session_id');
 
+    let uploadedFileUrls: string[] = [];
+    const uploadedFiles = new WeakSet<File>();
+
     function showError() {
       heading.textContent = "We couldn't verify this payment";
       errorBox.classList.remove('hidden');
     }
+
+    filesInput.addEventListener('change', async () => {
+      if (!filesInput.files) return;
+      const newFiles = Array.from(filesInput.files).filter((file) => !uploadedFiles.has(file));
+      if (newFiles.length === 0) return;
+
+      uploadStatus.textContent = 'Uploading files…';
+      for (const file of newFiles) {
+        uploadedFiles.add(file);
+        try {
+          const blob = await upload(file.name, file, {
+            access: 'public',
+            handleUploadUrl: '/api/blob-upload',
+            clientPayload: sessionId ?? undefined,
+          });
+          uploadedFileUrls.push(blob.url);
+        } catch {
+          uploadStatus.textContent = `Failed to upload ${file.name} — please remove it and try again, or email hi@brynncaputo.com directly.`;
+          return;
+        }
+      }
+      uploadStatus.textContent = 'Files uploaded.';
+    });
 
     addLinkBtn.addEventListener('click', () => {
       const input = document.createElement('input');
@@ -87,22 +113,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     });
 
     async function init() {
-      if (!sessionId) {
+      try {
+        if (!sessionId) {
+          showError();
+          return;
+        }
+
+        const res = await fetch(`/api/verify-session?session_id=${encodeURIComponent(sessionId)}`);
+        const result = await res.json();
+
+        if (!result.ok) {
+          showError();
+          return;
+        }
+
+        heading.textContent = 'Tell us about your project';
+        if (result.session.customerEmail) emailInput.value = result.session.customerEmail;
+        form.classList.remove('hidden');
+      } catch {
         showError();
-        return;
       }
-
-      const res = await fetch(`/api/verify-session?session_id=${encodeURIComponent(sessionId)}`);
-      const result = await res.json();
-
-      if (!result.ok) {
-        showError();
-        return;
-      }
-
-      heading.textContent = 'Tell us about your project';
-      if (result.session.customerEmail) emailInput.value = result.session.customerEmail;
-      form.classList.remove('hidden');
     }
 
     form.addEventListener('submit', async (e) => {
@@ -111,19 +141,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       submitBtn.disabled = true;
 
       try {
-        const fileUrls: string[] = [];
-        if (filesInput.files && filesInput.files.length > 0) {
-          uploadStatus.textContent = 'Uploading files…';
-          for (const file of Array.from(filesInput.files)) {
-            const blob = await upload(file.name, file, {
-              access: 'public',
-              handleUploadUrl: '/api/blob-upload',
-            });
-            fileUrls.push(blob.url);
-          }
-          uploadStatus.textContent = 'Files uploaded.';
-        }
-
         const links = Array.from(linkFields.querySelectorAll<HTMLInputElement>('input[name="links"]'))
           .map((input) => input.value.trim())
           .filter(Boolean);
@@ -135,7 +152,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           email: emailInput.value,
           description: (document.getElementById('description') as HTMLTextAreaElement).value,
           links,
-          fileUrls,
+          fileUrls: uploadedFileUrls,
         };
 
         const res = await fetch('/api/submit-intake', {

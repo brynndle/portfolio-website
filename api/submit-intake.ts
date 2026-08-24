@@ -21,7 +21,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  const { sessionId, ...fields } = req.body as { sessionId: string } & IntakeFormFields;
+  const body = req.body as Partial<{ sessionId: unknown } & Record<keyof IntakeFormFields, unknown>>;
+
+  const isStringArray = (value: unknown): value is string[] =>
+    Array.isArray(value) && value.every((item) => typeof item === 'string');
+
+  if (
+    typeof body?.sessionId !== 'string' ||
+    body.sessionId.length === 0 ||
+    typeof body.companyName !== 'string' ||
+    typeof body.clientName !== 'string' ||
+    typeof body.email !== 'string' ||
+    typeof body.description !== 'string' ||
+    !isStringArray(body.links) ||
+    !isStringArray(body.fileUrls)
+  ) {
+    res.status(400).json({ ok: false, reason: 'invalid_body' });
+    return;
+  }
+
+  const { sessionId, ...fields } = body as { sessionId: string } & IntakeFormFields;
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
   const tiers = loadTierConfigsFromEnv(process.env);

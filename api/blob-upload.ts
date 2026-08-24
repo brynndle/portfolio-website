@@ -1,7 +1,15 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { handleUpload, type HandleUploadBody } from '@vercel/blob/client';
+import Stripe from 'stripe';
+import { verifyPaidSession } from '../lib/verifySession';
+import { loadTierConfigsFromEnv } from '../lib/tiers';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (req.method !== 'POST') {
+    res.status(405).end();
+    return;
+  }
+
   const body = req.body as HandleUploadBody;
 
   try {
@@ -10,10 +18,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       // VercelRequest exposes the same `.headers` shape handleUpload needs;
       // it doesn't read the body stream directly since `body` is passed separately.
       request: req as any,
-      onBeforeGenerateToken: async () => ({
-        allowedContentTypes: ['application/pdf', 'image/png', 'image/jpeg', 'image/webp'],
-        maximumSizeInBytes: 25 * 1024 * 1024,
-      }),
+      onBeforeGenerateToken: async (_pathname, clientPayload) => {
+        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+        const tiers = loadTierConfigsFromEnv(process.env);
+        const verifyResult = await verifyPaidSession(clientPayload ?? undefined, stripe, tiers);
+
+        if (!verifyResult.ok) {
+          throw new Error('Unauthorized upload: session not verified');
+        }
+
+        return {
+          allowedContentTypes: ['application/pdf', 'image/png', 'image/jpeg', 'image/webp'],
+          maximumSizeInBytes: 25 * 1024 * 1024,
+        };
+      },
       onUploadCompleted: async () => {},
     });
     res.status(200).json(jsonResponse);

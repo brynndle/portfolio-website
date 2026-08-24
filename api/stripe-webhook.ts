@@ -4,7 +4,12 @@ import { Resend } from 'resend';
 import { sendNextStepsEmail } from '../lib/email';
 import { readRawBody } from '../lib/rawBody';
 
-export const config = { api: { bodyParser: false } };
+// Note: `readRawBody` works because Vercel's Node runtime buffers and replays
+// the request body stream, not because of any `bodyParser` config (that's a
+// Next.js API-route convention that @vercel/node does not read). Do not
+// re-add a `config.api.bodyParser` export expecting it to affect this.
+
+const EMAIL_FROM = 'Brynn Caputo <hi@brynncaputo.com>';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -20,6 +25,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     event = stripe.webhooks.constructEvent(rawBody, signature as string, process.env.STRIPE_WEBHOOK_SECRET as string);
   } catch {
+    console.error('Stripe webhook signature verification failed');
     res.status(400).send('Webhook signature verification failed');
     return;
   }
@@ -28,9 +34,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const session = event.data.object as Stripe.Checkout.Session;
     const email = session.customer_details?.email;
     if (email) {
-      const resend = new Resend(process.env.RESEND_API_KEY as string);
-      const confirmUrl = `https://brynncaputo.com/confirm?session_id=${session.id}`;
-      await sendNextStepsEmail(resend, { to: email, confirmUrl, from: 'Brynn Caputo <hi@brynncaputo.com>' });
+      try {
+        const resend = new Resend(process.env.RESEND_API_KEY as string);
+        const siteUrl = process.env.SITE_URL ?? 'https://brynncaputo.com';
+        const confirmUrl = `${siteUrl}/confirm?session_id=${session.id}`;
+        await sendNextStepsEmail(resend, { to: email, confirmUrl, from: EMAIL_FROM });
+      } catch (error) {
+        // Best-effort second channel — /confirm's own flow is the primary path.
+        // Don't fail the webhook so Stripe doesn't retry and risk duplicate emails.
+        console.error('Failed to send next-steps email', error);
+      }
     }
   }
 
