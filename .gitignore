@@ -21,3 +21,5 @@ npm-debug.log*
 
 # local assistant settings
 .claude/
+.vercel
+.env*
