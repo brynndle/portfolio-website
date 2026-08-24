@@ -1,8 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { handleUpload, type HandleUploadBody } from '@vercel/blob/client';
 import Stripe from 'stripe';
-import { verifyPaidSession } from '../lib/verifySession';
-import { loadTierConfigsFromEnv } from '../lib/tiers';
+import { verifyPaidSession } from '../lib/verifySession.js';
+import { loadTierConfigsFromEnv } from '../lib/tiers.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {

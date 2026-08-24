@@ -1,8 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import Stripe from 'stripe';
 import { Resend } from 'resend';
-import { sendNextStepsEmail } from '../lib/email';
-import { readRawBody } from '../lib/rawBody';
+import { sendNextStepsEmail } from '../lib/email.js';
+import { readRawBody } from '../lib/rawBody.js';
 
 // Note: `readRawBody` works because Vercel's Node runtime buffers and replays
 // the request body stream, not because of any `bodyParser` config (that's a

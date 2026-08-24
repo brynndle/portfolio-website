@@ -1,5 +1,5 @@
-import type { VerifiedSession } from './verifySession';
-import type { IntakeRow } from './sheets';
+import type { VerifiedSession } from './verifySession.js';
+import type { IntakeRow } from './sheets.js';
 
 export interface IntakeFormFields {
   companyName: string;

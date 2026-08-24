@@ -1,4 +1,4 @@
-import { getTierSlugByPriceId, type TierConfig } from './tiers';
+import { getTierSlugByPriceId, type TierConfig } from './tiers.js';
 
 export interface VerifiedSession {
   sessionId: string;
