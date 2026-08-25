@@ -17,36 +17,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <form id="confirm-form" class="mt-8 hidden max-w-[64ch] space-y-6">
       <div>
-        <label class="label mb-2 block" for="companyName">Company name</label>
-        <input id="companyName" name="companyName" type="text" required class="w-full border border-rule bg-paper px-4 py-3 text-ink" />
+        <label class="label mb-2 block font-bold text-[#333]" for="companyName">Company name</label>
+        <input id="companyName" name="companyName" type="text" required class="w-full border border-[#333] bg-paper px-4 py-3 text-ink" />
       </div>
       <div>
-        <label class="label mb-2 block" for="clientName">Your name</label>
-        <input id="clientName" name="clientName" type="text" required class="w-full border border-rule bg-paper px-4 py-3 text-ink" />
+        <label class="label mb-2 block font-bold text-[#333]" for="clientName">Your name</label>
+        <input id="clientName" name="clientName" type="text" required class="w-full border border-[#333] bg-paper px-4 py-3 text-ink" />
       </div>
       <div>
-        <label class="label mb-2 block" for="email">Email</label>
-        <input id="email" name="email" type="email" required class="w-full border border-rule bg-paper px-4 py-3 text-ink" />
+        <label class="label mb-2 block font-bold text-[#333]" for="email">Email</label>
+        <input id="email" name="email" type="email" required class="w-full border border-[#333] bg-paper px-4 py-3 text-ink" />
       </div>
       <div>
-        <label class="label mb-2 block" for="description">Tell us about your product or the issue</label>
-        <textarea id="description" name="description" rows="5" required class="w-full border border-rule bg-paper px-4 py-3 text-ink"></textarea>
+        <label class="label mb-2 block font-bold text-[#333]" for="description">Tell us about your product or the issue</label>
+        <textarea id="description" name="description" rows="5" required class="w-full border border-[#333] bg-paper px-4 py-3 text-ink"></textarea>
       </div>
       <div>
-        <label class="label mb-2 block">Links to your product or website</label>
+        <label class="label mb-2 block font-bold text-[#333]">Links to your product or website</label>
         <div id="link-fields" class="space-y-2">
-          <input type="url" name="links" placeholder="https://" class="w-full border border-rule bg-paper px-4 py-3 text-ink" />
+          <input type="text" inputmode="url" name="links" placeholder="yoursite.com" class="w-full border border-[#333] bg-paper px-4 py-3 text-ink" />
         </div>
-        <button type="button" id="add-link" class="mt-2 font-mono text-xs font-bold uppercase tracking-[0.08em] text-blue">+ Add another link</button>
+        <button type="button" id="add-link" class="mt-2 cursor-pointer font-mono text-xs font-bold uppercase tracking-[0.08em] text-blue">+ Add another link</button>
       </div>
       <div>
-        <label class="label mb-2 block" for="files">Upload files (PDF, prototype, etc.)</label>
-        <input id="files" name="files" type="file" multiple class="w-full" />
+        <label class="label mb-2 block font-bold text-[#333]" for="files">Upload files (PDF, prototype, etc.)</label>
+        <input id="files" name="files" type="file" multiple class="hidden" />
+        <button type="button" id="add-file" class="cursor-pointer font-mono text-xs font-bold uppercase tracking-[0.08em] text-blue">+ Add file</button>
         <p id="upload-status" class="mt-1 text-sm text-ink-3"></p>
       </div>
       <button
         type="submit"
-        class="whitespace-nowrap bg-[#00ff1c] px-[26px] py-4 text-center font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[5px_5px_0px_rgba(0,0,0,0.5)]"
+        class="cursor-pointer whitespace-nowrap bg-[#00ff1c] px-[26px] py-4 text-center font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[5px_5px_0px_rgba(0,0,0,0.5)]"
       >
         Submit →
       </button>
@@ -67,6 +68,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     const linkFields = document.getElementById('link-fields')!;
     const addLinkBtn = document.getElementById('add-link')!;
     const filesInput = document.getElementById('files') as HTMLInputElement;
+    const addFileBtn = document.getElementById('add-file')!;
     const uploadStatus = document.getElementById('upload-status')!;
     const emailInput = document.getElementById('email') as HTMLInputElement;
 
@@ -79,6 +81,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       heading.textContent = "We couldn't verify this payment";
       errorBox.classList.remove('hidden');
     }
+
+    addFileBtn.addEventListener('click', () => {
+      filesInput.click();
+    });
 
     filesInput.addEventListener('change', async () => {
       if (!filesInput.files) return;
@@ -105,12 +111,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     addLinkBtn.addEventListener('click', () => {
       const input = document.createElement('input');
-      input.type = 'url';
+      input.type = 'text';
+      input.inputMode = 'url';
       input.name = 'links';
-      input.placeholder = 'https://';
-      input.className = 'w-full border border-rule bg-paper px-4 py-3 text-ink';
+      input.placeholder = 'yoursite.com';
+      input.className = 'w-full border border-[#333] bg-paper px-4 py-3 text-ink';
       linkFields.appendChild(input);
     });
+
+    function normalizeLink(value: string): string {
+      return /^https?:\/\//i.test(value) ? value : `https://${value}`;
+    }
 
     async function init() {
       try {
@@ -143,7 +154,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       try {
         const links = Array.from(linkFields.querySelectorAll<HTMLInputElement>('input[name="links"]'))
           .map((input) => input.value.trim())
-          .filter(Boolean);
+          .filter(Boolean)
+          .map(normalizeLink);
 
         const payload = {
           sessionId,
