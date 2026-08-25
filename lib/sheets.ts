@@ -30,7 +30,7 @@ export interface SheetsWebAppClient {
   fetch: (url: string, init: RequestInit) => Promise<Response>;
 }
 
-export async function appendIntakeRow(
+async function attemptAppend(
   client: SheetsWebAppClient,
   webAppUrl: string,
   secret: string,
@@ -45,4 +45,44 @@ export async function appendIntakeRow(
   if (!response.ok) {
     throw new Error(`Sheets web app responded with ${response.status}`);
   }
+
+  // Apps Script always answers HTTP 200, even on its own internal errors —
+  // the real result lives in the JSON body, so a non-JSON or non-ok body is
+  // a failure the status code alone won't reveal.
+  let body: unknown;
+  try {
+    body = await response.json();
+  } catch {
+    throw new Error('Sheets web app returned a non-JSON response');
+  }
+
+  if (!body || typeof body !== 'object' || (body as { ok?: unknown }).ok !== true) {
+    throw new Error('Sheets web app did not confirm the write');
+  }
+}
+
+const RETRY_DELAYS_MS = [250, 750];
+
+export async function appendIntakeRow(
+  client: SheetsWebAppClient,
+  webAppUrl: string,
+  secret: string,
+  row: IntakeRow
+): Promise<void> {
+  let lastError: unknown;
+
+  for (let attempt = 0; attempt <= RETRY_DELAYS_MS.length; attempt++) {
+    try {
+      await attemptAppend(client, webAppUrl, secret, row);
+      return;
+    } catch (error) {
+      lastError = error;
+      const delay = RETRY_DELAYS_MS[attempt];
+      if (delay !== undefined) {
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      }
+    }
+  }
+
+  throw lastError;
 }
