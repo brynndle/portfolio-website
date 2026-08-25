@@ -30,6 +30,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
+  console.log(`Received Stripe event ${event.id} (${event.type})`);
+
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session;
     const email = session.customer_details?.email;
@@ -40,11 +42,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const confirmUrl = `${siteUrl}/confirm?session_id=${session.id}`;
         const emailFrom = process.env.EMAIL_FROM ?? DEFAULT_EMAIL_FROM;
         await sendNextStepsEmail(resend, { to: email, confirmUrl, from: emailFrom });
+        console.log(`Next-steps email sent for session ${session.id}`);
       } catch (error) {
         // Best-effort second channel — /confirm's own flow is the primary path.
         // Don't fail the webhook so Stripe doesn't retry and risk duplicate emails.
-        console.error('Failed to send next-steps email', error);
+        console.error(`Failed to send next-steps email for session ${session.id}:`, error);
       }
+    } else {
+      console.log(`No customer email on session ${session.id} — skipping next-steps email`);
     }
   }
 
