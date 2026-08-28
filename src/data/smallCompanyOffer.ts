@@ -9,6 +9,11 @@ export const SMALL_COMPANY_OFFER = {
   price: 500,
   priceLabel: '$500',
   persona: 'For independent creators',
-  checkoutHref: '/checkout/small-company',
+  // Points straight at the live Stripe Payment Link rather than the
+  // /checkout/small-company review page, so buttons go directly to payment.
+  // Same URL that page's own "Proceed to payment" button already sends
+  // people to (STRIPE_PAYMENT_LINK_SMALL_COMPANY on Vercel) — hardcoded here
+  // because this file must build without the Stripe env vars present.
+  checkoutHref: 'https://buy.stripe.com/dRmeVdfz13Vl7po7ImfUQ03',
   turnaround: '5 business days',
 } as const;
