@@ -9,7 +9,6 @@
 // because none have been confirmed for this tier. See the TODO comments.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SMALL_COMPANY_OFFER } from '../data/smallCompanyOffer';
-import { BOOK_A_CONSULT_URL } from '../data/site';
 
 const tier = SMALL_COMPANY_OFFER;
 
@@ -78,7 +77,7 @@ const whatYouGet = [
   <!-- CREDIBILITY BAR -->
   <section class="border-b border-rule bg-ink py-6">
     <div class="max-width flex flex-wrap items-center gap-x-10 gap-y-3 px-5 md:px-10">
-      <span class="font-mono text-[0.6875rem] font-bold uppercase tracking-[0.18em] text-[#5fd39a]">20 years of this</span>
+      <span class="font-mono text-[0.6875rem] font-bold uppercase tracking-[0.18em] text-[#5fd39a]">20 years of building products for</span>
       <span class="font-mono text-[0.9375rem] tracking-[0.06em] text-white/85">Sony · Cisco · Clover · Perka · Side · Habitat for Humanity</span>
     </div>
   </section>
@@ -152,28 +151,37 @@ const whatYouGet = [
         >
           Get the audit · {tier.priceLabel} →
         </a>
-        <div class="mt-7 space-y-2.5 border-t border-rule pt-6 text-[0.9375rem] leading-relaxed text-ink-2">
-          <p>Not sure it's a fit? <a href={BOOK_A_CONSULT_URL} class="border-b border-blue font-medium text-blue">Take the free 30 minutes first.</a> That one's a conversation, not the audit. If I can't help, I'll say so and point you at who can.</p>
-        </div>
       </aside>
     </div>
   </section>
 
   <!-- POSITIONING -->
   <section class="border-b border-rule bg-paper-2 px-5 py-20 md:px-10">
-    <div class="max-width">
-      <p class="label text-blue">Before you rebuild it</p>
-      <h2 class="mt-3 max-w-[22ch] text-[2.75rem] font-semibold leading-[1.06] -tracking-[0.025em] text-balance max-md:text-[2rem]">
-        Make the thing you already built work harder.
-      </h2>
-      <p class="mt-8 max-w-[58ch] text-[1.25rem] leading-relaxed text-ink-2 text-pretty">
-        You may not need a redesign, a new platform, or another round of
-        features. Often the valuable fixes are smaller: clearer language, a
-        better order, fewer decisions, and a more obvious next step.
-      </p>
-      <p class="mt-5 max-w-[58ch] text-[1.25rem] leading-relaxed text-ink-2 text-pretty">
-        I find those changes and put them in the order that matters.
-      </p>
+    <div class="max-width grid grid-cols-1 items-center gap-10 md:grid-cols-[1fr_0.8fr] md:gap-14">
+      <div>
+        <p class="label text-blue">Before you rebuild it</p>
+        <h2 class="mt-3 max-w-[22ch] text-[2.75rem] font-semibold leading-[1.06] -tracking-[0.025em] text-balance max-md:text-[2rem]">
+          Make the thing you already built work harder.
+        </h2>
+        <p class="mt-8 max-w-[58ch] text-[1.25rem] leading-relaxed text-ink-2 text-pretty">
+          You may not need a redesign, a new platform, or another round of
+          features. Often the valuable fixes are smaller: clearer language, a
+          better order, fewer decisions, and a more obvious next step.
+        </p>
+        <p class="mt-5 max-w-[58ch] text-[1.25rem] leading-relaxed text-ink-2 text-pretty">
+          I find those changes and put them in the order that matters.
+        </p>
+      </div>
+
+      <img
+        src="/tune-radio.png"
+        alt="A hand adjusts the dial on a radio, tuning it rather than replacing it."
+        width="806"
+        height="672"
+        loading="lazy"
+        decoding="async"
+        class="h-auto w-full max-w-[520px] justify-self-center md:max-w-none"
+      />
     </div>
   </section>
 
