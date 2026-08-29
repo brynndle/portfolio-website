@@ -12,12 +12,6 @@ import { SMALL_COMPANY_OFFER } from '../data/smallCompanyOffer';
 
 const tier = SMALL_COMPANY_OFFER;
 
-// The first two lines of the supplied list read as scope, not as findings, so
-// they sit under the heading as sub copy rather than as numbered items.
-const scope = [
-  'A full review of one product or website highlighting high risk areas where people get stuck.',
-];
-
 // Ported from CheckoutOffer.astro's "The process" section, same four steps.
 const process = [
   ['Pay', 'Checkout above, secured by Stripe.'],
@@ -151,11 +145,6 @@ const whatYouGet = [
         <h2 class="mt-3 max-w-[24ch] text-[2.75rem] font-semibold leading-[1.06] -tracking-[0.025em] text-balance max-md:text-[2rem]">
           A clear list of changes that can help you earn more.
         </h2>
-        <div class="mt-6 space-y-2">
-          {scope.map((line) => (
-            <p class="max-w-[54ch] text-[1.25rem] leading-relaxed text-ink-2 text-pretty">{line}</p>
-          ))}
-        </div>
         <ul class="mt-10 space-y-6 border-t border-rule-strong pt-8">
           {whatYouGet.map((item, i) => (
             <li class="flex gap-5">
