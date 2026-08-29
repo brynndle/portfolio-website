@@ -18,6 +18,14 @@ const scope = [
   'A full review of one product or website highlighting high risk areas where people get stuck.',
 ];
 
+// Ported from CheckoutOffer.astro's "The process" section, same four steps.
+const process = [
+  ['Pay', 'Checkout above, secured by Stripe.'],
+  ['Give me the info', "After payment, you'll be redirected to a short form to share your product, links, files, and what's going wrong. I'll email it to you too."],
+  ["I follow up if I need to", "If I need more context, I’ll reach out with a few specific questions."],
+  ['I deliver the goods', 'You get the audit and the changes that matter most, with the reasoning behind them.'],
+];
+
 const whatYouGet = [
   'A one-hour video of me auditing your product or site and talking through every place I hesitate, guess wrong, or get stuck. You can watch someone use it for the first time, on your own schedule, and come back to it whenever you want.',
   'Feedback on copy, usability, accessibility, and the path to purchase',
@@ -47,7 +55,7 @@ const whatYouGet = [
     ></div>
 
     <div class="max-width relative px-5 md:px-10">
-      <p class="label text-[0.8125rem] font-bold text-white">For independent creators with something real to sell</p>
+      <p class="label text-[0.8125rem] font-bold text-white"></p>
       <h1 class="mt-5 max-w-[20ch] font-['Monomaniac_One'] text-[5.5rem] font-normal leading-[0.98] -tracking-[0.03em] text-balance text-white [text-shadow:6px_6px_0_rgba(0,0,0,.24)] max-lg:text-[4rem] max-md:text-[3rem]">
         You built it. I'll show you where it's losing customers.
       </h1>
@@ -86,7 +94,7 @@ const whatYouGet = [
   <section class="border-b border-rule px-5 py-20 md:px-10">
     <div class="max-width grid grid-cols-1 items-center gap-10 md:grid-cols-[1fr_0.8fr] md:gap-14">
       <div>
-        <p class="label text-blue">The problem is not always traffic</p>
+        <p class="label font-bold text-blue">The problem is not always traffic</p>
         <h2 class="mt-3 max-w-[24ch] text-[2.75rem] font-semibold leading-[1.06] -tracking-[0.025em] text-balance max-md:text-[2rem]">
           People are finding you. Something keeps them from buying.
         </h2>
@@ -113,6 +121,24 @@ const whatYouGet = [
     </div>
   </section>
 
+  <!-- PROCESS -->
+  <section class="border-b border-rule bg-white px-5 py-10 md:px-10">
+    <div class="max-width">
+      <h2 class="text-[1.75rem] font-semibold -tracking-[0.015em]">The process</h2>
+      <ol class="mt-5 grid grid-cols-4 gap-8 border-t border-rule-strong pt-6 max-md:grid-cols-1 max-md:gap-5">
+        {process.map(([label, body], i) => (
+          <li>
+            <h3 class="flex items-baseline gap-2 text-[1rem] font-semibold -tracking-[0.01em]">
+              <span class="font-mono text-[1rem] font-bold text-blue">{String(i + 1).padStart(2, '0')}</span>
+              {label}
+            </h3>
+            <p class="mt-1 max-w-[30ch] text-[0.9375rem] leading-relaxed text-ink-2 text-pretty">{body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
   <!-- TODO REQUIRES BRYNN'S SIGN-OFF: testimonial band goes here. One or two real
        one-sentence quotes from a creator-tier buyer, with name and product. Do not
        ship invented quotes. -->
@@ -121,7 +147,7 @@ const whatYouGet = [
   <section id="what-you-get" class="border-b border-rule bg-band px-5 py-20 md:px-10">
     <div class="max-width grid grid-cols-[1.3fr_1fr] items-start gap-16 max-lg:grid-cols-1 max-lg:gap-10">
       <div>
-        <p class="label text-blue">What you get</p>
+        <p class="label font-bold text-blue">What you get</p>
         <h2 class="mt-3 max-w-[24ch] text-[2.75rem] font-semibold leading-[1.06] -tracking-[0.025em] text-balance max-md:text-[2rem]">
           A clear list of changes that can help you earn more.
         </h2>
@@ -141,7 +167,7 @@ const whatYouGet = [
       </div>
 
       <aside class="border border-rule-strong bg-card p-9 shadow-plate max-md:p-6 lg:sticky lg:top-[calc(var(--nav-height)+24px)]">
-        <p class="label text-ink-3">{tier.persona}</p>
+        <p class="label font-bold text-ink-3">{tier.persona}</p>
         <p class="mt-4 font-mono text-[3.5rem] font-bold leading-none text-ink">{tier.priceLabel}</p>
         <p class="mt-2 text-[0.9375rem] text-ink-3">One flat price, one hour of recorded feedback and recommendations.</p>
         <p class="mt-4 border-t border-rule pt-4 font-mono text-[0.8125rem] uppercase tracking-[0.12em] text-ink-3">Delivered in {tier.turnaround}</p>
@@ -159,7 +185,7 @@ const whatYouGet = [
   <section class="border-b border-rule bg-paper-2 px-5 py-20 md:px-10">
     <div class="max-width grid grid-cols-1 items-center gap-10 md:grid-cols-[1fr_0.8fr] md:gap-14">
       <div>
-        <p class="label text-blue">Before you rebuild it</p>
+        <p class="label font-bold text-blue">Before you rebuild it</p>
         <h2 class="mt-3 max-w-[22ch] text-[2.75rem] font-semibold leading-[1.06] -tracking-[0.025em] text-balance max-md:text-[2rem]">
           Make the thing you already built work harder.
         </h2>
@@ -186,29 +212,46 @@ const whatYouGet = [
   </section>
 
   <!-- WHO I AM -->
-  <section class="border-b border-rule px-5 py-16 md:px-10">
-    <div class="max-width grid grid-cols-[auto_1fr] gap-14 max-lg:grid-cols-1 max-lg:gap-8">
-      <div class="lg:w-[22ch]">
-        <p class="label text-blue">Who's doing the looking</p>
-        <h2 class="mt-3 text-[2rem] font-semibold leading-[1.1] -tracking-[0.02em] text-balance">I'm Brynn.</h2>
-      </div>
+  <section class="border-b border-rule px-5 py-20 md:px-10">
+    <div class="max-width grid grid-cols-[1.3fr_1fr] items-start gap-16 max-lg:grid-cols-1 max-lg:gap-10">
       <div>
-        <p class="max-w-[62ch] text-[1.1875rem] leading-relaxed text-ink-2 text-pretty">
-          Twenty years designing products that put users first. Loyalty apps for
-          small businesses at Perka and Clover. Claims tooling in healthcare at
-          Garner. A real estate auditing system at Side that tripled auditor
-          throughput. Before that, front-end code. I know what I'm asking you to
-          build, and nothing I recommend needs a quarter of engineering to ship.
+        <p class="label font-bold text-blue">Why work with me?</p>
+        <h2 class="mt-3 max-w-[24ch] text-[2.75rem] font-semibold leading-[1.06] -tracking-[0.025em] text-balance max-md:text-[2rem]">
+          I'm Brynn.
+        </h2>
+        <p class="mt-6 max-w-[62ch] text-[1.1875rem] leading-relaxed text-ink-2 text-pretty">
+          I've spent 20 years helping startups ship better products. A few recent
+          examples:
+        </p>
+        <ul class="mt-5 max-w-[62ch] space-y-2.5 text-[1.1875rem] leading-relaxed text-ink-2">
+          <li class="flex gap-3"><span class="mt-[3px] shrink-0 font-mono text-[0.6875rem] text-blue">→</span><span>Tripled adjudication rates at Garner Health</span></li>
+          <li class="flex gap-3"><span class="mt-[3px] shrink-0 font-mono text-[0.6875rem] text-blue">→</span><span>Increased transaction throughput by 200% at Side Inc</span></li>
+          <li class="flex gap-3"><span class="mt-[3px] shrink-0 font-mono text-[0.6875rem] text-blue">→</span><span>Made it easier for non-profits to turn website visits into donations</span></li>
+        </ul>
+        <p class="mt-5 max-w-[62ch] text-[1.1875rem] leading-relaxed text-ink-2 text-pretty">
+          I've spent most of those twenty years getting very good at seeing a
+          product from the user's side. Where they hesitate, what they
+          misunderstand, what they need to trust you, and what finally makes
+          something feel worth paying for.
         </p>
         <p class="mt-4 max-w-[62ch] text-[1.1875rem] leading-relaxed text-ink-2 text-pretty">
-          Most of those twenty years were spent getting dev teams to understand
-          and act on UX: mentoring engineers, sitting in the arguments, turning
-          design decisions into work that actually shipped. That is why what you
-          get back is written to be done, whether you do it yourself or hand it
-          to someone else.
+          That's the lens I bring to your product.
         </p>
         <a href="/about" class="mt-6 inline-block border-b border-blue pb-0.5 font-mono text-[0.8125rem] font-bold uppercase tracking-[0.1em] text-blue">Full background →</a>
       </div>
+
+      <aside class="border border-rule-strong bg-card p-9 shadow-plate max-md:p-6 lg:sticky lg:top-[calc(var(--nav-height)+24px)]">
+        <p class="label font-bold text-ink-3">{tier.persona}</p>
+        <p class="mt-4 font-mono text-[3.5rem] font-bold leading-none text-ink">{tier.priceLabel}</p>
+        <p class="mt-2 text-[0.9375rem] text-ink-3">One flat price, one hour of recorded feedback and recommendations.</p>
+        <p class="mt-4 border-t border-rule pt-4 font-mono text-[0.8125rem] uppercase tracking-[0.12em] text-ink-3">Delivered in {tier.turnaround}</p>
+        <a
+          href={tier.checkoutHref}
+          class="mt-6 block w-full bg-[#00ff1c] px-6 py-4 text-center font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[5px_5px_0px_rgba(0,0,0,0.5)] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-ink"
+        >
+          Get the audit · {tier.priceLabel} →
+        </a>
+      </aside>
     </div>
   </section>
 
