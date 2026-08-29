@@ -8,7 +8,7 @@ export const SMALL_COMPANY_OFFER = {
   name: 'Small Company',
   price: 500,
   priceLabel: '$500',
-  persona: 'For independent creators',
+  persona: 'Let\'s work together',
   // Points straight at the live Stripe Payment Link rather than the
   // /checkout/small-company review page, so buttons go directly to payment.
   // Same URL that page's own "Proceed to payment" button already sends
