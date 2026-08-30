@@ -1,21 +1,40 @@
 ---
 import { UX_OFFERS } from '../data/uxOffers';
 
+const href = '/ux-services';
 ---
-<article class="grid grid-cols-[1fr_auto] items-stretch overflow-hidden rounded-[10px] border border-rule-strong bg-card shadow-plate max-lg:grid-cols-1">
+<article class="mx-auto grid min-h-[180px] w-[min(100%,1050px)] grid-cols-[2fr_1fr] overflow-hidden [filter:drop-shadow(14px_14px_0_rgb(20_22_26/0.12))] max-lg:grid-cols-[1.4fr_1fr] max-md:grid-cols-1">
   <!-- what the service is -->
-  <div class="border-r border-rule p-5 lg:px-8 lg:py-7 max-lg:border-b max-lg:border-r-0">
-    <div class="mb-4 flex items-center gap-2.5">
-      <span class="bg-ink px-2 py-[5px] font-mono text-xs font-semibold uppercase tracking-[0.18em] text-paper">UX services</span>
+  <div class="offer-cut-panel relative bg-card px-12 py-5 pr-[72px] text-ink max-lg:py-5 max-lg:pl-9 max-lg:pr-14 max-md:px-6 max-md:pb-7 max-md:pt-5 max-md:text-center">
+    <div class="mb-[14px] flex items-center gap-3 font-mono text-[0.8rem] font-bold uppercase tracking-[0.08em] text-accent max-md:mb-3 max-md:justify-center">
+      <span class="text-[1.65rem] leading-none max-md:hidden">&#10033;</span>
+      <span>Currently offering</span>
     </div>
-    <h3 class="text-[1.75rem] font-semibold leading-[1.12] -tracking-[0.025em] text-balance">A fresh set of eyes on your product.</h3>
-    <p class="mt-3 text-[1.125rem] leading-[1.62] text-ink-2 text-pretty">I find where people get confused, stuck, or drop off, then help you decide what to fix.</p>
+
+    <div class="grid grid-cols-[minmax(0,1fr)_minmax(260px,0.95fr)] items-center gap-[26px] max-lg:grid-cols-1 max-lg:gap-[18px] max-md:justify-items-center">
+      <h3 class="text-[clamp(2rem,2.4vw,2.9rem)] font-bold leading-[0.98] -tracking-[0.045em] text-balance">
+        A fresh set of eyes<br />on your product<span class="text-accent">.</span>
+      </h3>
+      <p class="max-w-[380px] text-[1.05rem] leading-[1.45] text-ink-2">
+        I find where people get confused, stuck, or drop off, then help you decide what to fix.
+      </p>
+    </div>
   </div>
 
   <!-- the action -->
-  <div class="flex flex-col items-center justify-center gap-2.5 bg-slate p-5 text-center lg:px-8 lg:py-7">
-    <span class="font-mono text-[0.7188rem] font-medium uppercase tracking-[0.12em] text-accent">Two ways to work together</span>
-    <a href="/ux-services" class="w-full max-w-[280px] whitespace-nowrap bg-[#00ff1c] px-7 py-4 text-center font-mono text-[0.9062rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[5px_5px_0px_rgba(0,0,0,0.5)]">Explore UX services →</a>
-    <span class="font-mono text-[0.8125rem] text-ink">{UX_OFFERS.review.priceLabel} review · {UX_OFFERS.engagement.priceLabel.toLowerCase()}</span>
+  <div class="-ml-[70px] flex flex-col items-center justify-center bg-ink pb-6 pl-[105px] pr-[46px] pt-6 text-center text-white max-lg:-ml-[52px] max-lg:py-6 max-lg:pl-[80px] max-lg:pr-7 max-md:ml-0 max-md:-mt-px max-md:px-[38px] max-md:py-7">
+    <span class="mb-[18px] font-mono text-[0.82rem] font-bold uppercase tracking-[0.08em] text-accent">Two ways to work together</span>
+
+    <a
+      href={href}
+      class="flex w-full max-w-[360px] items-center justify-center gap-3 bg-[#00ff1c] px-7 py-[19px] font-mono text-[0.92rem] font-extrabold uppercase tracking-[0.07em] text-ink shadow-[7px_8px_0_rgb(255_255_255/0.08)] transition-[transform,box-shadow] duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[10px_11px_0_rgb(255_255_255/0.1)] max-lg:gap-2 max-lg:px-4 max-lg:text-[0.8rem] max-lg:tracking-[0.04em] max-md:px-7 max-md:text-[0.92rem] max-md:tracking-[0.07em]"
+    >
+      Explore UX services
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+
+    <p class="mt-4 text-[0.98rem] text-white/90">
+      {UX_OFFERS.review.priceLabel} review · {UX_OFFERS.engagement.priceLabel.toLowerCase()}
+    </p>
   </div>
 </article>
