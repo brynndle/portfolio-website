@@ -1,50 +1,21 @@
 ---
-import { BOOK_A_CONSULT_URL, AVAILABILITY } from '../data/site';
+import { UX_OFFERS } from '../data/uxOffers';
 
-interface Props {
-  pitch?: string;
-}
-
-const {
-  pitch = "You built something real with AI. Now it needs to work for real people.\n\nI'll spend an hour going through your product as a first-time user, finding the places where people get confused, stuck, or lose the thread. You'll get a recording of the audit plus a short, prioritized list of fixes you can actually ship.",
-} = Astro.props;
-
-const [pitchIntro, ...pitchRest] = pitch.split('\n\n');
-
-/* Process is supporting detail here — the explanation above is the point. */
-const steps = [
-  "We have a 30-minute chat to see what you're building and whether I can help.",
-  'We do a 1-hour UX audit. I use your product like a real user and document where the experience breaks down.',
-  'You get the recording and a prioritized action plan, with fixes ranked by impact and effort.',
-];
 ---
-<article class="grid grid-cols-[1.9fr_1.1fr_auto] items-stretch overflow-hidden rounded-[10px] border border-rule-strong bg-card shadow-plate max-lg:grid-cols-1">
+<article class="grid grid-cols-[1fr_auto] items-stretch overflow-hidden rounded-[10px] border border-rule-strong bg-card shadow-plate max-lg:grid-cols-1">
   <!-- what the service is -->
   <div class="border-r border-rule p-5 lg:px-8 lg:py-7 max-lg:border-b max-lg:border-r-0">
     <div class="mb-4 flex items-center gap-2.5">
-      <span class="bg-ink px-2 py-[5px] font-mono text-xs font-semibold uppercase tracking-[0.18em] text-paper">Featured Offering</span>
+      <span class="bg-ink px-2 py-[5px] font-mono text-xs font-semibold uppercase tracking-[0.18em] text-paper">UX services</span>
     </div>
-    <h3 class="text-[1.75rem] font-semibold leading-[1.12] -tracking-[0.025em] text-balance">Vibe Code UX Rescue</h3>
-    <p class="mt-3 text-[1.125rem] leading-[1.62] text-ink-2 text-pretty">{pitchIntro}</p>
-    <p class="mt-3 hidden whitespace-pre-line text-base leading-[1.62] text-ink-2 text-pretty lg:block">{pitchRest.join('\n\n')}</p>
-    <p class="mt-[0.7em] text-[0.9375rem] italic leading-snug text-ink-2">You bring the strange idea. I'll help make it make sense.</p>
-  </div>
-
-  <!-- how it works, demoted -->
-  <div class="flex flex-col justify-center border-r border-rule p-5 lg:px-8 lg:py-7 max-lg:border-b max-lg:border-r-0">
-    <span class="mb-1.5 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-4">How it works</span>
-    {steps.map((step, i) => (
-      <div class:list={['flex items-baseline gap-3.5 py-[11px]', { 'border-b border-rule': i < steps.length - 1 }]}>
-        <span class="shrink-0 font-mono text-xs text-accent">{String(i + 1).padStart(2, '0')}</span>
-        <span class="text-[0.9062rem] font-medium leading-[1.45]">{step}</span>
-      </div>
-    ))}
+    <h3 class="text-[1.75rem] font-semibold leading-[1.12] -tracking-[0.025em] text-balance">A fresh set of eyes on your product.</h3>
+    <p class="mt-3 text-[1.125rem] leading-[1.62] text-ink-2 text-pretty">I find where people get confused, stuck, or drop off, then help you decide what to fix.</p>
   </div>
 
   <!-- the action -->
   <div class="flex flex-col items-center justify-center gap-2.5 bg-slate p-5 text-center lg:px-8 lg:py-7">
-    <span class="font-mono text-[0.7188rem] font-medium uppercase tracking-[0.12em] text-accent">{AVAILABILITY}</span>
-    <a href={BOOK_A_CONSULT_URL} class="w-full max-w-[280px] whitespace-nowrap bg-[#00ff1c] px-7 py-4 text-center font-mono text-[0.9062rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[5px_5px_0px_rgba(0,0,0,0.5)]">Let's talk →</a>
-    <span class="font-mono text-[0.8125rem] text-ink">Free 30 minute consult</span>
+    <span class="font-mono text-[0.7188rem] font-medium uppercase tracking-[0.12em] text-accent">Two ways to work together</span>
+    <a href="/ux-services" class="w-full max-w-[280px] whitespace-nowrap bg-[#00ff1c] px-7 py-4 text-center font-mono text-[0.9062rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[5px_5px_0px_rgba(0,0,0,0.5)]">Explore UX services →</a>
+    <span class="font-mono text-[0.8125rem] text-ink">{UX_OFFERS.review.priceLabel} review · {UX_OFFERS.engagement.priceLabel.toLowerCase()}</span>
   </div>
 </article>
