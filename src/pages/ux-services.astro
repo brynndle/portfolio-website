@@ -23,12 +23,12 @@ const sharedOutcomes = [
     <div class="pointer-events-none absolute inset-0 opacity-40" style="background-image:url('/mist.png'); background-size:300px 300px;" aria-hidden="true"></div>
     <div class="pointer-events-none absolute inset-0" style="background:radial-gradient(circle at 50% 40%, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0) 70%);" aria-hidden="true"></div>
 
-    <div class="max-width relative z-10 px-5 md:px-10 lg:pr-[42%]">
-      <p class="label font-['Dongle'] text-[1.25rem] font-bold text-white">UX help for products that are almost working</p>
-      <h1 class="mt-5 max-w-[48ch] font-['Dongle'] text-[6.5rem] font-normal leading-[0.63] -tracking-[0.03em] text-balance text-white [text-shadow:6px_6px_0_rgba(0,0,0,.24)] max-lg:text-[4rem] max-md:text-[3rem]">
+    <div class="max-width relative z-10 px-5 md:px-10 lg:pr-[42%] max-md:text-center">
+      <p class="label font-['Dongle'] text-[1.25rem] font-bold text-white max-md:text-[1rem] max-md:[text-shadow:1px_1px_4px_rgba(0,0,0,.55)]">UX help for products that are almost working</p>
+      <h1 class="mt-5 max-w-[48ch] font-['Dongle'] text-[6.5rem] font-normal leading-[0.63] -tracking-[0.0em] text-balance text-white [text-shadow:6px_6px_0_rgba(0,0,0,.24)] max-lg:text-[4rem] max-md:mx-auto max-md:text-[3rem] max-md:[text-shadow:3px_3px_0_rgba(0,0,0,.24)]">
         Your product makes sense to you. Let's make sure it makes sense to everyone else.
       </h1>
-      <p class="mt-7 max-w-[56ch] font-['Dongle'] text-[2rem] leading-[1] text-white text-pretty [text-shadow:2px_2px_7px_rgba(0,0,0,.6)] max-md:text-[1.5rem]">
+      <p class="mt-7 max-w-[56ch] font-['Dongle'] text-[2rem] leading-[1] text-white text-pretty [text-shadow:2px_2px_7px_rgba(0,0,0,.6)] max-md:mx-auto max-md:text-[1.5rem] max-md:[text-shadow:1px_1px_5px_rgba(0,0,0,.6)]">
         I find the places where people get confused, stuck, or drop off, then help you decide what is worth fixing.
       </p>
       <a href="#ways-to-work" class="mt-10 inline-block bg-[#00ff1c] px-8 py-[18px] text-center font-['Dongle'] text-[1.375rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[6px_6px_0px_rgba(0,0,0,0.5)] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-ink">
@@ -42,7 +42,7 @@ const sharedOutcomes = [
       width="1536"
       height="1024"
       decoding="async"
-      class="pointer-events-none absolute inset-y-12 right-5 h-full w-[58%] object-contain object-right mix-blend-screen max-lg:relative max-lg:inset-auto max-lg:-mb-16 max-lg:-mt-8 max-lg:aspect-[4/3] max-lg:h-auto max-lg:w-full max-lg:object-cover max-lg:object-[70%_center]"
+      class="pointer-events-none absolute inset-y-12 right-5 h-full w-[58%] object-contain object-right mix-blend-screen max-lg:relative max-lg:inset-auto max-lg:-mb-16 max-lg:-mt-8 max-lg:aspect-[4/3] max-lg:h-auto max-lg:w-full max-lg:object-cover max-lg:object-[70%_center] max-md:hidden"
     />
   </section>
 
@@ -144,7 +144,7 @@ const sharedOutcomes = [
   <section class="relative overflow-hidden bg-ink px-5 py-24 md:px-10">
     <div class="pointer-events-none absolute inset-0 opacity-25" style="background-image:url('/mist.png'); background-size:300px 300px;" aria-hidden="true"></div>
     <div class="max-width relative text-center">
-      <h2 class="mx-auto max-w-[21ch] font-['Monomaniac_One'] text-[4rem] font-normal leading-[1.02] -tracking-[0.03em] text-balance text-white max-md:text-[2.5rem]">Start with the amount of help you actually need.</h2>
+      <h2 class="mx-auto max-w-[21ch] font-['Dongle'] text-[5rem] font-normal leading-[0.78] -tracking-[0.02em] text-balance text-white max-md:text-[3rem]">Start with the amount of help you actually need.</h2>
       <div class="mt-10 flex flex-wrap justify-center gap-5">
         <a href={review.href} class="bg-[#00ff1c] px-8 py-4 font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[5px_5px_0px_rgba(0,0,0,0.5)]">{review.name} · {review.priceLabel} →</a>
         <a href={engagement.href} class="border-2 border-white px-8 py-4 font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-white">{engagement.name} · {engagement.priceLabel} →</a>

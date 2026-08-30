@@ -28,27 +28,29 @@ const whatYouGet = [
   description="Higher-touch UX help for complex products and bigger questions, including a deep review, live working sessions, and a prioritized plan. Engagements start at $3,000."
   navOverlay
 >
-  <section class="relative overflow-hidden pb-24 pt-[calc(var(--nav-height)+90px)] max-md:pt-[150px]">
+  <section class="relative overflow-hidden pb-24 pt-[calc(var(--nav-height)+90px)] max-md:pb-0 max-md:pt-[150px]">
     <div class="hero-bg absolute inset-0" aria-hidden="true"></div>
     <div class="pointer-events-none absolute inset-0 opacity-40" style="background-image:url('/mist.png'); background-size:300px 300px;" aria-hidden="true"></div>
     <div class="pointer-events-none absolute inset-0" style="background:radial-gradient(circle at 50% 40%, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0) 70%);" aria-hidden="true"></div>
 
-    <div class="max-width relative px-5 md:px-10">
-      <p class="label font-['Dongle'] text-[1.25rem] font-bold text-white">UX Engagement · For complex products and bigger questions</p>
-      <h1 class="mt-5 max-w-[38ch] font-['Dongle'] text-[6.5rem] font-normal leading-[0.63] -tracking-[0.03em] text-balance text-white [text-shadow:6px_6px_0_rgba(0,0,0,.24)] max-lg:text-[4rem] max-md:text-[3rem]">
+    <div class="max-width relative px-5 md:px-10 max-md:text-center">
+      <p class="label font-['Dongle'] text-[1rem] font-bold text-white max-md:text-[1rem] max-md:[text-shadow:1px_1px_4px_rgba(0,0,0,.55)]">For complex products and bigger questions</p>
+      <h1 class="mt-5 max-w-[38ch] font-['Dongle'] text-[6.5rem] font-normal leading-[0.63] -tracking-[0.0em] text-balance text-white [text-shadow:6px_6px_0_rgba(0,0,0,.24)] max-lg:text-[4rem] max-md:mx-auto max-md:text-[4rem] max-md:[text-shadow:3px_3px_0_rgba(0,0,0,.24)]">
         Bring me into the problem, not just the final screen.
       </h1>
-      <p class="mt-7 max-w-[55ch] font-['Dongle'] text-[2rem] leading-[1] text-white text-pretty [text-shadow:2px_2px_7px_rgba(0,0,0,.6)] max-md:text-[1.5rem]">
+      <p class="mt-2 max-w-[55ch] font-['Dongle'] text-[2rem] leading-[.9] text-white text-pretty [text-shadow:2px_2px_7px_rgba(0,0,0,.6)] max-md:mx-auto max-md:text-[1.75rem] max-md:[text-shadow:1px_1px_5px_rgba(0,0,0,.6)]">
         I learn how the product works, find where the experience breaks down, and talk through the decisions with you and your team.
       </p>
-      <p class="mt-5 font-mono text-[0.9375rem] font-bold uppercase tracking-[0.12em] text-white [text-shadow:2px_2px_7px_rgba(0,0,0,.6)]">
-        {engagement.priceLabel} · scope set together · includes live working time
-      </p>
-      <div class="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
-        <a href={BOOK_A_CONSULT_URL} class="whitespace-nowrap bg-[#00ff1c] px-8 py-[18px] text-center font-['Dongle'] text-[1.375rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[6px_6px_0px_rgba(0,0,0,0.5)] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-ink">
-          Talk through your project →
-        </a>
-        <a href="#what-you-get" class="border-b-2 border-white/60 pb-1 font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-white hover:border-white">See what is included ↓</a>
+      <div class="hero-cta-notch mt-8 max-md:mb-5 max-md:bg-black/40 max-md:px-6 max-md:py-7">
+        <p class="font-mono text-[0.8em] font-bold uppercase tracking-[0.12em] text-white [text-shadow:2px_2px_7px_rgba(0,0,0,.6)] max-md:[text-shadow:1px_1px_5px_rgba(0,0,0,.6)]">
+          {engagement.priceLabel} · scope set together · includes live working time
+        </p>
+        <div class="mt-5 flex flex-wrap items-center gap-x-7 gap-y-4 max-md:justify-center">
+          <a href={BOOK_A_CONSULT_URL} class="whitespace-nowrap bg-[#00ff1c] px-8 py-[18px] text-center font-['Dongle'] text-[1.375rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[6px_6px_0px_rgba(0,0,0,0.5)] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-ink max-md:mx-1 max-md:w-full max-md:whitespace-normal max-md:px-2">
+            Talk through your project<span class="max-md:hidden"> →</span>
+          </a>
+          <a href="#what-you-get" class="border-b-2 border-white/60 pb-1 font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-white hover:border-white">See what is included ↓</a>
+        </div>
       </div>
     </div>
   </section>
@@ -111,14 +113,13 @@ const whatYouGet = [
     </div>
   </section>
 
-  <section class="border-b border-rule bg-paper-2 px-5 py-16 md:px-10">
-    <div class="max-width grid grid-cols-[1fr_auto] items-center gap-10 max-md:grid-cols-1">
+  <section class="border-b border-rule bg-paper-3 px-5 py-8 md:px-10">
+    <div class="max-width flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-10">
       <div>
-        <p class="label font-bold text-blue">Only need a focused review?</p>
-        <h2 class="mt-3 max-w-[26ch] text-[2.25rem] font-semibold leading-[1.08] -tracking-[0.02em] text-balance">If the scope is one product or site and you do not need meetings, start smaller.</h2>
-        <p class="mt-4 max-w-[58ch] text-[1.125rem] leading-relaxed text-ink-2">The {review.name} gives you a recorded walkthrough and prioritized recommendations for {review.priceLabel}.</p>
+        <p class="label font-bold text-ink">Only need a focused review?</p>
+        <p class="mt-2 max-w-[70ch] text-[1.0625rem] font-semibold leading-snug -tracking-[0.01em] text-ink-3">If the scope is one product or site and you do not need meetings, start smaller. The {review.name} gives you a recorded walkthrough and prioritized recommendations for {review.priceLabel}.</p>
       </div>
-      <a href={review.href} class="whitespace-nowrap border-2 border-ink px-7 py-4 text-center font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-ink">{review.ctaLabel} →</a>
+      <a href={review.href} class="shrink-0 whitespace-nowrap border-2 border-ink-3 px-6 py-3 text-center font-mono text-[0.875rem] font-bold uppercase tracking-[0.1em] text-ink-3">{review.ctaLabel} →</a>
     </div>
   </section>
 
@@ -139,7 +140,7 @@ const whatYouGet = [
   <section class="relative overflow-hidden bg-ink px-5 py-24 md:px-10">
     <div class="pointer-events-none absolute inset-0 opacity-25" style="background-image:url('/mist.png'); background-size:300px 300px;" aria-hidden="true"></div>
     <div class="max-width relative text-center">
-      <h2 class="mx-auto max-w-[21ch] font-['Monomaniac_One'] text-[4rem] font-normal leading-[1.02] -tracking-[0.03em] text-balance text-white max-md:text-[2.5rem]">Bring me the part that is not making sense.</h2>
+      <h2 class="mx-auto max-w-[21ch] font-['Dongle'] text-[5rem] font-normal leading-[0.78] -tracking-[0.02em] text-balance text-white max-md:text-[3rem]">Bring me the part that is not making sense.</h2>
       <p class="mx-auto mt-6 max-w-[52ch] text-[1.25rem] leading-relaxed text-white/80">We will use the first conversation to decide whether you need the full engagement, the smaller review, or neither.</p>
       <a href={BOOK_A_CONSULT_URL} class="mt-10 inline-block bg-[#00ff1c] px-9 py-5 text-center font-mono text-[1rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[6px_6px_0px_rgba(0,0,0,0.5)]">Talk through your project →</a>
     </div>

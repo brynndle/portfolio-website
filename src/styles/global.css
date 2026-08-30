@@ -49,8 +49,11 @@
   --color-rule-invert: rgb(244 241 234 / 0.16);
 
   --font-sans: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+  /* Deliberate alias: the theme's "mono" labels are Figtree, not a true monospace. */
   --font-mono: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+  /* Actual monospace, for content that has to read as code/terminal output. */
+  --font-code: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
   /* Sharp corners is a house rule. */
   --radius-none: 0px;
@@ -128,6 +131,42 @@
 .diagonal-cut-board {
   --seam: 65px;
   clip-path: polygon(0 var(--seam), 100% 0, 100% 100%, 0 100%);
+}
+
+/* Featured offering card — the paper panel is notched at the top-left and
+   bottom-right; the dark action panel slides under the bottom-right notch
+   (pulled left with -ml-[70px] in FeaturedOffering.astro). Below lg the panels
+   stack, so drop the bottom-right cut and keep only the top-left notch. */
+.offer-cut-panel {
+  clip-path: polygon(28px 0, 100% 0, 91% 100%, 0 100%, 0 28px);
+}
+@media (max-width: 1023px) {
+  /* Narrower band: the dark panel overlaps less (see max-lg:-ml-* in
+     FeaturedOffering.astro), so shrink the chamfer to stay fully covered. */
+  .offer-cut-panel {
+    clip-path: polygon(28px 0, 100% 0, 95% 100%, 0 100%, 0 28px);
+  }
+}
+@media (max-width: 767px) {
+  .offer-cut-panel {
+    clip-path: polygon(24px 0, 100% 0, 100% 100%, 0 100%, 0 24px);
+  }
+}
+
+/* UX service pages — hero CTA panel (price + buttons). The tinted backing only
+   exists below md, so the matching top-left / bottom-right corner notch is
+   scoped there too. */
+@media (max-width: 767px) {
+  .hero-cta-notch {
+    clip-path: polygon(
+      16px 0,
+      100% 0,
+      100% calc(100% - 16px),
+      calc(100% - 16px) 100%,
+      0 100%,
+      0 16px
+    );
+  }
 }
 
 /* Nav overlay mode (homepage only, data-overlay="true"): the nav is fixed on
