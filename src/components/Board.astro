@@ -9,7 +9,8 @@ const STATUS = {
   shipped:    { label: 'Shipped', tone: 'text-ink-3' },
   launched:   { label: 'Launched', tone: 'text-green' },
   paused:     { label: 'Paused', tone: 'text-ink-4' },
-  'coming-soon': { label: 'Coming to PDX this September', tone: 'text-blue' },
+  'coming-soon': { label: 'Coming soon to PDX', tone: 'text-blue' },
+  'in-progress': { label: 'In progress', tone: 'text-blue' }
 };
 
 const items = await Promise.all(entries.map(async ({ data }) => {
