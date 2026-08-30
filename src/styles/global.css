@@ -153,6 +153,22 @@
   }
 }
 
+/* UX service pages — hero CTA panel (price + buttons). The tinted backing only
+   exists below md, so the matching top-left / bottom-right corner notch is
+   scoped there too. */
+@media (max-width: 767px) {
+  .hero-cta-notch {
+    clip-path: polygon(
+      16px 0,
+      100% 0,
+      100% calc(100% - 16px),
+      calc(100% - 16px) 100%,
+      0 100%,
+      0 16px
+    );
+  }
+}
+
 /* Nav overlay mode (homepage only, data-overlay="true"): the nav is fixed on
    top of the hero with a transparent background — the hero's own gradient +
    mist show through it, so the brand and links render white. Once you scroll
