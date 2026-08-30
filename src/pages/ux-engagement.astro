@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { BOOK_A_CONSULT_URL } from '../data/site';
+import { getAlternativeUxOffer, UX_OFFERS } from '../data/uxOffers';
+
+const engagement = UX_OFFERS.engagement;
+const review = getAlternativeUxOffer('engagement');
+
+const process = [
+  ['We talk', 'A free 30-minute conversation to understand the product, the problem, and whether I am the right person for it.'],
+  ['We set the scope', 'I propose the useful level of review and collaboration, with a clear price and no mystery deliverables.'],
+  ['I dig in', 'I review the product, the important journeys, and the context behind the decisions already made.'],
+  ['We work through it', 'You get prioritized recommendations plus live time to question, clarify, and decide what happens next.'],
+];
+
+const whatYouGet = [
+  'A deeper review of your product, site, and the customer journeys that matter most',
+  'Live working sessions to talk through the problems and the tradeoffs',
+  'A clear separation between minor rough edges and consequential UX problems',
+  'Recommendations ranked by impact, effort, and urgency',
+  'A practical order of operations your product, design, or engineering team can use',
+];
+---
+
+<BaseLayout
+  title="UX Engagement"
+  description="Higher-touch UX help for complex products and bigger questions, including a deep review, live working sessions, and a prioritized plan. Engagements start at $3,000."
+  navOverlay
+>
+  <section class="relative overflow-hidden pb-24 pt-[calc(var(--nav-height)+90px)] max-md:pt-[150px]">
+    <div class="hero-bg absolute inset-0" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute inset-0 opacity-40" style="background-image:url('/mist.png'); background-size:300px 300px;" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute inset-0" style="background:radial-gradient(circle at 50% 40%, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0) 70%);" aria-hidden="true"></div>
+
+    <div class="max-width relative px-5 md:px-10">
+      <p class="label text-[0.8125rem] font-bold text-white">UX Engagement · For complex products and bigger questions</p>
+      <h1 class="mt-5 max-w-[19ch] font-['Monomaniac_One'] text-[5.5rem] font-normal leading-[0.98] -tracking-[0.03em] text-balance text-white [text-shadow:6px_6px_0_rgba(0,0,0,.24)] max-lg:text-[4rem] max-md:text-[3rem]">
+        Bring me into the problem, not just the final screen.
+      </h1>
+      <p class="mt-7 max-w-[55ch] text-[1.5rem] leading-[1.45] text-white text-pretty [text-shadow:2px_2px_7px_rgba(0,0,0,.6)] max-md:text-[1.1875rem]">
+        I learn how the product works, find where the experience breaks down, and talk through the decisions with you and your team.
+      </p>
+      <p class="mt-5 font-mono text-[0.9375rem] font-bold uppercase tracking-[0.12em] text-white [text-shadow:2px_2px_7px_rgba(0,0,0,.6)]">
+        {engagement.priceLabel} · scope set together · includes live working time
+      </p>
+      <div class="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
+        <a href={BOOK_A_CONSULT_URL} class="whitespace-nowrap bg-[#00ff1c] px-8 py-[18px] text-center font-mono text-[1rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[6px_6px_0px_rgba(0,0,0,0.5)] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-ink">
+          Talk through your project →
+        </a>
+        <a href="#what-you-get" class="border-b-2 border-white/60 pb-1 font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-white hover:border-white">See what is included ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-rule bg-ink py-6">
+    <div class="max-width flex flex-wrap items-center gap-x-10 gap-y-3 px-5 md:px-10">
+      <span class="font-mono text-[0.6875rem] font-bold uppercase tracking-[0.18em] text-[#5fd39a]">20 years designing products for</span>
+      <span class="font-mono text-[0.9375rem] tracking-[0.06em] text-white/85">Sony · Cisco · Clover · Perka · Side · Habitat for Humanity</span>
+    </div>
+  </section>
+
+  <section class="border-b border-rule px-5 py-20 md:px-10">
+    <div class="max-width grid grid-cols-1 items-center gap-10 md:grid-cols-[1fr_0.8fr] md:gap-14">
+      <div>
+        <p class="label font-bold text-blue">When a review is not enough</p>
+        <h2 class="mt-3 max-w-[23ch] text-[2.75rem] font-semibold leading-[1.06] -tracking-[0.025em] text-balance max-md:text-[2rem]">Some UX problems do not fit inside a one-hour recording.</h2>
+        <p class="mt-8 max-w-[58ch] text-[1.25rem] leading-relaxed text-ink-2 text-pretty">The flow may span several parts of the product. The obvious fix may create a new problem somewhere else. Your team may already disagree about what is wrong.</p>
+        <p class="mt-5 max-w-[58ch] text-[1.25rem] leading-relaxed text-ink-2 text-pretty">That kind of work needs context and conversation. I get close enough to understand the constraints, then stay involved long enough to help you make the decisions.</p>
+      </div>
+      <img src="/lost-at-the-crossroads.png" alt="A person faces several confusing paths and signposts." width="806" height="806" loading="lazy" decoding="async" class="h-auto w-full max-w-[520px] justify-self-center md:max-w-none" />
+    </div>
+  </section>
+
+  <section class="border-b border-rule bg-white px-5 py-14 md:px-10">
+    <div class="max-width">
+      <p class="label font-bold text-blue">How it works</p>
+      <ol class="mt-5 grid grid-cols-4 gap-8 border-t border-rule-strong pt-7 max-lg:grid-cols-2 max-md:grid-cols-1">
+        {process.map(([label, body], i) => (
+          <li>
+            <h3 class="flex items-baseline gap-2 text-[1rem] font-semibold"><span class="font-mono font-bold text-blue">{String(i + 1).padStart(2, '0')}</span>{label}</h3>
+            <p class="mt-2 text-[0.9375rem] leading-relaxed text-ink-2">{body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section id="what-you-get" class="border-b border-rule bg-band px-5 py-20 md:px-10">
+    <div class="max-width grid grid-cols-[1.3fr_1fr] items-start gap-16 max-lg:grid-cols-1 max-lg:gap-10">
+      <div>
+        <p class="label font-bold text-blue">What you get</p>
+        <h2 class="mt-3 max-w-[24ch] text-[2.75rem] font-semibold leading-[1.06] -tracking-[0.025em] text-balance max-md:text-[2rem]">Enough context to make better product decisions.</h2>
+        <ul class="mt-10 space-y-6 border-t border-rule-strong pt-8">
+          {whatYouGet.map((item, i) => (
+            <li class="flex gap-5">
+              <span class="mt-[5px] shrink-0 font-mono text-[0.8125rem] font-bold text-blue">{String(i + 1).padStart(2, '0')}</span>
+              <p class="max-w-[52ch] text-[1.1875rem] leading-relaxed text-ink-2 text-pretty">{item}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <aside class="border border-rule-strong bg-card p-9 shadow-plate max-md:p-6 lg:sticky lg:top-[calc(var(--nav-height)+24px)]">
+        <p class="label font-bold text-ink-3">{engagement.name}</p>
+        <p class="mt-4 font-mono text-[3rem] font-bold leading-none text-ink">{engagement.priceLabel}</p>
+        <p class="mt-4 text-[0.9375rem] leading-relaxed text-ink-3">Scope, timing, and the amount of live working time depend on the product and the questions you need answered.</p>
+        <a href={BOOK_A_CONSULT_URL} class="mt-6 block w-full bg-[#00ff1c] px-6 py-4 text-center font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[5px_5px_0px_rgba(0,0,0,0.5)] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-ink">Talk through your project →</a>
+        <p class="mt-6 border-t border-rule pt-5 text-[0.9375rem] leading-relaxed text-ink-2">The first conversation is free. If a focused review is enough, I will tell you rather than sell you a larger engagement.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="border-b border-rule bg-paper-2 px-5 py-16 md:px-10">
+    <div class="max-width grid grid-cols-[1fr_auto] items-center gap-10 max-md:grid-cols-1">
+      <div>
+        <p class="label font-bold text-blue">Only need a focused review?</p>
+        <h2 class="mt-3 max-w-[26ch] text-[2.25rem] font-semibold leading-[1.08] -tracking-[0.02em] text-balance">If the scope is one product or site and you do not need meetings, start smaller.</h2>
+        <p class="mt-4 max-w-[58ch] text-[1.125rem] leading-relaxed text-ink-2">The {review.name} gives you a recorded walkthrough and prioritized recommendations for {review.priceLabel}.</p>
+      </div>
+      <a href={review.href} class="whitespace-nowrap border-2 border-ink px-7 py-4 text-center font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-ink">{review.ctaLabel} →</a>
+    </div>
+  </section>
+
+  <section class="border-b border-rule px-5 py-20 md:px-10">
+    <div class="max-width grid grid-cols-[0.7fr_1.3fr] gap-14 max-lg:grid-cols-1 max-lg:gap-8">
+      <div>
+        <p class="label font-bold text-blue">Why me</p>
+        <h2 class="mt-3 text-[2.5rem] font-semibold leading-[1.06] -tracking-[0.025em]">I'm Brynn.</h2>
+      </div>
+      <div>
+        <p class="max-w-[62ch] text-[1.1875rem] leading-relaxed text-ink-2 text-pretty">I have spent 20 years helping teams turn messy product questions into work that can actually ship. That includes products for Sony, Clover, Garner Health, Side, and Habitat for Humanity.</p>
+        <p class="mt-4 max-w-[62ch] text-[1.1875rem] leading-relaxed text-ink-2 text-pretty">I know how to work with product, design, and engineering without turning the result into a wish list someone else has to decipher.</p>
+        <a href="/about" class="mt-6 inline-block border-b border-blue pb-0.5 font-mono text-[0.8125rem] font-bold uppercase tracking-[0.1em] text-blue">Full background →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden bg-ink px-5 py-24 md:px-10">
+    <div class="pointer-events-none absolute inset-0 opacity-25" style="background-image:url('/mist.png'); background-size:300px 300px;" aria-hidden="true"></div>
+    <div class="max-width relative text-center">
+      <h2 class="mx-auto max-w-[21ch] font-['Monomaniac_One'] text-[4rem] font-normal leading-[1.02] -tracking-[0.03em] text-balance text-white max-md:text-[2.5rem]">Bring me the part that is not making sense.</h2>
+      <p class="mx-auto mt-6 max-w-[52ch] text-[1.25rem] leading-relaxed text-white/80">We will use the first conversation to decide whether you need the full engagement, the smaller review, or neither.</p>
+      <a href={BOOK_A_CONSULT_URL} class="mt-10 inline-block bg-[#00ff1c] px-9 py-5 text-center font-mono text-[1rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[6px_6px_0px_rgba(0,0,0,0.5)]">Talk through your project →</a>
+    </div>
+  </section>
+</BaseLayout>

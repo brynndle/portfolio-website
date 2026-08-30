@@ -12,12 +12,18 @@ const { tier } = Astro.props;
   <h1 class="max-w-[20ch] text-[2.5rem] font-semibold leading-[1.05] -tracking-[0.02em] text-balance max-md:text-3xl">1-Hour UX Consult</h1>
   <p class="mt-6 max-w-[64ch] text-lg leading-relaxed text-ink-2 text-pretty">{tier.blurb}</p>
   <p class="mt-6 font-mono text-2xl font-bold text-ink">${tier.price}</p>
-  <a
-    href={tier.paymentLinkUrl}
-    class="mt-8 inline-block whitespace-nowrap bg-[#00ff1c] px-[26px] py-4 text-center font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[5px_5px_0px_rgba(0,0,0,0.5)]"
-  >
-    Proceed to payment →
-  </a>
+  {tier.paymentLinkUrl ? (
+    <a
+      href={tier.paymentLinkUrl}
+      class="mt-8 inline-block whitespace-nowrap bg-[#00ff1c] px-[26px] py-4 text-center font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[5px_5px_0px_rgba(0,0,0,0.5)]"
+    >
+      Proceed to payment →
+    </a>
+  ) : (
+    <p class="mt-8 inline-block border border-rule-strong bg-paper-2 px-5 py-3 font-mono text-[0.8125rem] font-bold uppercase tracking-[0.1em] text-ink-3">
+      Checkout is not configured in this environment
+    </p>
+  )}
 </section>
 
 <section class="max-width border-b border-rule px-5 py-12 md:px-10">
