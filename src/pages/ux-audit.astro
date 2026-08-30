@@ -10,6 +10,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SMALL_COMPANY_OFFER } from '../data/smallCompanyOffer';
 import { getAlternativeUxOffer, UX_OFFERS } from '../data/uxOffers';
+import '@fontsource/dongle/400.css';
 
 const tier = SMALL_COMPANY_OFFER;
 const review = UX_OFFERS.review;
@@ -52,11 +53,11 @@ const whatYouGet = [
     ></div>
 
     <div class="max-width relative px-5 md:px-10">
-      <p class="label text-[0.8125rem] font-bold text-white">UX Review · For one product or site</p>
-      <h1 class="mt-5 max-w-[20ch] font-['Monomaniac_One'] text-[5.5rem] font-normal leading-[0.98] -tracking-[0.03em] text-balance text-white [text-shadow:6px_6px_0_rgba(0,0,0,.24)] max-lg:text-[4rem] max-md:text-[3rem]">
+      <p class="label font-['Dongle'] text-[1.25rem] font-bold text-white">UX Review · For one product or site</p>
+      <h1 class="mt-5 max-w-[40ch] font-['Dongle'] text-[6.5rem] font-normal leading-[0.63] -tracking-[0.03em] text-balance text-white [text-shadow:6px_6px_0_rgba(0,0,0,.24)] max-lg:text-[4rem] max-md:text-[3rem]">
         You built it. I'll show you where people get stuck.
       </h1>
-      <p class="mt-7 max-w-[54ch] text-[1.5rem] leading-[1.45] text-white text-pretty [text-shadow:2px_2px_7px_rgba(0,0,0,.6)] max-md:text-[1.1875rem]">
+      <p class="mt-7 max-w-[54ch] font-['Dongle'] text-[2rem] leading-[1] text-white text-pretty [text-shadow:2px_2px_7px_rgba(0,0,0,.6)] max-md:text-[1.5rem]">
         I use your product like a first-time user, record what happens, and send
         you the fixes that matter most.
       </p>
@@ -67,7 +68,7 @@ const whatYouGet = [
       <div class="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
         <a
           href={tier.checkoutHref}
-          class="whitespace-nowrap bg-[#00ff1c] px-8 py-[18px] text-center font-mono text-[1rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[6px_6px_0px_rgba(0,0,0,0.5)] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-ink"
+          class="whitespace-nowrap bg-[#00ff1c] px-8 py-[18px] text-center font-['Dongle'] text-[1.375rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[6px_6px_0px_rgba(0,0,0,0.5)] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-ink"
         >
           Get the {review.name} · {tier.priceLabel} →
         </a>
