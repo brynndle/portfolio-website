@@ -39,7 +39,7 @@ const whatYouGet = [
   navOverlay
 >
   <!-- HERO -->
-  <section class="relative overflow-hidden pb-24 pt-[calc(var(--nav-height)+90px)] max-md:pt-[150px]">
+  <section class="relative overflow-hidden pb-24 pt-[calc(var(--nav-height)+90px)] max-md:pb-0 max-md:pt-[150px]">
     <div class="hero-bg absolute inset-0" aria-hidden="true"></div>
     <div
       class="pointer-events-none absolute inset-0 opacity-40"
@@ -53,7 +53,7 @@ const whatYouGet = [
     ></div>
 
     <div class="max-width relative px-5 md:px-10 max-md:text-center">
-      <p class="label font-['Dongle'] text-[1rem] font-bold text-white max-md:text-[1rem] max-md:[text-shadow:1px_1px_4px_rgba(0,0,0,.55)]">UX Review · For one product or site</p>
+      <p class="label font-['Dongle'] text-[1.5rem] font-bold text-white max-md:text-[1rem] max-md:[text-shadow:1px_1px_4px_rgba(0,0,0,.55)]">UX Review · For one product or site</p>
       <h1 class="mt-5 max-w-[40ch] font-['Dongle'] text-[6.5rem] font-normal leading-[0.63] -tracking-[0.0em] text-balance text-white [text-shadow:6px_6px_0_rgba(0,0,0,.24)] max-lg:text-[4rem] max-md:mx-auto max-md:text-[4rem] max-md:[text-shadow:3px_3px_0_rgba(0,0,0,.24)]">
         You built it. I'll show you where people get stuck.
       </h1>
@@ -61,20 +61,22 @@ const whatYouGet = [
         I use your product like a first-time user, record what happens, and send
         you the fixes that matter most.
       </p>
-      <p class="mt-8 font-mono text-[0.8em] font-bold uppercase tracking-[0.12em] text-white [text-shadow:2px_2px_7px_rgba(0,0,0,.6)] max-md:[text-shadow:1px_1px_5px_rgba(0,0,0,.6)]">
-        {tier.priceLabel} flat · recorded review · delivered in {tier.turnaround}
-      </p>
+      <div class="hero-cta-notch mt-8 max-md:mb-5 max-md:bg-black/40 max-md:px-6 max-md:py-7">
+        <p class="font-mono text-[0.8em] font-bold uppercase tracking-[0.12em] text-white [text-shadow:2px_2px_7px_rgba(0,0,0,.6)] max-md:[text-shadow:1px_1px_5px_rgba(0,0,0,.6)]">
+          {tier.priceLabel} flat · recorded review · delivered in {tier.turnaround}
+        </p>
 
-      <div class="mt-5 flex flex-wrap items-center gap-x-7 gap-y-4 max-md:justify-center">
-        <a
-          href={tier.checkoutHref}
-          class="whitespace-nowrap bg-[#00ff1c] px-8 py-[18px] text-center font-['Dongle'] text-[1.375rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[6px_6px_0px_rgba(0,0,0,0.5)] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-ink"
-        >
-          Get the {review.name} · {tier.priceLabel} →
-        </a>
-        <a href="#what-you-get" class="border-b-2 border-white/60 pb-1 font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-white hover:border-white hover:text-white">
-          See what I look for ↓
-        </a>
+        <div class="mt-5 flex flex-wrap items-center gap-x-7 gap-y-4 max-md:justify-center">
+          <a
+            href={tier.checkoutHref}
+            class="whitespace-nowrap bg-[#00ff1c] px-8 py-[18px] text-center font-['Dongle'] text-[1.375rem] font-bold uppercase tracking-[0.1em] text-ink shadow-[6px_6px_0px_rgba(0,0,0,0.5)] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-ink max-md:mx-1 max-md:w-full max-md:whitespace-normal max-md:px-2"
+          >
+            Get the {review.name} · {tier.priceLabel}<span class="max-md:hidden"> →</span>
+          </a>
+          <a href="#what-you-get" class="border-b-2 border-white/60 pb-1 font-mono text-[0.9375rem] font-bold uppercase tracking-[0.1em] text-white hover:border-white hover:text-white">
+            See what I look for ↓
+          </a>
+        </div>
       </div>
     </div>
   </section>
