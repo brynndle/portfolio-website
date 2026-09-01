@@ -2,15 +2,27 @@ import { describe, it, expect, vi } from 'vitest';
 import { buildNextStepsEmail, sendNextStepsEmail } from './email';
 
 describe('buildNextStepsEmail', () => {
-  it('includes the confirm link in the html body', () => {
-    const { subject, html } = buildNextStepsEmail('https://brynncaputo.com/confirm?session_id=sess_1');
-    expect(subject).toContain('Next steps');
-    expect(html).toContain('https://brynncaputo.com/confirm?session_id=sess_1');
+  it('names the audit in the subject', () => {
+    const { subject } = buildNextStepsEmail('https://brynncaputo.com/confirm?session_id=sess_1');
+    expect(subject).toContain('booked');
+  });
+
+  it('includes the confirm link in both the html and text bodies', () => {
+    const url = 'https://brynncaputo.com/confirm?session_id=sess_1';
+    const { html, text } = buildNextStepsEmail(url);
+    expect(html).toContain(url);
+    expect(text).toContain(url);
+  });
+
+  it('wraps the button in an mso conditional so Outlook gets the VML fallback', () => {
+    const { html } = buildNextStepsEmail('https://brynncaputo.com/confirm?session_id=sess_1');
+    expect(html).toContain('<!--[if mso]>');
+    expect(html).toContain('v:roundrect');
   });
 });
 
 describe('sendNextStepsEmail', () => {
-  it('calls the resend client with the built subject/html', async () => {
+  it('calls the resend client with the built subject, html, and text', async () => {
     const send = vi.fn().mockResolvedValue({ data: { id: 'email_1' }, error: null });
     const resendClient = { emails: { send } };
 
@@ -24,8 +36,9 @@ describe('sendNextStepsEmail', () => {
       expect.objectContaining({
         from: 'Brynn Caputo <hi@brynncaputo.com>',
         to: 'client@example.com',
-        subject: expect.stringContaining('Next steps'),
+        subject: expect.stringContaining('booked'),
         html: expect.stringContaining('sess_1'),
+        text: expect.stringContaining('sess_1'),
       })
     );
   });
