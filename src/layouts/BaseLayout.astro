@@ -8,9 +8,10 @@ interface Props {
   title: string;
   description?: string;
   navOverlay?: boolean;
+  navHideCta?: boolean;
 }
 
-const { title, description = "Brynn Caputo — experience designer.", navOverlay = false } = Astro.props;
+const { title, description = "Brynn Caputo — experience designer.", navOverlay = false, navHideCta = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -24,7 +25,7 @@ const { title, description = "Brynn Caputo — experience designer.", navOverlay
     <meta name="description" content={description} />
   </head>
   <body class="bg-paper font-sans text-ink antialiased">
-    <Nav overlay={navOverlay} />
+    <Nav overlay={navOverlay} hideCta={navHideCta} />
     <main>
       <slot />
     </main>

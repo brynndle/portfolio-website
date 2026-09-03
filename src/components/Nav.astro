@@ -3,9 +3,10 @@ import { BOOK_A_CONSULT_URL } from '../data/site';
 
 interface Props {
   overlay?: boolean;
+  hideCta?: boolean;
 }
 
-const { overlay = false } = Astro.props;
+const { overlay = false, hideCta = false } = Astro.props;
 
 const links = [
   { href: '/#board', label: 'Now' },
@@ -51,7 +52,9 @@ const projectLinks = [
         </div>
         <a href="/about" class="nav-link transition-colors duration-300 hover:text-blue">About</a>
       </div>
-      <a href={BOOK_A_CONSULT_URL} class="col-start-2 row-start-1 justify-self-end bg-[#00ff1c] px-4 py-2.5 text-[0.875rem] font-bold text-ink shadow-[5px_5px_0px_rgba(0,0,0,0.5)] md:col-auto md:row-auto">Coffee?</a>
+      {!hideCta && (
+        <a href={BOOK_A_CONSULT_URL} class="col-start-2 row-start-1 justify-self-end bg-[#00ff1c] px-4 py-2.5 text-[0.875rem] font-bold text-ink shadow-[5px_5px_0px_rgba(0,0,0,0.5)] md:col-auto md:row-auto">Coffee?</a>
+      )}
     </nav>
   </div>
 </header>
