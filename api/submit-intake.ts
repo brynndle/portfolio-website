@@ -23,6 +23,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     typeof body.clientName !== 'string' ||
     typeof body.email !== 'string' ||
     typeof body.description !== 'string' ||
+    typeof body.acquisition !== 'string' ||
+    typeof body.audienceLevel !== 'string' ||
+    typeof body.primaryProblem !== 'string' ||
     !isStringArray(body.links) ||
     !isStringArray(body.fileUrls)
   ) {

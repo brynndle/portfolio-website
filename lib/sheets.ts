@@ -7,6 +7,9 @@ export interface IntakeRow {
   clientName: string;
   email: string;
   description: string;
+  acquisition: string;
+  audienceLevel: string;
+  primaryProblem: string;
   links: string[];
   fileUrls: string[];
 }
@@ -21,6 +24,9 @@ export function formatIntakeRowValues(row: IntakeRow): string[] {
     row.clientName,
     row.email,
     row.description,
+    row.acquisition,
+    row.audienceLevel,
+    row.primaryProblem,
     row.links.join(', '),
     row.fileUrls.join(', '),
   ];

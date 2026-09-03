@@ -10,6 +10,9 @@ const row: IntakeRow = {
   clientName: 'Jane Client',
   email: 'jane@example.com',
   description: 'Our checkout flow converts poorly.',
+  acquisition: 'Organic search and word of mouth.',
+  audienceLevel: 'Mostly novices trying it for the first time.',
+  primaryProblem: 'People bounce before reaching pricing.',
   links: ['https://acme.com', 'https://acme.com/pricing'],
   fileUrls: ['https://blob.vercel-storage.com/file1.pdf'],
 };
@@ -25,6 +28,9 @@ describe('formatIntakeRowValues', () => {
       'Jane Client',
       'jane@example.com',
       'Our checkout flow converts poorly.',
+      'Organic search and word of mouth.',
+      'Mostly novices trying it for the first time.',
+      'People bounce before reaching pricing.',
       'https://acme.com, https://acme.com/pricing',
       'https://blob.vercel-storage.com/file1.pdf',
     ]);

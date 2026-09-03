@@ -6,6 +6,9 @@ export interface IntakeFormFields {
   clientName: string;
   email: string;
   description: string;
+  acquisition: string;
+  audienceLevel: string;
+  primaryProblem: string;
   links: string[];
   fileUrls: string[];
 }
@@ -20,6 +23,9 @@ export function buildIntakeRow(session: VerifiedSession, fields: IntakeFormField
     clientName: fields.clientName,
     email: fields.email || session.customerEmail || '',
     description: fields.description,
+    acquisition: fields.acquisition,
+    audienceLevel: fields.audienceLevel,
+    primaryProblem: fields.primaryProblem,
     links: fields.links,
     fileUrls: fields.fileUrls,
   };

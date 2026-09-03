@@ -3,8 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Confirm" description="Confirm your consult booking and tell us about your project.">
-  <section class="max-width border-b border-rule px-5 py-12 md:px-10" id="confirm-root">
-    <div class="label mb-3 text-blue">Almost there</div>
+  <section class="max-width border-b border-rule px-5 py-12 pb-24 md:px-10" id="confirm-root">
+    <div class="label mb-3 text-blue">I'm excited to work with you! But first...</div>
     <h1 id="confirm-heading" class="max-w-[20ch] text-[2.5rem] font-semibold leading-[1.05] -tracking-[0.02em] text-balance max-md:text-3xl">Checking your payment…</h1>
 
     <div id="confirm-error" class="mt-6 hidden max-w-[64ch] text-lg leading-relaxed text-ink-2">
@@ -28,12 +28,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <label class="label mb-2 block font-bold text-[#333]" for="email">Email</label>
         <input id="email" name="email" type="email" required class="w-full border border-[#333] bg-paper px-4 py-3 text-ink" />
       </div>
+
+      <div class="pt-6">
+        <h2 class="text-[1.5rem] font-semibold -tracking-[0.02em] text-ink">Context for the audit</h2>
+        <p class="mt-1 text-[0.9375rem] leading-relaxed text-ink-2">The more precisely you answer these, the sharper the audit.</p>
+      </div>
+
       <div>
-        <label class="label mb-2 block font-bold text-[#333]" for="description">Tell us about your product or the issue</label>
+        <label class="label mb-2 block font-bold text-[#333]" for="description">Tell me about your project</label>
         <textarea id="description" name="description" rows="5" required class="w-full border border-[#333] bg-paper px-4 py-3 text-ink"></textarea>
       </div>
       <div>
-        <label class="label mb-2 block font-bold text-[#333]">Links to your product or website</label>
+        <label class="label mb-2 block font-bold text-[#333]" for="acquisition">How is your audience finding your project?</label>
+        <textarea id="acquisition" name="acquisition" rows="2" required class="w-full border border-[#333] bg-paper px-4 py-3 text-ink"></textarea>
+      </div>
+      <div>
+        <label class="label mb-2 block font-bold text-[#333]" for="audienceLevel">Do they come in as power users or novices?</label>
+        <textarea id="audienceLevel" name="audienceLevel" rows="2" required class="w-full border border-[#333] bg-paper px-4 py-3 text-ink"></textarea>
+      </div>
+      <div>
+        <label class="label mb-2 block font-bold text-[#333]" for="primaryProblem">In as few words as possible, sum up what you believe is your primary problem</label>
+        <input id="primaryProblem" name="primaryProblem" type="text" required class="w-full border border-[#333] bg-paper px-4 py-3 text-ink" />
+      </div>
+      <div>
+        <label class="label mb-2 block font-bold text-[#333]">Links to your project or website</label>
         <div id="link-fields" class="space-y-2">
           <input type="text" inputmode="url" name="links" placeholder="yoursite.com" class="w-full border border-[#333] bg-paper px-4 py-3 text-ink" />
         </div>
@@ -125,6 +143,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     async function init() {
       try {
+        // Dev-only preview: /confirm?preview=1 skips Stripe verification so the
+        // intake form can be viewed locally. Stripped from production builds.
+        if (import.meta.env.DEV && new URLSearchParams(window.location.search).has('preview')) {
+          heading.textContent = 'Tell me about your project';
+          form.classList.remove('hidden');
+          return;
+        }
+
         if (!sessionId) {
           showError();
           return;
@@ -163,6 +189,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           clientName: (document.getElementById('clientName') as HTMLInputElement).value,
           email: emailInput.value,
           description: (document.getElementById('description') as HTMLTextAreaElement).value,
+          acquisition: (document.getElementById('acquisition') as HTMLTextAreaElement).value,
+          audienceLevel: (document.getElementById('audienceLevel') as HTMLTextAreaElement).value,
+          primaryProblem: (document.getElementById('primaryProblem') as HTMLInputElement).value,
           links,
           fileUrls: uploadedFileUrls,
         };
